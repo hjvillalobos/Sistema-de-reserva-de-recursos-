@@ -4,6 +4,7 @@ import jakarta.xml.bind.annotation.*;
 
 @XmlRootElement(name = "categoria")
 @XmlAccessorType(XmlAccessType.FIELD)
+
 public class Categoria {
 
     @XmlAttribute
