@@ -31,5 +31,6 @@ public class Recurso {
     @Override
     public String toString() {
         return getDescripcion()+"-"+
-                "id: "+getId();}
+                (categoria!=null?categoria.getId():"sin categoria")
+                +"id: "+getId();}
 }

@@ -1,4 +1,5 @@
 package una.eif206.reservas.persistencia;
+import una.eif206.reservas.modelo.EstadoReserva;
 import una.eif206.reservas.modelo.Reserva;
 
 import java.time.LocalDate;
@@ -28,6 +29,7 @@ public class ReservaDaoXml implements ReservaDAO{
     @Override
     public List<Reserva> obtenerPorFechaYCategoria(LocalDate fecha, String idCat) {
         return obtenerReservas().stream()
+                .filter(r->r.getEstado()== EstadoReserva.ACTIVA)
                 .filter(r->r.getFecha()!=null &&r.getFecha().equals(fecha))
                 .filter(r->r.getRecurso()!=null
                         &&r.getRecurso().getCategoria()!=null

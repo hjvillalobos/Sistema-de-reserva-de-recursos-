@@ -16,12 +16,13 @@ una\eif206\reservas\modelo\Funcionario.class
 una\eif206\reservas\persistencia\adaptadores\LocalTimeAdapter.class
 una\eif206\reservas\servicio\CredencialesInvalidasException.class
 una\eif206\reservas\persistencia\AdministradorDAO.class
+una\eif206\reservas\servicio\CalendarizacionService.class
 una\eif206\reservas\modelo\Reserva.class
-una\eif206\reservas\vista\App.class
 una\eif206\reservas\modelo\Categoria.class
 una\eif206\reservas\persistencia\FuncionarioDAO.class
 una\eif206\reservas\servicio\LoginService.class
 una\eif206\reservas\modelo\Recurso.class
+una\eif206\reservas\servicio\AccesoDenegadoException.class
 una\eif206\reservas\controlador\PrincipalController.class
 una\eif206\reservas\modelo\EstadoReserva.class
 una\eif206\reservas\persistencia\ListaReservas.class
