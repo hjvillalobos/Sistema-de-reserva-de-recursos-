@@ -10,5 +10,6 @@
     <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
     <Label fx:id="lblBienvenida" style="-fx-font-size: 16px;"/>
     <Button fx:id="btnCategorias" text="Gestionar Categorías" onAction="#onAbrirCategorias" visible="false" managed="false"/>
+    <Button fx:id="btnFuncionarios" text="Gestionar Funcionarios" onAction="#onAbrirFuncionarios" visible="false" managed="false"/>
     <Label text="(Aquí irán las demás pestañas: Reservas, Funcionarios, Recursos...)"/>
 </VBox>

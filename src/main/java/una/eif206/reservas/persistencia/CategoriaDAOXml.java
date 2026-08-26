@@ -18,6 +18,10 @@ public class CategoriaDAOXml implements CategoriaDAO {
         return cargar().getCategorias();
     }
 
+
+
+
+
     @Override
     public List<Categoria> buscarPorDescripcion(String texto) {
         List<Categoria> resultado = new ArrayList<>();

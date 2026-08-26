@@ -2,6 +2,8 @@
 package una.eif206.reservas.persistencia;
 
 import una.eif206.reservas.modelo.Funcionario;
+
+import java.util.ArrayList;
 import java.util.List;
 
 public class FuncionarioDAOXml implements FuncionarioDAO {
@@ -15,6 +17,24 @@ public class FuncionarioDAOXml implements FuncionarioDAO {
     @Override
     public List<Funcionario> obtenerTodos() {
         return cargar().getFuncionarios();
+    }
+
+    // dentro de FuncionarioDAOXml.java
+    @Override
+    public List<Funcionario> buscar(String id, String nombre) {
+        List<Funcionario> resultado = new ArrayList<>();
+        String idBusqueda = (id == null) ? "" : id.trim().toLowerCase();
+        String nombreBusqueda = (nombre == null) ? "" : nombre.trim().toLowerCase();
+
+        for (Funcionario f : obtenerTodos()) {
+            boolean coincideId = idBusqueda.isEmpty() || f.getId().toLowerCase().contains(idBusqueda);
+            boolean coincideNombre = nombreBusqueda.isEmpty() || f.getNombre().toLowerCase().contains(nombreBusqueda);
+
+            if (coincideId && coincideNombre) {
+                resultado.add(f);
+            }
+        }
+        return resultado;
     }
 
     @Override

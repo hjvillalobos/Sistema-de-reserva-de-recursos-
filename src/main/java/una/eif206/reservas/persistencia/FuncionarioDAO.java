@@ -6,7 +6,8 @@ import java.util.List;
 
 public interface FuncionarioDAO {
     List<Funcionario> obtenerTodos();
-    Funcionario buscarPorId(String id);   // devuelve null si no existe
+    Funcionario buscarPorId(String id);
+    List<Funcionario> buscar(String id, String nombre);   // NUEVO: filtro por id y/o nombre
     void guardar(Funcionario funcionario);
     void eliminar(String id);
 }
