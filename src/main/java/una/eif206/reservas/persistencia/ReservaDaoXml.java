@@ -1,55 +1,72 @@
 package una.eif206.reservas.persistencia;
-import una.eif206.reservas.modelo.EstadoReserva;
+
 import una.eif206.reservas.modelo.Reserva;
-
-import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-public class ReservaDaoXml implements ReservaDAO{
+public class ReservaDAOXml implements ReservaDAO {
+
     public static final String RUTA_DEFECTO = "data/reservas.xml";
     private final String ruta;
 
-    public ReservaDaoXml() { this(RUTA_DEFECTO); }
-    public ReservaDaoXml(String ruta) { this.ruta = ruta; }
+    public ReservaDAOXml() { this(RUTA_DEFECTO); }
+    public ReservaDAOXml(String ruta) { this.ruta = ruta; }
 
     @Override
-    public List<Reserva> obtenerReservas() {
+    public List<Reserva> obtenerTodos() {
         return cargar().getReservas();
     }
 
     @Override
-    public Optional<Reserva> busquedaPorId(String id) {
-        return obtenerReservas().stream()
-                .filter(f -> f.getId().equalsIgnoreCase(id))
-                .findFirst();
+    public Reserva buscarPorId(String id) {
+        for (Reserva r : obtenerTodos()) {
+            if (r.getId().equalsIgnoreCase(id)) {
+                return r;
+            }
+        }
+        return null;
     }
 
     @Override
-    public List<Reserva> obtenerPorFechaYCategoria(LocalDate fecha, String idCat) {
-        return obtenerReservas().stream()
-                .filter(r->r.getEstado()== EstadoReserva.ACTIVA)
-                .filter(r->r.getFecha()!=null &&r.getFecha().equals(fecha))
-                .filter(r->r.getRecurso()!=null
-                        &&r.getRecurso().getCategoria()!=null
-                        && r.getRecurso().getCategoria().getId().equalsIgnoreCase(idCat))
-                .collect(Collectors.toList());
+    public List<Reserva> buscarPorFuncionario(String funcionarioId) {
+        List<Reserva> resultado = new ArrayList<>();
+        for (Reserva r : obtenerTodos()) {
+            if (r.getFuncionarioId().equalsIgnoreCase(funcionarioId)) {
+                resultado.add(r);
+            }
+        }
+        return resultado;
     }
 
     @Override
     public void guardar(Reserva reserva) {
         ListaReservas lista = cargar();
-        lista.getReservas().removeIf(f -> f.getId().equalsIgnoreCase(reserva.getId()));
+        Reserva existente = null;
+        for (Reserva r : lista.getReservas()) {
+            if (r.getId().equalsIgnoreCase(reserva.getId())) {
+                existente = r;
+                break;
+            }
+        }
+        if (existente != null) {
+            lista.getReservas().remove(existente);
+        }
         lista.getReservas().add(reserva);
         XmlDaoUtil.guardar(ruta, lista, ListaReservas.class);
     }
 
     @Override
-    public void eliminar(String id) {
-        ListaReservas lista = cargar();
-        lista.getReservas().removeIf(f -> f.getId().equalsIgnoreCase(id));
-        XmlDaoUtil.guardar(ruta, lista, ListaReservas.class);
+    public String generarSiguienteId() {
+        int maxNumero = 0;
+        for (Reserva r : obtenerTodos()) {
+            String parteNumerica = r.getId().substring(r.getId().indexOf('-') + 1);
+            int numero = Integer.parseInt(parteNumerica);
+            if (numero > maxNumero) {
+                maxNumero = numero;
+            }
+        }
+        int siguiente = maxNumero + 1;
+        return String.format("RES-%06d", siguiente);
     }
 
     private ListaReservas cargar() {

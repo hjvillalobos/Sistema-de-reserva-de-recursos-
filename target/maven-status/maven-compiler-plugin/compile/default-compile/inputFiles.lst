@@ -1,33 +1,42 @@
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\controlador\CambiarClaveController.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\controlador\LoginController.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\controlador\PrincipalController.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\Categoria.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\EstadoReserva.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\Funcionario.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\Recurso.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\Reserva.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\Rol.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\Usuario.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\adaptadores\LocalDateAdapter.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\adaptadores\LocalTimeAdapter.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\AdministradorDAO.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\AdministradorDAOXml.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\FuncionarioDAO.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\FuncionarioDAOXml.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\ListaAdministradores.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\ListaFuncionarios.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\ListaRecursos.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\ListaReservas.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\PersistenciaException.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\RecursoDao.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\RecursoDAOXml.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\ReservaDAO.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\ReservaDaoXml.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\XmlDaoUtil.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\AccesoDenegadoException.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\CalendarizacionService.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\CredencialesInvalidasException.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\LoginService.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\MatrizDeCalendarizacion.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\RecursoService.java
-C:\Users\diego\IdeaProjects\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\vista\App.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\controlador\CambiarClaveController.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\controlador\CategoriaController.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\controlador\FuncionarioController.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\controlador\LoginController.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\controlador\PrincipalController.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\Categoria.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\EstadoReserva.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\Funcionario.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\Recurso.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\Reserva.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\Rol.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\modelo\Usuario.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\adaptadores\LocalDateAdapter.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\adaptadores\LocalTimeAdapter.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\AdministradorDAO.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\AdministradorDAOXml.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\CategoriaDAO.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\CategoriaDAOXml.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\FuncionarioDAO.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\FuncionarioDAOXml.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\ListaAdministradores.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\ListaCategorias.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\ListaFuncionarios.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\ListaRecursos.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\ListaReservas.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\PersistenciaException.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\RecursoDao.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\RecursoDAOXml.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\ReservaDAO.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\ReservaDaoXml.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\persistencia\XmlDaoUtil.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\AccesoDenegadoException.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\CalendarizacionService.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\CategoriaService.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\CredencialesInvalidasException.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\FuncionarioService.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\LoginService.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\MatrizDeCalendarizacion.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\RecursoService.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\servicio\ValidacionException.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\util\ReportePdfUtil.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\main\java\una\eif206\reservas\vista\App.java

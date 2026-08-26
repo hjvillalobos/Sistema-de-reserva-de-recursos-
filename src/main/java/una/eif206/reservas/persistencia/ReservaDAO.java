@@ -1,15 +1,12 @@
 package una.eif206.reservas.persistencia;
 
 import una.eif206.reservas.modelo.Reserva;
-
-import java.time.LocalDate;
 import java.util.List;
-import java.util.Optional;
 
 public interface ReservaDAO {
-    List<Reserva> obtenerReservas();
-    List<Reserva> obtenerPorFechaYCategoria(LocalDate fecha,String idCat);
-    Optional<Reserva> busquedaPorId(String id);
-    void guardar(Reserva recurso);
-    void eliminar(String id);
+    List<Reserva> obtenerTodos();
+    Reserva buscarPorId(String id);
+    List<Reserva> buscarPorFuncionario(String funcionarioId);
+    void guardar(Reserva reserva);
+    String generarSiguienteId();
 }

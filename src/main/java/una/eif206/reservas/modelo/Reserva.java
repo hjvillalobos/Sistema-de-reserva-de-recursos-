@@ -1,73 +1,70 @@
 package una.eif206.reservas.modelo;
 
-import jakarta.xml.bind.annotation.XmlAttribute;
-import jakarta.xml.bind.annotation.XmlAccessorType;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlAccessType;
-import jakarta.xml.bind.annotation.XmlRootElement;
-
-import jakarta.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import una.eif206.reservas.persistencia.adaptadores.LocalDateAdapter;
-import una.eif206.reservas.persistencia.adaptadores.LocalTimeAdapter;
-
-import java.time.LocalDate;
-import java.time.LocalTime;
+import jakarta.xml.bind.annotation.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @XmlRootElement(name = "reserva")
 @XmlAccessorType(XmlAccessType.FIELD)
-
 public class Reserva {
+
     @XmlAttribute
-    private String id;
-    private Recurso recurso;
+    private String id;               // autogenerado, ej: RES-000001
+
     private String actividad;
+    private String fecha;            // formato yyyy-MM-dd
+    private String horaInicio;       // formato HH:mm
+    private String horaFin;          // formato HH:mm
+    private String funcionarioId;
     private EstadoReserva estado;
-    private Funcionario funcionario;
 
-    @XmlJavaTypeAdapter(LocalDateAdapter.class)
-    private LocalDate fecha;
-    @XmlJavaTypeAdapter(LocalTimeAdapter.class)
-    private LocalTime hora;
+    @XmlElementWrapper(name = "categoriasSolicitadas")
+    @XmlElement(name = "categoriaId")
+    private List<String> categoriasSolicitadas = new ArrayList<>();
 
+    @XmlElementWrapper(name = "recursosAsignados")
+    @XmlElement(name = "recursoId")
+    private List<String> recursosAsignados = new ArrayList<>();
 
-    public Reserva(){}
+    public Reserva() {}
 
-    public Reserva(String id, Recurso recurso, String actividad,EstadoReserva estado,Funcionario funcionario,
-                   LocalDate fecha, LocalTime hora){
-        this.id=id;
-        this.recurso=recurso;
-        this.actividad=actividad;
-        this.estado=estado;
-        this.hora=hora;
-        this.fecha=fecha;
-        this.funcionario=funcionario;
+    public Reserva(String id, String actividad, String fecha, String horaInicio, String horaFin,
+                   String funcionarioId, List<String> categoriasSolicitadas) {
+        this.id = id;
+        this.actividad = actividad;
+        this.fecha = fecha;
+        this.horaInicio = horaInicio;
+        this.horaFin = horaFin;
+        this.funcionarioId = funcionarioId;
+        this.categoriasSolicitadas = categoriasSolicitadas;
+        this.estado = EstadoReserva.ACTIVA;
+        this.recursosAsignados = new ArrayList<>();
     }
 
     public String getId() { return id; }
     public void setId(String id) { this.id = id; }
 
-    public Recurso getRecurso() { return recurso; }
-    public void setRecurso(Recurso recurso) { this.recurso = recurso; }
-
     public String getActividad() { return actividad; }
     public void setActividad(String actividad) { this.actividad = actividad; }
+
+    public String getFecha() { return fecha; }
+    public void setFecha(String fecha) { this.fecha = fecha; }
+
+    public String getHoraInicio() { return horaInicio; }
+    public void setHoraInicio(String horaInicio) { this.horaInicio = horaInicio; }
+
+    public String getHoraFin() { return horaFin; }
+    public void setHoraFin(String horaFin) { this.horaFin = horaFin; }
+
+    public String getFuncionarioId() { return funcionarioId; }
+    public void setFuncionarioId(String funcionarioId) { this.funcionarioId = funcionarioId; }
 
     public EstadoReserva getEstado() { return estado; }
     public void setEstado(EstadoReserva estado) { this.estado = estado; }
 
-    public LocalDate getFecha() { return fecha; }
-    public void setFecha(LocalDate fecha) { this.fecha = fecha; }
+    public List<String> getCategoriasSolicitadas() { return categoriasSolicitadas; }
+    public void setCategoriasSolicitadas(List<String> categoriasSolicitadas) { this.categoriasSolicitadas = categoriasSolicitadas; }
 
-    public LocalTime getHora() { return hora; }
-    public void setHora(LocalTime hora) { this.hora = hora; }
-
-    public Funcionario getFuncionario() { return funcionario; }
-    public void setFuncionario(Funcionario funcionario) { this.funcionario = funcionario; }
-
-    @Override
-    public String toString() {
-        return getActividad()+"-"+
-                (recurso!=null?recurso.getId():"sin recurso")+
-                "("+fecha+" "+hora+")";
-    }
+    public List<String> getRecursosAsignados() { return recursosAsignados; }
+    public void setRecursosAsignados(List<String> recursosAsignados) { this.recursosAsignados = recursosAsignados; }
 }
