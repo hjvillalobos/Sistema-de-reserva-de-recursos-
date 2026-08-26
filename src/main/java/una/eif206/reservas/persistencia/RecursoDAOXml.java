@@ -29,6 +29,24 @@ public class RecursoDAOXml implements RecursoDAO {
     }
 
     @Override
+    public List<Recurso> buscar(String categoriaId, String descripcion) {
+        List<Recurso> resultado = new ArrayList<>();
+        String categoriaBusqueda = (categoriaId == null) ? "" : categoriaId.trim();
+        String descripcionBusqueda = (descripcion == null) ? "" : descripcion.trim().toLowerCase();
+
+        for (Recurso r : obtenerTodos()) {
+            boolean coincideCategoria = categoriaBusqueda.isEmpty()
+                    || r.getCategoriaId().equalsIgnoreCase(categoriaBusqueda);
+            boolean coincideDescripcion = descripcionBusqueda.isEmpty()
+                    || r.getDescripcion().toLowerCase().contains(descripcionBusqueda);
+            if (coincideCategoria && coincideDescripcion) {
+                resultado.add(r);
+            }
+        }
+        return resultado;
+    }
+
+    @Override
     public Recurso buscarPorId(String id) {
         for (Recurso r : obtenerTodos()) {
             if (r.getId().equalsIgnoreCase(id)) {

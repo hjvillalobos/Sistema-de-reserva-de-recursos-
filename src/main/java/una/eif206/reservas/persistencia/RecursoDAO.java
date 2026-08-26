@@ -6,6 +6,7 @@ import java.util.List;
 public interface RecursoDAO {
     List<Recurso> obtenerTodos();
     List<Recurso> buscarPorCategoria(String categoriaId);
+    List<Recurso> buscar(String categoriaId, String descripcion);
     Recurso buscarPorId(String id);
     void guardar(Recurso recurso);
     void eliminar(String id);

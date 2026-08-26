@@ -21,6 +21,7 @@ public class PrincipalController {
     @FXML private Button btnCategorias;
     @FXML private Button btnFuncionarios;
     @FXML private Button btnReservas;
+    @FXML private Button btnRecursos;
 
     private Usuario usuarioActual;
 
@@ -33,6 +34,8 @@ public class PrincipalController {
             btnCategorias.setManaged(true);
             btnFuncionarios.setVisible(true);
             btnFuncionarios.setManaged(true);
+            btnRecursos.setVisible(true);
+            btnRecursos.setManaged(true);
         }
 
         if (usuario.getRol() == Rol.FUNCIONARIO) {
@@ -75,6 +78,10 @@ public class PrincipalController {
         } catch (IOException e) {
             mostrarError("No se pudo cargar la vista", e.getMessage());
         }
+    }
+    @FXML
+    public void onAbrirRecursos(ActionEvent event) {
+        abrirVentanaSimple("/una/eif206/reservas/fxml/recursos.fxml", "Lista de Recursos");
     }
 
     // Para vistas que NO necesitan recibir datos del usuario (Categorías, Funcionarios)

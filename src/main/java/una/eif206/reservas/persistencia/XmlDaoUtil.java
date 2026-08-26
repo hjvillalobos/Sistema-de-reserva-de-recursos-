@@ -16,7 +16,7 @@ public class XmlDaoUtil {
     public static <T> T cargar(String ruta, Class<T> clase) {
         try {
             File archivo = new File(ruta);
-            if (!archivo.exists()) {
+            if (!archivo.exists() || archivo.length() == 0) {
                 return clase.getDeclaredConstructor().newInstance();
             }
             Unmarshaller unmarshaller = JAXBContext.newInstance(clase).createUnmarshaller();

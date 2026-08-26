@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <administradores>
     <administrador id="admin" rol="ADMINISTRADOR">
-        <clave>admin</clave>
+        <clave>1234</clave>
     </administrador>
 </administradores>

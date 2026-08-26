@@ -7,7 +7,7 @@ import jakarta.xml.bind.annotation.*;
 public class Recurso {
 
     @XmlAttribute
-    private String id;            // id o número de activo (se ingresa manualmente, no autogenerado)
+    private String id;            // id o número de activo, se ingresa manualmente (no autogenerado)
     private String categoriaId;
     private String descripcion;
 

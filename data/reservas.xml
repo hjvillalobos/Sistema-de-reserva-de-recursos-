@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<reservas>
+    <reserva id="RES-000001">
+        <actividad>Jugar futbol</actividad>
+        <fecha>2026-08-26</fecha>
+        <horaInicio>00:00</horaInicio>
+        <horaFin>23:59</horaFin>
+        <funcionarioId>01</funcionarioId>
+        <estado>ACTIVA</estado>
+        <categoriasSolicitadas>
+            <categoriaId>CAT-000001</categoriaId>
+        </categoriasSolicitadas>
+        <recursosAsignados>
+            <recursoId>238715</recursoId>
+        </recursosAsignados>
+    </reserva>
+</reservas>
