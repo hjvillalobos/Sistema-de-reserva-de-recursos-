@@ -1,10 +1,11 @@
 package una.eif206.reservas.persistencia;
-import una.eif206.reservas.modelo.Recurso;
-import java.util.List;
-import java.util.Optional;
-import java.util.stream.Collectors;
 
-public class RecursoDAOXml implements RecursoDao{
+import una.eif206.reservas.modelo.Recurso;
+import java.util.ArrayList;
+import java.util.List;
+
+public class RecursoDAOXml implements RecursoDAO {
+
     public static final String RUTA_DEFECTO = "data/recursos.xml";
     private final String ruta;
 
@@ -12,29 +13,44 @@ public class RecursoDAOXml implements RecursoDao{
     public RecursoDAOXml(String ruta) { this.ruta = ruta; }
 
     @Override
-    public List<Recurso> obtenerRecursos() {
+    public List<Recurso> obtenerTodos() {
         return cargar().getRecursos();
     }
 
     @Override
-    public Optional<Recurso> busquedaPorId(String id) {
-        return obtenerRecursos().stream()
-                .filter(f -> f.getId().equalsIgnoreCase(id))
-                .findFirst();
-
+    public List<Recurso> buscarPorCategoria(String categoriaId) {
+        List<Recurso> resultado = new ArrayList<>();
+        for (Recurso r : obtenerTodos()) {
+            if (r.getCategoriaId().equalsIgnoreCase(categoriaId)) {
+                resultado.add(r);
+            }
+        }
+        return resultado;
     }
 
     @Override
-    public List<Recurso> obtenerPorCategoria(String idCat) {
-        return obtenerRecursos().stream()
-                .filter(r->r.getCategoria()!=null && r.getCategoria().getId().equalsIgnoreCase(idCat))
-                .collect(Collectors.toList());
+    public Recurso buscarPorId(String id) {
+        for (Recurso r : obtenerTodos()) {
+            if (r.getId().equalsIgnoreCase(id)) {
+                return r;
+            }
+        }
+        return null;
     }
 
     @Override
     public void guardar(Recurso recurso) {
         ListaRecursos lista = cargar();
-        lista.getRecursos().removeIf(f -> f.getId().equalsIgnoreCase(recurso.getId()));
+        Recurso existente = null;
+        for (Recurso r : lista.getRecursos()) {
+            if (r.getId().equalsIgnoreCase(recurso.getId())) {
+                existente = r;
+                break;
+            }
+        }
+        if (existente != null) {
+            lista.getRecursos().remove(existente);
+        }
         lista.getRecursos().add(recurso);
         XmlDaoUtil.guardar(ruta, lista, ListaRecursos.class);
     }
@@ -42,7 +58,16 @@ public class RecursoDAOXml implements RecursoDao{
     @Override
     public void eliminar(String id) {
         ListaRecursos lista = cargar();
-        lista.getRecursos().removeIf(f -> f.getId().equalsIgnoreCase(id));
+        Recurso aEliminar = null;
+        for (Recurso r : lista.getRecursos()) {
+            if (r.getId().equalsIgnoreCase(id)) {
+                aEliminar = r;
+                break;
+            }
+        }
+        if (aEliminar != null) {
+            lista.getRecursos().remove(aEliminar);
+        }
         XmlDaoUtil.guardar(ruta, lista, ListaRecursos.class);
     }
 

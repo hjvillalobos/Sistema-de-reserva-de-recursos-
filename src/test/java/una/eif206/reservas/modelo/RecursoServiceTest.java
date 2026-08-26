@@ -1,12 +1,6 @@
 package una.eif206.reservas.modelo;
 
-import una.eif206.reservas.modelo.Categoria;
-import una.eif206.reservas.modelo.Funcionario;
-import una.eif206.reservas.modelo.Recurso;
-import una.eif206.reservas.modelo.Usuario;
-import una.eif206.reservas.modelo.Rol;
-import una.eif206.reservas.persistencia.RecursoDao;
-import una.eif206.reservas.persistencia.ReservaDAO;
+import una.eif206.reservas.persistencia.RecursoDAO;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,12 +9,10 @@ import una.eif206.reservas.servicio.RecursoService;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 
 public class RecursoServiceTest {
-    private RecursoDao fakeDao;
+    private RecursoDAO fakeDao;
     private RecursoService recursoService;
     private Usuario admin;
     private Usuario funcionario;

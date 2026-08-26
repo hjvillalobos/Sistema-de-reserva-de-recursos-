@@ -1,10 +1,11 @@
 package una.eif206.reservas.persistencia;
+
 import jakarta.xml.bind.annotation.*;
 import una.eif206.reservas.modelo.Recurso;
-
 import java.util.ArrayList;
 import java.util.List;
-@XmlRootElement(name = "recurso")
+
+@XmlRootElement(name = "recursos")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class ListaRecursos {
     @XmlElement(name = "recurso")

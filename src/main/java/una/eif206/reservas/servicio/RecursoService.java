@@ -4,7 +4,7 @@ import una.eif206.reservas.modelo.Recurso;
 import una.eif206.reservas.modelo.Rol;
 import una.eif206.reservas.modelo.Usuario;
 
-import una.eif206.reservas.persistencia.RecursoDao;
+import una.eif206.reservas.persistencia.RecursoDAO;
 import una.eif206.reservas.persistencia.RecursoDAOXml;
 
 import java.util.List;
@@ -12,12 +12,12 @@ import java.util.Optional;
 
 public class RecursoService {
 
-    private final RecursoDao recursoDao;
+    private final RecursoDAO recursoDao;
 
     public RecursoService(){
         this.recursoDao=new RecursoDAOXml();
     }
-    public RecursoService(RecursoDao recursoDao){
+    public RecursoService(RecursoDAO recursoDao){
         this.recursoDao=recursoDao;
     }
     public List<Recurso> listaRecursos(Usuario usuario){

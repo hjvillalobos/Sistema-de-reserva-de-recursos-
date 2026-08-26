@@ -3,7 +3,7 @@ import una.eif206.reservas.modelo.Recurso;
 import una.eif206.reservas.modelo.Reserva;
 import una.eif206.reservas.modelo.Usuario;
 
-import una.eif206.reservas.persistencia.RecursoDao;
+import una.eif206.reservas.persistencia.RecursoDAO;
 import una.eif206.reservas.persistencia.RecursoDAOXml;
 import una.eif206.reservas.persistencia.ReservaDaoXml;
 import una.eif206.reservas.persistencia.ReservaDAO;
@@ -15,14 +15,14 @@ import java.util.List;
 
 
 public class CalendarizacionService {
-    private final RecursoDao recursoDao;
+    private final RecursoDAO recursoDao;
     private final ReservaDAO reservaDao;
 
     public CalendarizacionService(){
         this.recursoDao=new RecursoDAOXml();
         this.reservaDao=new ReservaDaoXml();
     }
-    public CalendarizacionService(ReservaDAO reserva, RecursoDao recurso){
+    public CalendarizacionService(ReservaDAO reserva, RecursoDAO recurso){
         this.recursoDao=recurso;
         this.reservaDao=reserva;
     }
