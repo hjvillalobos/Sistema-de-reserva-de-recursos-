@@ -5,7 +5,6 @@ import una.eif206.reservas.persistencia.RecursoDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import una.eif206.reservas.servicio.AccesoDenegadoException;
-import una.eif206.reservas.servicio.RecursoService;
 
 import static org.junit.jupiter.api.Assertions.*;
 

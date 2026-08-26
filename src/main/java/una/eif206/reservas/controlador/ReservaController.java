@@ -40,6 +40,7 @@ public class ReservaController {
     private final ReservaService reservaService = new ReservaService();
     private final CategoriaService categoriaService = new CategoriaService();
     private final ObservableList<Reserva> datos = FXCollections.observableArrayList();
+    private final una.eif206.reservas.util.ExtractorReservaIA extractorIA = new una.eif206.reservas.util.ExtractorReservaIA();
 
     private Usuario usuarioActual;
 
@@ -68,16 +69,21 @@ public class ReservaController {
     @FXML
     public void onReservar(ActionEvent event) {
         lblError.setText("");
+
+        if (dpFecha.getValue() == null) {
+            lblError.setText("Debe seleccionar una fecha.");
+            return;
+        }
+
         try {
             List<String> categoriasIds = new ArrayList<>();
             for (Categoria c : listCategorias.getSelectionModel().getSelectedItems()) {
                 categoriasIds.add(c.getId());
             }
 
-            String fecha = (dpFecha.getValue() == null) ? "" : dpFecha.getValue().toString();
-
             reservaService.intentarRegistrar(
-                    txtActividad.getText(), fecha, txtHoraInicio.getText(), txtHoraFin.getText(),
+                    txtActividad.getText(), dpFecha.getValue().toString(),
+                    txtHoraInicio.getText(), txtHoraFin.getText(),
                     usuarioActual.getId(), categoriasIds);
 
             limpiarFormulario();
@@ -111,7 +117,40 @@ public class ReservaController {
 
     @FXML
     public void onExtraerIA(ActionEvent event) {
-        lblError.setText("La función de llenado con IA todavía no está implementada.");
+        lblError.setText("");
+
+        List<String> descripcionesDisponibles = new ArrayList<>();
+        for (Categoria c : categoriaService.listarTodos()) {
+            descripcionesDisponibles.add(c.getDescripcion());
+        }
+
+        try {
+            una.eif206.reservas.util.ReservaExtraida extraido = extractorIA.extraer(txtFrase.getText(), descripcionesDisponibles);
+
+            txtActividad.setText(extraido.getActividad());
+            txtHoraInicio.setText(extraido.getHoraInicio());
+            txtHoraFin.setText(extraido.getHoraFin());
+
+            if (!extraido.getFecha().isBlank()) {
+                try {
+                    dpFecha.setValue(java.time.LocalDate.parse(extraido.getFecha()));
+                } catch (Exception e) {
+                    // Si la IA devolvió una fecha en formato raro, se deja que el usuario la ponga a mano
+                }
+            }
+
+            listCategorias.getSelectionModel().clearSelection();
+            for (Categoria categoria : listCategorias.getItems()) {
+                for (String descripcionExtraida : extraido.getCategoriasDescripcion()) {
+                    if (categoria.getDescripcion().equalsIgnoreCase(descripcionExtraida.trim())) {
+                        listCategorias.getSelectionModel().select(categoria);
+                    }
+                }
+            }
+
+        } catch (una.eif206.reservas.util.ExtraccionIAException e) {
+            lblError.setText(e.getMessage());
+        }
     }
 
     @FXML

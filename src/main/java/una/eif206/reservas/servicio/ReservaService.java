@@ -69,6 +69,14 @@ public class ReservaService {
             throws ValidacionException {
         validarDatos(actividad, fecha, horaInicio, horaFin, categoriasSolicitadas);
 
+        // Quita duplicados preservando el orden, por si la misma categoría llega repetida
+        List<String> categoriasSinDuplicados = new ArrayList<>();
+        for (String categoriaId : categoriasSolicitadas) {
+            if (!categoriasSinDuplicados.contains(categoriaId)) {
+                categoriasSinDuplicados.add(categoriaId);
+            }
+        }
+
         LocalTime inicio = LocalTime.parse(horaInicio);
         LocalTime fin = LocalTime.parse(horaFin);
         List<Reserva> reservasExistentes = reservaDAO.obtenerTodos();
@@ -76,7 +84,7 @@ public class ReservaService {
         List<String> recursosAsignados = new ArrayList<>();
         List<String> categoriasSinDisponibilidad = new ArrayList<>();
 
-        for (String categoriaId : categoriasSolicitadas) {
+        for (String categoriaId : categoriasSinDuplicados) {
             String recursoDisponible = buscarPrimerRecursoDisponible(
                     categoriaId, fecha, inicio, fin, reservasExistentes);
 
@@ -93,7 +101,7 @@ public class ReservaService {
         }
 
         String id = reservaDAO.generarSiguienteId();
-        Reserva reserva = new Reserva(id, actividad, fecha, horaInicio, horaFin, funcionarioId, categoriasSolicitadas);
+        Reserva reserva = new Reserva(id, actividad, fecha, horaInicio, horaFin, funcionarioId, categoriasSinDuplicados);
         reserva.setRecursosAsignados(recursosAsignados);
         reservaDAO.guardar(reserva);
         return reserva;
