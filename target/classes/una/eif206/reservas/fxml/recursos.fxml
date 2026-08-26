@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="15.0" xmlns="http://javafx.com/javafx/21"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="una.eif206.reservas.controlador.RecursoController">
+    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+
+    <Label text="Filtro" style="-fx-font-weight: bold;"/>
+    <HBox spacing="10.0" alignment="CENTER_LEFT">
+        <Label text="Categoria"/>
+        <ComboBox fx:id="comboFiltroCategoria" prefWidth="180.0"/>
+        <Label text="Descripcion"/>
+        <TextField fx:id="txtFiltroDescripcion" prefWidth="180.0"/>
+        <Button text="Buscar" onAction="#onBuscar"/>
+        <Button text="Imprimir" onAction="#onImprimir"/>
+    </HBox>
+
+    <Label text="Recurso" style="-fx-font-weight: bold;"/>
+    <GridPane hgap="10.0" vgap="10.0">
+        <Label text="ID" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtId" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <Label text="Categoria" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
+        <ComboBox fx:id="comboCategoria" prefWidth="220.0" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <Label text="Descripcion" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
+        <TextField fx:id="txtDescripcion" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+    </GridPane>
+
+    <HBox spacing="10.0">
+        <Button text="Guardar" onAction="#onGuardar"/>
+        <Button text="Borrar" onAction="#onBorrar"/>
+        <Button text="Limpiar" onAction="#onLimpiar"/>
+    </HBox>
+
+    <Label fx:id="lblError" style="-fx-text-fill: red;"/>
+
+    <Label text="Listado" style="-fx-font-weight: bold;"/>
+    <TableView fx:id="tablaRecursos" prefHeight="200.0">
+        <columns>
+            <TableColumn fx:id="colId" text="Id" prefWidth="100.0"/>
+            <TableColumn fx:id="colCategoria" text="Categoria" prefWidth="180.0"/>
+            <TableColumn fx:id="colDescripcion" text="Descripcion" prefWidth="200.0"/>
+        </columns>
+    </TableView>
+</VBox>

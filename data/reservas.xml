@@ -14,4 +14,18 @@
             <recursoId>238715</recursoId>
         </recursosAsignados>
     </reserva>
+    <reserva id="RES-000002">
+        <actividad>Darle play</actividad>
+        <fecha>2026-08-26</fecha>
+        <horaInicio>00:00</horaInicio>
+        <horaFin>12:00</horaFin>
+        <funcionarioId>01</funcionarioId>
+        <estado>ACTIVA</estado>
+        <categoriasSolicitadas>
+            <categoriaId>CAT-000001</categoriaId>
+        </categoriasSolicitadas>
+        <recursosAsignados>
+            <recursoId>001</recursoId>
+        </recursosAsignados>
+    </reserva>
 </reservas>

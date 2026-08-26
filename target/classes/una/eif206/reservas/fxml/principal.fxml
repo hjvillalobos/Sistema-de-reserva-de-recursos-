@@ -18,4 +18,5 @@
     <Button fx:id="btnCategorias" text="Gestionar Categorías" onAction="#onAbrirCategorias" visible="false" managed="false"/>
     <Button fx:id="btnFuncionarios" text="Gestionar Funcionarios" onAction="#onAbrirFuncionarios" visible="false" managed="false"/>
     <Button fx:id="btnReservas" text="Mis Reservas" onAction="#onAbrirReservas" visible="false" managed="false"/>
+    <Button fx:id="btnRecursos" text="Gestionar Recursos" onAction="#onAbrirRecursos" visible="false" managed="false"/>
 </VBox>
