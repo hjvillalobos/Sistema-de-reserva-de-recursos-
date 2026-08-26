@@ -9,7 +9,8 @@ import una.eif206.reservas.persistencia.FuncionarioDAO;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -19,33 +20,74 @@ class LoginServiceTest {
     private FuncionarioDAO funcionarioDAO;
     private LoginService loginService;
 
+    private List<Usuario> administradoresDePrueba;
+    private List<Funcionario> funcionariosDePrueba;
+
     @BeforeEach
     void setUp() {
-        Usuario admin = new Usuario("admin", "admin123", Rol.ADMINISTRADOR);
-        Funcionario funcionario = new Funcionario("111", "clave111", "Juan Perez", "8888-0000");
+        administradoresDePrueba = new ArrayList<>();
+        administradoresDePrueba.add(new Usuario("admin", "admin123", Rol.ADMINISTRADOR));
+
+        funcionariosDePrueba = new ArrayList<>();
+        funcionariosDePrueba.add(new Funcionario("111", "clave111", "Juan Perez", "8888-0000"));
 
         administradorDAO = new AdministradorDAO() {
-            private final List<Usuario> datos = new ArrayList<>(List.of(admin));
-            public List<Usuario> obtenerTodos() { return datos; }
-            public Optional<Usuario> buscarPorId(String id) {
-                return datos.stream().filter(u -> u.getId().equals(id)).findFirst();
+            @Override
+            public List<Usuario> obtenerTodos() {
+                return administradoresDePrueba;
             }
+
+            @Override
+            public Usuario buscarPorId(String id) {
+                for (Usuario u : administradoresDePrueba) {
+                    if (u.getId().equals(id)) {
+                        return u;
+                    }
+                }
+                return null;
+            }
+
+            @Override
             public void actualizarClave(String id, String nuevaClave) {
-                buscarPorId(id).ifPresent(u -> u.setClave(nuevaClave));
+                Usuario u = buscarPorId(id);
+                if (u != null) {
+                    u.setClave(nuevaClave);
+                }
             }
         };
 
         funcionarioDAO = new FuncionarioDAO() {
-            private final List<Funcionario> datos = new ArrayList<>(List.of(funcionario));
-            public List<Funcionario> obtenerTodos() { return datos; }
-            public Optional<Funcionario> buscarPorId(String id) {
-                return datos.stream().filter(f -> f.getId().equals(id)).findFirst();
+            @Override
+            public List<Funcionario> obtenerTodos() {
+                return funcionariosDePrueba;
             }
+
+            @Override
+            public Funcionario buscarPorId(String id) {
+                for (Funcionario f : funcionariosDePrueba) {
+                    if (f.getId().equals(id)) {
+                        return f;
+                    }
+                }
+                return null;
+            }
+
+            @Override
             public void guardar(Funcionario f) {
-                datos.removeIf(x -> x.getId().equals(f.getId()));
-                datos.add(f);
+                Funcionario existente = buscarPorId(f.getId());
+                if (existente != null) {
+                    funcionariosDePrueba.remove(existente);
+                }
+                funcionariosDePrueba.add(f);
             }
-            public void eliminar(String id) { datos.removeIf(f -> f.getId().equals(id)); }
+
+            @Override
+            public void eliminar(String id) {
+                Funcionario existente = buscarPorId(id);
+                if (existente != null) {
+                    funcionariosDePrueba.remove(existente);
+                }
+            }
         };
 
         loginService = new LoginService(administradorDAO, funcionarioDAO);
@@ -79,7 +121,7 @@ class LoginServiceTest {
     void cambiarClaveExitoso() throws CredencialesInvalidasException {
         Usuario u = loginService.autenticar("admin", "admin123");
         loginService.cambiarClave(u, "admin123", "nuevaClave");
-        assertEquals("nuevaClave", administradorDAO.buscarPorId("admin").get().getClave());
+        assertEquals("nuevaClave", administradorDAO.buscarPorId("admin").getClave());
     }
 
     @Test

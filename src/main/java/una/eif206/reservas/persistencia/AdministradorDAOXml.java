@@ -5,7 +5,6 @@ import una.eif206.reservas.modelo.Rol;
 import una.eif206.reservas.modelo.Usuario;
 import java.io.File;
 import java.util.List;
-import java.util.Optional;
 
 public class AdministradorDAOXml implements AdministradorDAO {
 
@@ -25,22 +24,30 @@ public class AdministradorDAOXml implements AdministradorDAO {
     }
 
     @Override
-    public List<Usuario> obtenerTodos() { return cargar().getAdministradores(); }
+    public List<Usuario> obtenerTodos() {
+        return cargar().getAdministradores();
+    }
 
     @Override
-    public Optional<Usuario> buscarPorId(String id) {
-        return obtenerTodos().stream()
-                .filter(a -> a.getId().equalsIgnoreCase(id))
-                .findFirst();
+    public Usuario buscarPorId(String id) {
+        List<Usuario> lista = obtenerTodos();
+        for (Usuario u : lista) {
+            if (u.getId().equalsIgnoreCase(id)) {
+                return u;
+            }
+        }
+        return null;
     }
 
     @Override
     public void actualizarClave(String id, String nuevaClave) {
         ListaAdministradores lista = cargar();
-        lista.getAdministradores().stream()
-                .filter(a -> a.getId().equalsIgnoreCase(id))
-                .findFirst()
-                .ifPresent(a -> a.setClave(nuevaClave));
+        for (Usuario u : lista.getAdministradores()) {
+            if (u.getId().equalsIgnoreCase(id)) {
+                u.setClave(nuevaClave);
+                break;
+            }
+        }
         XmlDaoUtil.guardar(ruta, lista, ListaAdministradores.class);
     }
 

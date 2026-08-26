@@ -9,8 +9,6 @@ import una.eif206.reservas.persistencia.AdministradorDAOXml;
 import una.eif206.reservas.persistencia.FuncionarioDAO;
 import una.eif206.reservas.persistencia.FuncionarioDAOXml;
 
-import java.util.Optional;
-
 public class LoginService {
 
     private final AdministradorDAO administradorDAO;
@@ -30,14 +28,14 @@ public class LoginService {
             throw new CredencialesInvalidasException("Debe indicar id y clave.");
         }
 
-        Optional<Usuario> admin = administradorDAO.buscarPorId(id);
-        if (admin.isPresent() && admin.get().getClave().equals(clave)) {
-            return admin.get();
+        Usuario admin = administradorDAO.buscarPorId(id);
+        if (admin != null && admin.getClave().equals(clave)) {
+            return admin;
         }
 
-        Optional<Funcionario> funcionario = funcionarioDAO.buscarPorId(id);
-        if (funcionario.isPresent() && funcionario.get().getClave().equals(clave)) {
-            return funcionario.get();
+        Funcionario funcionario = funcionarioDAO.buscarPorId(id);
+        if (funcionario != null && funcionario.getClave().equals(clave)) {
+            return funcionario;
         }
 
         throw new CredencialesInvalidasException("Id o clave incorrectos.");

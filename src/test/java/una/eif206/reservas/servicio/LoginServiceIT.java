@@ -5,7 +5,6 @@ import una.eif206.reservas.modelo.Rol;
 import una.eif206.reservas.modelo.Usuario;
 import una.eif206.reservas.persistencia.AdministradorDAOXml;
 import una.eif206.reservas.persistencia.FuncionarioDAOXml;
-import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -14,7 +13,6 @@ import java.nio.file.Path;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-// Prueba de INTEGRACIÓN real: escribe y lee archivos XML en disco (usa Failsafe)
 class LoginServiceIT {
 
     @TempDir
@@ -34,8 +32,6 @@ class LoginServiceIT {
 
         loginService.cambiarClave(u, "admin", "otraClave");
 
-        // Nueva instancia del DAO para forzar relectura desde disco
-        AdministradorDAOXml adminDAO2 = new AdministradorDAOXml(rutaAdmins);
         Usuario recargado = loginService.autenticar("admin", "otraClave");
         assertEquals("otraClave", recargado.getClave());
         assertTrue(new File(rutaAdmins).exists());
