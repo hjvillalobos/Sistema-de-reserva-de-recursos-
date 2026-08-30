@@ -3,7 +3,6 @@ package una.eif206.reservas.util;
 import java.util.ArrayList;
 import java.util.List;
 
-// Objeto simple (no se persiste) para pasar del texto de la IA al formulario
 public class ReservaExtraida {
     private String actividad = "";
     private String fecha = "";

@@ -1,4 +1,4 @@
-// vista/App.java
+
 package una.eif206.reservas.vista;
 
 import javafx.application.Application;

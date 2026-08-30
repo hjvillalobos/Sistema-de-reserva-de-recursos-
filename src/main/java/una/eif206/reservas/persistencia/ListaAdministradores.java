@@ -1,4 +1,4 @@
-// persistencia/ListaAdministradores.java
+
 package una.eif206.reservas.persistencia;
 
 import jakarta.xml.bind.annotation.*;

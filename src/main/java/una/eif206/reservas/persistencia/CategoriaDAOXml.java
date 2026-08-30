@@ -1,4 +1,4 @@
-// persistencia/CategoriaDAOXml.java
+
 package una.eif206.reservas.persistencia;
 
 import una.eif206.reservas.modelo.Categoria;

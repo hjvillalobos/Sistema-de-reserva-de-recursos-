@@ -1,4 +1,4 @@
-// servicio/CredencialesInvalidasException.java
+
 package una.eif206.reservas.servicio;
 
 public class CredencialesInvalidasException extends Exception {

@@ -124,11 +124,9 @@ class ReservaServiceTest {
 
     @Test
     void registrarSinDisponibilidadLanzaExcepcion() throws ValidacionException {
-        // Ocupamos el único recurso de esa categoría en el mismo horario
         reservaService.intentarRegistrar("Reunion 1", fechaManana(), "09:00", "11:00",
                 "111", List.of("CAT-000002"));
 
-        // Segunda reserva pidiendo la misma categoría, en horario que se sobrepone
         assertThrows(ValidacionException.class, () ->
                 reservaService.intentarRegistrar("Reunion 2", fechaManana(), "10:00", "12:00",
                         "222", List.of("CAT-000002")));
@@ -139,7 +137,6 @@ class ReservaServiceTest {
         reservaService.intentarRegistrar("Reunion 1", fechaManana(), "09:00", "10:00",
                 "111", List.of("CAT-000002"));
 
-        // No se solapa (empieza justo cuando termina la anterior)
         Reserva segunda = reservaService.intentarRegistrar("Reunion 2", fechaManana(), "10:00", "11:00",
                 "222", List.of("CAT-000002"));
 
@@ -153,7 +150,6 @@ class ReservaServiceTest {
 
         reservaService.cancelar(primera.getId(), "111");
 
-        // Ahora otra reserva en el mismo horario sí debería poder tomar el recurso
         Reserva segunda = reservaService.intentarRegistrar("Reunion 2", fechaManana(), "09:00", "11:00",
                 "222", List.of("CAT-000002"));
 

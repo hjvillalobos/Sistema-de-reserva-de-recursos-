@@ -1,4 +1,4 @@
-// src/test/java/una/eif206/reservas/servicio/CategoriaServiceTest.java
+
 package una.eif206.reservas.servicio;
 
 import una.eif206.reservas.modelo.Categoria;

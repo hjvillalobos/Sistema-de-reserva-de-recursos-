@@ -25,7 +25,6 @@ public class PrincipalController {
 
     private Usuario usuarioActual;
 
-    // Ruta de mi CSS
     private final String RUTA_CSS = "/una/eif206/reservas/css/estilos.css";
 
     public void inicializar(Usuario usuario) {
@@ -123,7 +122,7 @@ public class PrincipalController {
 
             Stage stage = new Stage();
             Scene scene = new Scene(root);
-            aplicarEstilos(scene); // <-- Se aplica el CSS a las ventanas secundarias
+            aplicarEstilos(scene);
 
             stage.setScene(scene);
             stage.setTitle(titulo);

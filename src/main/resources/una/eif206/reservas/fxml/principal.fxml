@@ -27,7 +27,6 @@
                 <Button fx:id="btnPrincipalRecursos" managed="false" onAction="#onAbrirRecursos" prefWidth="260.0" styleClass="btn-outline-info" text="Gestionar Recursos" visible="false" />
                 <Button fx:id="btnPrincipalReservas" managed="false" onAction="#onAbrirReservas" prefWidth="260.0" styleClass="btn-primary" text="Mis Reservas" visible="false" />
 
-                <!-- BOTÓN DE CERRAR SESIÓN CENTRADO Y ALINEADO -->
                 <Button fx:id="btnPrincipalCerrarSesion" onAction="#onCerrarSesion" prefWidth="260.0" styleClass="btn-outline-danger" text="Cerrar Sesión" />
             </VBox>
         </VBox>

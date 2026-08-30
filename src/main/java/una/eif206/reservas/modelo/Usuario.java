@@ -1,6 +1,4 @@
 
- // Clase usario
-
 package una.eif206.reservas.modelo;
 
 import jakarta.xml.bind.annotation.*;
@@ -16,7 +14,6 @@ public class Usuario {
     protected Rol rol;
 
     public Usuario() {
-        // requerido por JAXB
     }
 
     public Usuario(String id, String clave, Rol rol) {

@@ -1,4 +1,4 @@
-// servicio/CategoriaService.java
+
 package una.eif206.reservas.servicio;
 
 import una.eif206.reservas.modelo.Categoria;

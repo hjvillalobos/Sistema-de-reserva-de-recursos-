@@ -65,7 +65,7 @@ public class LoginController {
             Stage stage = (Stage) txtLoginId.getScene().getWindow();
             Scene scene = new Scene(root);
 
-            // Inyectar el archivo CSS aquí
+
             URL cssUrl = getClass().getResource("/una/eif206/reservas/estilos.css");
             if (cssUrl != null) {
                 scene.getStylesheets().add(cssUrl.toExternalForm());
