@@ -14,33 +14,37 @@ import una.eif206.reservas.modelo.Usuario;
 import una.eif206.reservas.servicio.CategoriaService;
 import una.eif206.reservas.servicio.ReservaService;
 import una.eif206.reservas.servicio.ValidacionException;
+import una.eif206.reservas.util.ExtraccionIAException;
+import una.eif206.reservas.util.ExtractorReservaIA;
+import una.eif206.reservas.util.ReservaExtraida;
 import una.eif206.reservas.util.ReportePdfUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
 public class ReservaController {
 
-    @FXML private TextField txtFrase;
-    @FXML private TextField txtActividad;
-    @FXML private DatePicker dpFecha;
-    @FXML private TextField txtHoraInicio;
-    @FXML private TextField txtHoraFin;
-    @FXML private ListView<Categoria> listCategorias;
-    @FXML private Label lblError;
-    @FXML private TableView<Reserva> tablaReservas;
-    @FXML private TableColumn<Reserva, String> colId;
-    @FXML private TableColumn<Reserva, String> colActividad;
-    @FXML private TableColumn<Reserva, String> colFecha;
-    @FXML private TableColumn<Reserva, String> colHorario;
-    @FXML private TableColumn<Reserva, String> colEstado;
+    @FXML private TextField txtReservaFrase;
+    @FXML private TextField txtReservaActividad;
+    @FXML private DatePicker dpReservaFecha;
+    @FXML private TextField txtReservaHoraInicio;
+    @FXML private TextField txtReservaHoraFin;
+    @FXML private ListView<Categoria> lstReservaCategorias;
+    @FXML private Label lblReservaError;
+    @FXML private TableView<Reserva> tblReservaListado;
+    @FXML private TableColumn<Reserva, String> colReservaId;
+    @FXML private TableColumn<Reserva, String> colReservaActividad;
+    @FXML private TableColumn<Reserva, String> colReservaFecha;
+    @FXML private TableColumn<Reserva, String> colReservaHorario;
+    @FXML private TableColumn<Reserva, String> colReservaEstado;
 
     private final ReservaService reservaService = new ReservaService();
     private final CategoriaService categoriaService = new CategoriaService();
+    private final ExtractorReservaIA extractorIA = new ExtractorReservaIA();
     private final ObservableList<Reserva> datos = FXCollections.observableArrayList();
-    private final una.eif206.reservas.util.ExtractorReservaIA extractorIA = new una.eif206.reservas.util.ExtractorReservaIA();
 
     private Usuario usuarioActual;
 
@@ -51,73 +55,73 @@ public class ReservaController {
 
     @FXML
     public void initialize() {
-        listCategorias.setItems(FXCollections.observableArrayList(categoriaService.listarTodos()));
-        listCategorias.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
+        lstReservaCategorias.setItems(FXCollections.observableArrayList(categoriaService.listarTodos()));
+        lstReservaCategorias.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
 
-        colId.setCellValueFactory(new PropertyValueFactory<Reserva, String>("id"));
-        colActividad.setCellValueFactory(new PropertyValueFactory<Reserva, String>("actividad"));
-        colFecha.setCellValueFactory(new PropertyValueFactory<Reserva, String>("fecha"));
-        colEstado.setCellValueFactory(new PropertyValueFactory<Reserva, String>("estado"));
-        colHorario.setCellValueFactory(cellData -> {
+        colReservaId.setCellValueFactory(new PropertyValueFactory<Reserva, String>("id"));
+        colReservaActividad.setCellValueFactory(new PropertyValueFactory<Reserva, String>("actividad"));
+        colReservaFecha.setCellValueFactory(new PropertyValueFactory<Reserva, String>("fecha"));
+        colReservaEstado.setCellValueFactory(new PropertyValueFactory<Reserva, String>("estado"));
+        colReservaHorario.setCellValueFactory(cellData -> {
             Reserva r = cellData.getValue();
             return new javafx.beans.property.SimpleStringProperty(r.getHoraInicio() + " - " + r.getHoraFin());
         });
 
-        tablaReservas.setItems(datos);
+        tblReservaListado.setItems(datos);
     }
 
     @FXML
     public void onReservar(ActionEvent event) {
-        lblError.setText("");
+        lblReservaError.setText("");
 
-        if (dpFecha.getValue() == null) {
-            lblError.setText("Debe seleccionar una fecha.");
+        if (dpReservaFecha.getValue() == null) {
+            lblReservaError.setText("Debe seleccionar una fecha.");
             return;
         }
 
         try {
             List<String> categoriasIds = new ArrayList<>();
-            for (Categoria c : listCategorias.getSelectionModel().getSelectedItems()) {
+            for (Categoria c : lstReservaCategorias.getSelectionModel().getSelectedItems()) {
                 categoriasIds.add(c.getId());
             }
 
             reservaService.intentarRegistrar(
-                    txtActividad.getText(), dpFecha.getValue().toString(),
-                    txtHoraInicio.getText(), txtHoraFin.getText(),
+                    txtReservaActividad.getText(), dpReservaFecha.getValue().toString(),
+                    txtReservaHoraInicio.getText(), txtReservaHoraFin.getText(),
                     usuarioActual.getId(), categoriasIds);
 
             limpiarFormulario();
             cargarReservas();
         } catch (ValidacionException e) {
-            lblError.setText(e.getMessage());
+            lblReservaError.setText(e.getMessage());
         }
     }
 
     @FXML
     public void onCancelarSeleccionada(ActionEvent event) {
-        lblError.setText("");
-        Reserva seleccionada = tablaReservas.getSelectionModel().getSelectedItem();
+        lblReservaError.setText("");
+        Reserva seleccionada = tblReservaListado.getSelectionModel().getSelectedItem();
         if (seleccionada == null) {
-            lblError.setText("Seleccione una reserva de la lista para cancelar.");
+            lblReservaError.setText("Seleccione una reserva de la lista para cancelar.");
             return;
         }
         try {
             reservaService.cancelar(seleccionada.getId(), usuarioActual.getId());
             cargarReservas();
         } catch (ValidacionException e) {
-            lblError.setText(e.getMessage());
+            lblReservaError.setText(e.getMessage());
         }
     }
 
     @FXML
     public void onLimpiar(ActionEvent event) {
         limpiarFormulario();
-        lblError.setText("");
+        lblReservaError.setText("");
     }
 
     @FXML
     public void onExtraerIA(ActionEvent event) {
-        lblError.setText("");
+        lblReservaError.setText("");
 
         List<String> descripcionesDisponibles = new ArrayList<>();
         for (Categoria c : categoriaService.listarTodos()) {
@@ -125,43 +129,43 @@ public class ReservaController {
         }
 
         try {
-            una.eif206.reservas.util.ReservaExtraida extraido = extractorIA.extraer(txtFrase.getText(), descripcionesDisponibles);
+            ReservaExtraida extraido = extractorIA.extraer(txtReservaFrase.getText(), descripcionesDisponibles);
 
-            txtActividad.setText(extraido.getActividad());
-            txtHoraInicio.setText(extraido.getHoraInicio());
-            txtHoraFin.setText(extraido.getHoraFin());
+            txtReservaActividad.setText(extraido.getActividad());
+            txtReservaHoraInicio.setText(extraido.getHoraInicio());
+            txtReservaHoraFin.setText(extraido.getHoraFin());
 
             if (!extraido.getFecha().isBlank()) {
                 try {
-                    dpFecha.setValue(java.time.LocalDate.parse(extraido.getFecha()));
+                    dpReservaFecha.setValue(LocalDate.parse(extraido.getFecha()));
                 } catch (Exception e) {
-                    // Si la IA devolvió una fecha en formato raro, se deja que el usuario la ponga a mano
+                    // Si la IA devolvió una fecha en formato raro, el usuario la corrige a mano
                 }
             }
 
-            listCategorias.getSelectionModel().clearSelection();
-            for (Categoria categoria : listCategorias.getItems()) {
+            lstReservaCategorias.getSelectionModel().clearSelection();
+            for (Categoria categoria : lstReservaCategorias.getItems()) {
                 for (String descripcionExtraida : extraido.getCategoriasDescripcion()) {
                     if (categoria.getDescripcion().equalsIgnoreCase(descripcionExtraida.trim())) {
-                        listCategorias.getSelectionModel().select(categoria);
+                        lstReservaCategorias.getSelectionModel().select(categoria);
                     }
                 }
             }
 
-        } catch (una.eif206.reservas.util.ExtraccionIAException e) {
-            lblError.setText(e.getMessage());
+        } catch (ExtraccionIAException e) {
+            lblReservaError.setText(e.getMessage());
         }
     }
 
     @FXML
     public void onImprimir(ActionEvent event) {
-        lblError.setText("");
+        lblReservaError.setText("");
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar reporte de reservas");
         fileChooser.setInitialFileName("reservas.pdf");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf"));
-        Stage stage = (Stage) tablaReservas.getScene().getWindow();
+        Stage stage = (Stage) tblReservaListado.getScene().getWindow();
         File archivo = fileChooser.showSaveDialog(stage);
 
         if (archivo == null) {
@@ -180,7 +184,7 @@ public class ReservaController {
         try {
             ReportePdfUtil.generarReporteTabla(archivo.getAbsolutePath(), "Mis Reservas", encabezados, filas);
         } catch (IOException e) {
-            lblError.setText("No se pudo generar el PDF: " + e.getMessage());
+            lblReservaError.setText("No se pudo generar el PDF: " + e.getMessage());
         }
     }
 
@@ -194,11 +198,11 @@ public class ReservaController {
     }
 
     private void limpiarFormulario() {
-        txtFrase.clear();
-        txtActividad.clear();
-        dpFecha.setValue(null);
-        txtHoraInicio.clear();
-        txtHoraFin.clear();
-        listCategorias.getSelectionModel().clearSelection();
+        txtReservaFrase.clear();
+        txtReservaActividad.clear();
+        dpReservaFecha.setValue(null);
+        txtReservaHoraInicio.clear();
+        txtReservaHoraFin.clear();
+        lstReservaCategorias.getSelectionModel().clearSelection();
     }
 }

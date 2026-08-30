@@ -77,6 +77,19 @@ class ReservaServiceTest {
             }
 
             @Override
+            public List<Recurso> buscar(String categoriaId, String descripcion) {
+                List<Recurso> resultado = new ArrayList<>();
+                String catB = (categoriaId == null) ? "" : categoriaId;
+                String descB = (descripcion == null) ? "" : descripcion.toLowerCase();
+                for (Recurso r : recursosDePrueba) {
+                    boolean coincideCat = catB.isEmpty() || r.getCategoriaId().equals(catB);
+                    boolean coincideDesc = descB.isEmpty() || r.getDescripcion().toLowerCase().contains(descB);
+                    if (coincideCat && coincideDesc) resultado.add(r);
+                }
+                return resultado;
+            }
+
+            @Override
             public Recurso buscarPorId(String id) {
                 for (Recurso r : recursosDePrueba) {
                     if (r.getId().equals(id)) return r;

@@ -26,16 +26,16 @@ import java.util.List;
 
 public class RecursoController {
 
-    @FXML private ComboBox<Categoria> comboFiltroCategoria;
-    @FXML private TextField txtFiltroDescripcion;
-    @FXML private TextField txtId;
-    @FXML private ComboBox<Categoria> comboCategoria;
-    @FXML private TextField txtDescripcion;
-    @FXML private TableView<Recurso> tablaRecursos;
-    @FXML private TableColumn<Recurso, String> colId;
-    @FXML private TableColumn<Recurso, String> colCategoria;
-    @FXML private TableColumn<Recurso, String> colDescripcion;
-    @FXML private Label lblError;
+    @FXML private ComboBox<Categoria> cmbRecursoFiltroCategoria;
+    @FXML private TextField txtRecursoFiltroDescripcion;
+    @FXML private TextField txtRecursoId;
+    @FXML private ComboBox<Categoria> cmbRecursoCategoria;
+    @FXML private TextField txtRecursoDescripcion;
+    @FXML private TableView<Recurso> tblRecursoListado;
+    @FXML private TableColumn<Recurso, String> colRecursoId;
+    @FXML private TableColumn<Recurso, String> colRecursoCategoria;
+    @FXML private TableColumn<Recurso, String> colRecursoDescripcion;
+    @FXML private Label lblRecursoError;
 
     private final RecursoService recursoService = new RecursoService();
     private final CategoriaService categoriaService = new CategoriaService();
@@ -50,30 +50,30 @@ public class RecursoController {
         ObservableList<Categoria> categoriasParaFiltro = FXCollections.observableArrayList();
         categoriasParaFiltro.add(null); // opción "todas"
         categoriasParaFiltro.addAll(categoriasDisponibles);
-        comboFiltroCategoria.setItems(categoriasParaFiltro);
+        cmbRecursoFiltroCategoria.setItems(categoriasParaFiltro);
 
-        comboCategoria.setItems(FXCollections.observableArrayList(categoriasDisponibles));
+        cmbRecursoCategoria.setItems(FXCollections.observableArrayList(categoriasDisponibles));
 
-        colId.setCellValueFactory(new PropertyValueFactory<Recurso, String>("id"));
-        colDescripcion.setCellValueFactory(new PropertyValueFactory<Recurso, String>("descripcion"));
-        colCategoria.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recurso, String>, ObservableValue<String>>() {
+        colRecursoId.setCellValueFactory(new PropertyValueFactory<Recurso, String>("id"));
+        colRecursoDescripcion.setCellValueFactory(new PropertyValueFactory<Recurso, String>("descripcion"));
+        colRecursoCategoria.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<Recurso, String>, ObservableValue<String>>() {
             @Override
             public ObservableValue<String> call(TableColumn.CellDataFeatures<Recurso, String> data) {
                 return new SimpleStringProperty(obtenerDescripcionCategoria(data.getValue().getCategoriaId()));
             }
         });
 
-        tablaRecursos.setItems(datos);
+        tblRecursoListado.setItems(datos);
 
-        tablaRecursos.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Recurso>() {
+        tblRecursoListado.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Recurso>() {
             @Override
             public void changed(ObservableValue<? extends Recurso> observable,
                                 Recurso valorAnterior, Recurso valorNuevo) {
                 if (valorNuevo != null) {
-                    txtId.setText(valorNuevo.getId());
-                    txtId.setEditable(false);
-                    txtDescripcion.setText(valorNuevo.getDescripcion());
-                    seleccionarCategoriaEnCombo(comboCategoria, valorNuevo.getCategoriaId());
+                    txtRecursoId.setText(valorNuevo.getId());
+                    txtRecursoId.setEditable(false);
+                    txtRecursoDescripcion.setText(valorNuevo.getDescripcion());
+                    seleccionarCategoriaEnCombo(cmbRecursoCategoria, valorNuevo.getCategoriaId());
                     editandoExistente = true;
                 }
             }
@@ -85,8 +85,8 @@ public class RecursoController {
     @FXML
     public void onBuscar(ActionEvent event) {
         datos.clear();
-        String categoriaId = (comboFiltroCategoria.getValue() == null) ? "" : comboFiltroCategoria.getValue().getId();
-        List<Recurso> resultado = recursoService.buscar(categoriaId, txtFiltroDescripcion.getText());
+        String categoriaId = (cmbRecursoFiltroCategoria.getValue() == null) ? "" : cmbRecursoFiltroCategoria.getValue().getId();
+        List<Recurso> resultado = recursoService.buscar(categoriaId, txtRecursoFiltroDescripcion.getText());
         for (Recurso r : resultado) {
             datos.add(r);
         }
@@ -94,58 +94,58 @@ public class RecursoController {
 
     @FXML
     public void onGuardar(ActionEvent event) {
-        lblError.setText("");
+        lblRecursoError.setText("");
 
-        if (comboCategoria.getValue() == null) {
-            lblError.setText("Debe seleccionar una categoría.");
+        if (cmbRecursoCategoria.getValue() == null) {
+            lblRecursoError.setText("Debe seleccionar una categoría.");
             return;
         }
-        String categoriaId = comboCategoria.getValue().getId();
+        String categoriaId = cmbRecursoCategoria.getValue().getId();
 
         try {
             if (editandoExistente) {
-                recursoService.modificar(txtId.getText(), categoriaId, txtDescripcion.getText());
+                recursoService.modificar(txtRecursoId.getText(), categoriaId, txtRecursoDescripcion.getText());
             } else {
-                recursoService.crear(txtId.getText(), categoriaId, txtDescripcion.getText());
+                recursoService.crear(txtRecursoId.getText(), categoriaId, txtRecursoDescripcion.getText());
             }
             limpiarFormulario();
             cargarTodos();
         } catch (ValidacionException e) {
-            lblError.setText(e.getMessage());
+            lblRecursoError.setText(e.getMessage());
         }
     }
 
     @FXML
     public void onBorrar(ActionEvent event) {
-        lblError.setText("");
-        if (txtId.getText() == null || txtId.getText().isBlank()) {
-            lblError.setText("Seleccione un recurso de la lista para borrar.");
+        lblRecursoError.setText("");
+        if (txtRecursoId.getText() == null || txtRecursoId.getText().isBlank()) {
+            lblRecursoError.setText("Seleccione un recurso de la lista para borrar.");
             return;
         }
         try {
-            recursoService.eliminar(txtId.getText());
+            recursoService.eliminar(txtRecursoId.getText());
             limpiarFormulario();
             cargarTodos();
         } catch (ValidacionException e) {
-            lblError.setText(e.getMessage());
+            lblRecursoError.setText(e.getMessage());
         }
     }
 
     @FXML
     public void onLimpiar(ActionEvent event) {
         limpiarFormulario();
-        lblError.setText("");
+        lblRecursoError.setText("");
     }
 
     @FXML
     public void onImprimir(ActionEvent event) {
-        lblError.setText("");
+        lblRecursoError.setText("");
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar reporte de recursos");
         fileChooser.setInitialFileName("recursos.pdf");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf"));
-        Stage stage = (Stage) tablaRecursos.getScene().getWindow();
+        Stage stage = (Stage) tblRecursoListado.getScene().getWindow();
         File archivo = fileChooser.showSaveDialog(stage);
 
         if (archivo == null) {
@@ -161,7 +161,7 @@ public class RecursoController {
         try {
             ReportePdfUtil.generarReporteTabla(archivo.getAbsolutePath(), "Listado de Recursos", encabezados, filas);
         } catch (IOException e) {
-            lblError.setText("No se pudo generar el PDF: " + e.getMessage());
+            lblRecursoError.setText("No se pudo generar el PDF: " + e.getMessage());
         }
     }
 
@@ -174,11 +174,11 @@ public class RecursoController {
     }
 
     private void limpiarFormulario() {
-        txtId.clear();
-        txtId.setEditable(true);
-        txtDescripcion.clear();
-        comboCategoria.setValue(null);
-        tablaRecursos.getSelectionModel().clearSelection();
+        txtRecursoId.clear();
+        txtRecursoId.setEditable(true);
+        txtRecursoDescripcion.clear();
+        cmbRecursoCategoria.setValue(null);
+        tblRecursoListado.getSelectionModel().clearSelection();
         editandoExistente = false;
     }
 

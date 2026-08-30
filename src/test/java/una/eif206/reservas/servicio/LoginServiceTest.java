@@ -57,6 +57,7 @@ class LoginServiceTest {
         };
 
         funcionarioDAO = new FuncionarioDAO() {
+
             @Override
             public List<Funcionario> obtenerTodos() {
                 return funcionariosDePrueba;
@@ -73,17 +74,25 @@ class LoginServiceTest {
             }
 
             @Override
+            public List<Funcionario> buscar(String id, String nombre) {
+                return List.of();
+            }
+
+            @Override
             public void guardar(Funcionario f) {
                 Funcionario existente = buscarPorId(f.getId());
+
                 if (existente != null) {
                     funcionariosDePrueba.remove(existente);
                 }
+
                 funcionariosDePrueba.add(f);
             }
 
             @Override
             public void eliminar(String id) {
                 Funcionario existente = buscarPorId(id);
+
                 if (existente != null) {
                     funcionariosDePrueba.remove(existente);
                 }
@@ -92,6 +101,7 @@ class LoginServiceTest {
 
         loginService = new LoginService(administradorDAO, funcionarioDAO);
     }
+
 
     @Test
     void autenticarAdminExitoso() throws CredencialesInvalidasException {

@@ -1,4 +1,3 @@
-// controlador/FuncionarioController.java
 package una.eif206.reservas.controlador;
 
 import javafx.beans.value.ChangeListener;
@@ -23,16 +22,16 @@ import java.util.List;
 
 public class FuncionarioController {
 
-    @FXML private TextField txtBusquedaId;
-    @FXML private TextField txtBusquedaNombre;
-    @FXML private TextField txtId;
-    @FXML private TextField txtNombre;
-    @FXML private TextField txtTelefono;
-    @FXML private TableView<Funcionario> tablaFuncionarios;
-    @FXML private TableColumn<Funcionario, String> colId;
-    @FXML private TableColumn<Funcionario, String> colNombre;
-    @FXML private TableColumn<Funcionario, String> colTelefono;
-    @FXML private Label lblError;
+    @FXML private TextField txtFuncionarioBusquedaId;
+    @FXML private TextField txtFuncionarioBusquedaNombre;
+    @FXML private TextField txtFuncionarioId;
+    @FXML private TextField txtFuncionarioNombre;
+    @FXML private TextField txtFuncionarioTelefono;
+    @FXML private TableView<Funcionario> tblFuncionarioListado;
+    @FXML private TableColumn<Funcionario, String> colFuncionarioId;
+    @FXML private TableColumn<Funcionario, String> colFuncionarioNombre;
+    @FXML private TableColumn<Funcionario, String> colFuncionarioTelefono;
+    @FXML private Label lblFuncionarioError;
 
     private final FuncionarioService funcionarioService = new FuncionarioService();
     private final ObservableList<Funcionario> datos = FXCollections.observableArrayList();
@@ -40,20 +39,20 @@ public class FuncionarioController {
 
     @FXML
     public void initialize() {
-        colId.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("id"));
-        colNombre.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("nombre"));
-        colTelefono.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("telefono"));
-        tablaFuncionarios.setItems(datos);
+        colFuncionarioId.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("id"));
+        colFuncionarioNombre.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("nombre"));
+        colFuncionarioTelefono.setCellValueFactory(new PropertyValueFactory<Funcionario, String>("telefono"));
+        tblFuncionarioListado.setItems(datos);
 
-        tablaFuncionarios.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Funcionario>() {
+        tblFuncionarioListado.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Funcionario>() {
             @Override
             public void changed(ObservableValue<? extends Funcionario> observable,
                                 Funcionario valorAnterior, Funcionario valorNuevo) {
                 if (valorNuevo != null) {
-                    txtId.setText(valorNuevo.getId());
-                    txtId.setEditable(false);
-                    txtNombre.setText(valorNuevo.getNombre());
-                    txtTelefono.setText(valorNuevo.getTelefono());
+                    txtFuncionarioId.setText(valorNuevo.getId());
+                    txtFuncionarioId.setEditable(false);
+                    txtFuncionarioNombre.setText(valorNuevo.getNombre());
+                    txtFuncionarioTelefono.setText(valorNuevo.getTelefono());
                     editandoExistente = true;
                 }
             }
@@ -65,7 +64,7 @@ public class FuncionarioController {
     @FXML
     public void onBuscar(ActionEvent event) {
         datos.clear();
-        List<Funcionario> resultado = funcionarioService.buscar(txtBusquedaId.getText(), txtBusquedaNombre.getText());
+        List<Funcionario> resultado = funcionarioService.buscar(txtFuncionarioBusquedaId.getText(), txtFuncionarioBusquedaNombre.getText());
         for (Funcionario f : resultado) {
             datos.add(f);
         }
@@ -73,51 +72,51 @@ public class FuncionarioController {
 
     @FXML
     public void onGuardar(ActionEvent event) {
-        lblError.setText("");
+        lblFuncionarioError.setText("");
         try {
             if (editandoExistente) {
-                funcionarioService.modificar(txtId.getText(), txtNombre.getText(), txtTelefono.getText());
+                funcionarioService.modificar(txtFuncionarioId.getText(), txtFuncionarioNombre.getText(), txtFuncionarioTelefono.getText());
             } else {
-                funcionarioService.crear(txtId.getText(), txtNombre.getText(), txtTelefono.getText());
+                funcionarioService.crear(txtFuncionarioId.getText(), txtFuncionarioNombre.getText(), txtFuncionarioTelefono.getText());
             }
             limpiarFormulario();
             cargarTodos();
         } catch (ValidacionException e) {
-            lblError.setText(e.getMessage());
+            lblFuncionarioError.setText(e.getMessage());
         }
     }
 
     @FXML
     public void onBorrar(ActionEvent event) {
-        lblError.setText("");
-        if (txtId.getText() == null || txtId.getText().isBlank()) {
-            lblError.setText("Seleccione un funcionario de la lista para borrar.");
+        lblFuncionarioError.setText("");
+        if (txtFuncionarioId.getText() == null || txtFuncionarioId.getText().isBlank()) {
+            lblFuncionarioError.setText("Seleccione un funcionario de la lista para borrar.");
             return;
         }
         try {
-            funcionarioService.eliminar(txtId.getText());
+            funcionarioService.eliminar(txtFuncionarioId.getText());
             limpiarFormulario();
             cargarTodos();
         } catch (ValidacionException e) {
-            lblError.setText(e.getMessage());
+            lblFuncionarioError.setText(e.getMessage());
         }
     }
 
     @FXML
     public void onLimpiar(ActionEvent event) {
         limpiarFormulario();
-        lblError.setText("");
+        lblFuncionarioError.setText("");
     }
 
     @FXML
     public void onImprimir(ActionEvent event) {
-        lblError.setText("");
+        lblFuncionarioError.setText("");
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar reporte de funcionarios");
         fileChooser.setInitialFileName("funcionarios.pdf");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf"));
-        Stage stage = (Stage) tablaFuncionarios.getScene().getWindow();
+        Stage stage = (Stage) tblFuncionarioListado.getScene().getWindow();
         File archivo = fileChooser.showSaveDialog(stage);
 
         if (archivo == null) {
@@ -133,7 +132,7 @@ public class FuncionarioController {
         try {
             ReportePdfUtil.generarReporteTabla(archivo.getAbsolutePath(), "Listado de Funcionarios", encabezados, filas);
         } catch (IOException e) {
-            lblError.setText("No se pudo generar el PDF: " + e.getMessage());
+            lblFuncionarioError.setText("No se pudo generar el PDF: " + e.getMessage());
         }
     }
 
@@ -146,11 +145,11 @@ public class FuncionarioController {
     }
 
     private void limpiarFormulario() {
-        txtId.clear();
-        txtId.setEditable(true);
-        txtNombre.clear();
-        txtTelefono.clear();
-        tablaFuncionarios.getSelectionModel().clearSelection();
+        txtFuncionarioId.clear();
+        txtFuncionarioId.setEditable(true);
+        txtFuncionarioNombre.clear();
+        txtFuncionarioTelefono.clear();
+        tblFuncionarioListado.getSelectionModel().clearSelection();
         editandoExistente = false;
     }
 }

@@ -18,37 +18,37 @@
     <Label text="Filtro" style="-fx-font-weight: bold;"/>
     <HBox spacing="10.0" alignment="CENTER_LEFT">
         <Label text="Categoria"/>
-        <ComboBox fx:id="comboFiltroCategoria" prefWidth="180.0"/>
+        <ComboBox fx:id="cmbRecursoFiltroCategoria" prefWidth="180.0"/>
         <Label text="Descripcion"/>
-        <TextField fx:id="txtFiltroDescripcion" prefWidth="180.0"/>
-        <Button text="Buscar" onAction="#onBuscar"/>
-        <Button text="Imprimir" onAction="#onImprimir"/>
+        <TextField fx:id="txtRecursoFiltroDescripcion" prefWidth="180.0"/>
+        <Button fx:id="btnRecursoBuscar" text="Buscar" onAction="#onBuscar"/>
+        <Button fx:id="btnRecursoImprimir" text="Imprimir" onAction="#onImprimir"/>
     </HBox>
 
     <Label text="Recurso" style="-fx-font-weight: bold;"/>
     <GridPane hgap="10.0" vgap="10.0">
         <Label text="ID" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtId" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <TextField fx:id="txtRecursoId" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
         <Label text="Categoria" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <ComboBox fx:id="comboCategoria" prefWidth="220.0" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <ComboBox fx:id="cmbRecursoCategoria" prefWidth="220.0" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
         <Label text="Descripcion" GridPane.rowIndex="2" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtDescripcion" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        <TextField fx:id="txtRecursoDescripcion" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
     </GridPane>
 
     <HBox spacing="10.0">
-        <Button text="Guardar" onAction="#onGuardar"/>
-        <Button text="Borrar" onAction="#onBorrar"/>
-        <Button text="Limpiar" onAction="#onLimpiar"/>
+        <Button fx:id="btnRecursoGuardar" text="Guardar" onAction="#onGuardar"/>
+        <Button fx:id="btnRecursoBorrar" text="Borrar" onAction="#onBorrar"/>
+        <Button fx:id="btnRecursoLimpiar" text="Limpiar" onAction="#onLimpiar"/>
     </HBox>
 
-    <Label fx:id="lblError" style="-fx-text-fill: red;"/>
+    <Label fx:id="lblRecursoError" style="-fx-text-fill: red;"/>
 
     <Label text="Listado" style="-fx-font-weight: bold;"/>
-    <TableView fx:id="tablaRecursos" prefHeight="200.0">
+    <TableView fx:id="tblRecursoListado" prefHeight="200.0">
         <columns>
-            <TableColumn fx:id="colId" text="Id" prefWidth="100.0"/>
-            <TableColumn fx:id="colCategoria" text="Categoria" prefWidth="180.0"/>
-            <TableColumn fx:id="colDescripcion" text="Descripcion" prefWidth="200.0"/>
+            <TableColumn fx:id="colRecursoId" text="Id" prefWidth="100.0"/>
+            <TableColumn fx:id="colRecursoCategoria" text="Categoria" prefWidth="180.0"/>
+            <TableColumn fx:id="colRecursoDescripcion" text="Descripcion" prefWidth="200.0"/>
         </columns>
     </TableView>
 </VBox>

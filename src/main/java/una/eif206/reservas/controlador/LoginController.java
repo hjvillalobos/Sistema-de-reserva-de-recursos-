@@ -1,4 +1,3 @@
-// controlador/LoginController.java
 package una.eif206.reservas.controlador;
 
 import javafx.event.ActionEvent;
@@ -19,38 +18,38 @@ import java.io.IOException;
 
 public class LoginController {
 
-    @FXML private TextField txtId;
-    @FXML private PasswordField txtClave;
-    @FXML private Label lblError;
-    @FXML private Button btnIngresar;
-    @FXML private Button btnCancelar;
+    @FXML private TextField txtLoginId;
+    @FXML private PasswordField txtLoginClave;
+    @FXML private Label lblLoginError;
+    @FXML private Button btnLoginIngresar;
+    @FXML private Button btnLoginCancelar;
 
     private final LoginService loginService = new LoginService();
 
     @FXML
     public void onIngresar(ActionEvent event) {
-        lblError.setText("");
+        lblLoginError.setText("");
         try {
-            Usuario usuario = loginService.autenticar(txtId.getText(), txtClave.getText());
+            Usuario usuario = loginService.autenticar(txtLoginId.getText(), txtLoginClave.getText());
             abrirVistaPrincipal(usuario);
         } catch (CredencialesInvalidasException e) {
-            lblError.setText(e.getMessage());
+            lblLoginError.setText(e.getMessage());
         }
     }
 
     @FXML
     public void onCancelar(ActionEvent event) {
-        ((Stage) btnCancelar.getScene().getWindow()).close();
+        ((Stage) btnLoginCancelar.getScene().getWindow()).close();
     }
 
     @FXML
     public void onCambiarClave(ActionEvent event) {
-        lblError.setText("");
+        lblLoginError.setText("");
         try {
-            Usuario usuario = loginService.autenticar(txtId.getText(), txtClave.getText());
+            Usuario usuario = loginService.autenticar(txtLoginId.getText(), txtLoginClave.getText());
             abrirVistaCambiarClave(usuario);
         } catch (CredencialesInvalidasException e) {
-            lblError.setText("Ingrese un id/clave válidos antes de cambiarla.");
+            lblLoginError.setText("Ingrese un id/clave válidos antes de cambiarla.");
         }
     }
 
@@ -61,11 +60,11 @@ public class LoginController {
             Parent root = loader.load();
             ((PrincipalController) loader.getController()).inicializar(usuario);
 
-            Stage stage = (Stage) btnIngresar.getScene().getWindow();
+            Stage stage = (Stage) btnLoginIngresar.getScene().getWindow();
             stage.setScene(new Scene(root));
             stage.setTitle("Sistema de Reservas - " + usuario.getId() + " (" + usuario.getRol() + ")");
         } catch (IOException e) {
-            lblError.setText("No se pudo cargar la vista principal.");
+            lblLoginError.setText("No se pudo cargar la vista principal.");
         }
     }
 
@@ -81,7 +80,7 @@ public class LoginController {
             stage.setTitle("Cambiar Clave");
             stage.showAndWait();
         } catch (IOException e) {
-            lblError.setText("No se pudo abrir la ventana de cambio de clave.");
+            lblLoginError.setText("No se pudo abrir la ventana de cambio de clave.");
         }
     }
 }

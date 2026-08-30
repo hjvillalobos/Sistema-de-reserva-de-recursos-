@@ -17,30 +17,30 @@ import java.net.URL;
 
 public class PrincipalController {
 
-    @FXML private Label lblBienvenida;
-    @FXML private Button btnCategorias;
-    @FXML private Button btnFuncionarios;
-    @FXML private Button btnReservas;
-    @FXML private Button btnRecursos;
+    @FXML private Label lblPrincipalBienvenida;
+    @FXML private Button btnPrincipalCategorias;
+    @FXML private Button btnPrincipalFuncionarios;
+    @FXML private Button btnPrincipalRecursos;
+    @FXML private Button btnPrincipalReservas;
 
     private Usuario usuarioActual;
 
     public void inicializar(Usuario usuario) {
         this.usuarioActual = usuario;
-        lblBienvenida.setText("Bienvenido, " + usuario.getId() + " (" + usuario.getRol() + ")");
+        lblPrincipalBienvenida.setText("Bienvenido, " + usuario.getId() + " (" + usuario.getRol() + ")");
 
         if (usuario.getRol() == Rol.ADMINISTRADOR) {
-            btnCategorias.setVisible(true);
-            btnCategorias.setManaged(true);
-            btnFuncionarios.setVisible(true);
-            btnFuncionarios.setManaged(true);
-            btnRecursos.setVisible(true);
-            btnRecursos.setManaged(true);
+            btnPrincipalCategorias.setVisible(true);
+            btnPrincipalCategorias.setManaged(true);
+            btnPrincipalFuncionarios.setVisible(true);
+            btnPrincipalFuncionarios.setManaged(true);
+            btnPrincipalRecursos.setVisible(true);
+            btnPrincipalRecursos.setManaged(true);
         }
 
         if (usuario.getRol() == Rol.FUNCIONARIO) {
-            btnReservas.setVisible(true);
-            btnReservas.setManaged(true);
+            btnPrincipalReservas.setVisible(true);
+            btnPrincipalReservas.setManaged(true);
         }
     }
 
@@ -52,6 +52,11 @@ public class PrincipalController {
     @FXML
     public void onAbrirFuncionarios(ActionEvent event) {
         abrirVentanaSimple("/una/eif206/reservas/fxml/funcionarios.fxml", "Lista de Funcionarios");
+    }
+
+    @FXML
+    public void onAbrirRecursos(ActionEvent event) {
+        abrirVentanaSimple("/una/eif206/reservas/fxml/recursos.fxml", "Lista de Recursos");
     }
 
     @FXML
@@ -79,12 +84,22 @@ public class PrincipalController {
             mostrarError("No se pudo cargar la vista", e.getMessage());
         }
     }
+
     @FXML
-    public void onAbrirRecursos(ActionEvent event) {
-        abrirVentanaSimple("/una/eif206/reservas/fxml/recursos.fxml", "Lista de Recursos");
+    public void onCerrarSesion(ActionEvent event) {
+        try {
+            FXMLLoader loader = new FXMLLoader(
+                    getClass().getResource("/una/eif206/reservas/fxml/login.fxml"));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) lblPrincipalBienvenida.getScene().getWindow();
+            stage.setScene(new Scene(root));
+            stage.setTitle("Sistema de Reservas");
+        } catch (IOException e) {
+            mostrarError("No se pudo volver al login", e.getMessage());
+        }
     }
 
-    // Para vistas que NO necesitan recibir datos del usuario (Categorías, Funcionarios)
     private void abrirVentanaSimple(String rutaFxml, String titulo) {
         URL recurso = getClass().getResource(rutaFxml);
 
@@ -112,20 +127,5 @@ public class PrincipalController {
         alerta.setHeaderText(encabezado);
         alerta.setContentText(detalle);
         alerta.showAndWait();
-    }
-
-    @FXML
-    public void onCerrarSesion(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/una/eif206/reservas/fxml/login.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) lblBienvenida.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Sistema de Reservas");
-        } catch (IOException e) {
-            mostrarError("No se pudo volver al login", e.getMessage());
-        }
     }
 }

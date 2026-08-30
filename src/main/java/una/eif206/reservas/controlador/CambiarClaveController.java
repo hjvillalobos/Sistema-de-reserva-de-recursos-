@@ -1,4 +1,3 @@
-// controlador/CambiarClaveController.java
 package una.eif206.reservas.controlador;
 
 import javafx.event.ActionEvent;
@@ -12,10 +11,10 @@ import una.eif206.reservas.servicio.LoginService;
 
 public class CambiarClaveController {
 
-    @FXML private PasswordField txtClaveActual;
-    @FXML private PasswordField txtClaveNueva;
-    @FXML private PasswordField txtClaveConfirmar;
-    @FXML private Label lblError;
+    @FXML private PasswordField txtCambiarClaveActual;
+    @FXML private PasswordField txtCambiarClaveNueva;
+    @FXML private PasswordField txtCambiarClaveConfirmar;
+    @FXML private Label lblCambiarClaveError;
 
     private final LoginService loginService = new LoginService();
     private Usuario usuario;
@@ -24,21 +23,21 @@ public class CambiarClaveController {
 
     @FXML
     public void onAceptar(ActionEvent event) {
-        lblError.setText("");
-        if (!txtClaveNueva.getText().equals(txtClaveConfirmar.getText())) {
-            lblError.setText("La clave nueva y su confirmación no coinciden.");
+        lblCambiarClaveError.setText("");
+        if (!txtCambiarClaveNueva.getText().equals(txtCambiarClaveConfirmar.getText())) {
+            lblCambiarClaveError.setText("La clave nueva y su confirmación no coinciden.");
             return;
         }
         try {
-            loginService.cambiarClave(usuario, txtClaveActual.getText(), txtClaveNueva.getText());
-            ((Stage) txtClaveActual.getScene().getWindow()).close();
+            loginService.cambiarClave(usuario, txtCambiarClaveActual.getText(), txtCambiarClaveNueva.getText());
+            ((Stage) txtCambiarClaveActual.getScene().getWindow()).close();
         } catch (CredencialesInvalidasException e) {
-            lblError.setText(e.getMessage());
+            lblCambiarClaveError.setText(e.getMessage());
         }
     }
 
     @FXML
     public void onCancelar(ActionEvent event) {
-        ((Stage) txtClaveActual.getScene().getWindow()).close();
+        ((Stage) txtCambiarClaveActual.getScene().getWindow()).close();
     }
 }

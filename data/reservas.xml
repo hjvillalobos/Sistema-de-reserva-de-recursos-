@@ -28,4 +28,18 @@
             <recursoId>001</recursoId>
         </recursosAsignados>
     </reserva>
+    <reserva id="RES-000003">
+        <actividad>noche de sexo</actividad>
+        <fecha>2026-08-26</fecha>
+        <horaInicio>00:00</horaInicio>
+        <horaFin>23:59</horaFin>
+        <funcionarioId>01</funcionarioId>
+        <estado>ACTIVA</estado>
+        <categoriasSolicitadas>
+            <categoriaId>CAT-000002</categoriaId>
+        </categoriasSolicitadas>
+        <recursosAsignados>
+            <recursoId>01</recursoId>
+        </recursosAsignados>
+    </reserva>
 </reservas>

@@ -1,4 +1,3 @@
-// controlador/CategoriaController.java
 package una.eif206.reservas.controlador;
 
 import javafx.beans.value.ChangeListener;
@@ -23,30 +22,30 @@ import java.util.List;
 
 public class CategoriaController {
 
-    @FXML private TextField txtBusquedaDescripcion;
-    @FXML private TextField txtId;
-    @FXML private TextField txtDescripcion;
-    @FXML private TableView<Categoria> tablaCategorias;
-    @FXML private TableColumn<Categoria, String> colId;
-    @FXML private TableColumn<Categoria, String> colDescripcion;
-    @FXML private Label lblError;
+    @FXML private TextField txtCategoriaBusquedaDescripcion;
+    @FXML private TextField txtCategoriaId;
+    @FXML private TextField txtCategoriaDescripcion;
+    @FXML private TableView<Categoria> tblCategoriaListado;
+    @FXML private TableColumn<Categoria, String> colCategoriaId;
+    @FXML private TableColumn<Categoria, String> colCategoriaDescripcion;
+    @FXML private Label lblCategoriaError;
 
     private final CategoriaService categoriaService = new CategoriaService();
     private final ObservableList<Categoria> datos = FXCollections.observableArrayList();
 
     @FXML
     public void initialize() {
-        colId.setCellValueFactory(new PropertyValueFactory<Categoria, String>("id"));
-        colDescripcion.setCellValueFactory(new PropertyValueFactory<Categoria, String>("descripcion"));
-        tablaCategorias.setItems(datos);
+        colCategoriaId.setCellValueFactory(new PropertyValueFactory<Categoria, String>("id"));
+        colCategoriaDescripcion.setCellValueFactory(new PropertyValueFactory<Categoria, String>("descripcion"));
+        tblCategoriaListado.setItems(datos);
 
-        tablaCategorias.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Categoria>() {
+        tblCategoriaListado.getSelectionModel().selectedItemProperty().addListener(new ChangeListener<Categoria>() {
             @Override
             public void changed(ObservableValue<? extends Categoria> observable,
                                 Categoria valorAnterior, Categoria valorNuevo) {
                 if (valorNuevo != null) {
-                    txtId.setText(valorNuevo.getId());
-                    txtDescripcion.setText(valorNuevo.getDescripcion());
+                    txtCategoriaId.setText(valorNuevo.getId());
+                    txtCategoriaDescripcion.setText(valorNuevo.getDescripcion());
                 }
             }
         });
@@ -57,7 +56,7 @@ public class CategoriaController {
     @FXML
     public void onBuscar(ActionEvent event) {
         datos.clear();
-        List<Categoria> resultado = categoriaService.buscarPorDescripcion(txtBusquedaDescripcion.getText());
+        List<Categoria> resultado = categoriaService.buscarPorDescripcion(txtCategoriaBusquedaDescripcion.getText());
         for (Categoria c : resultado) {
             datos.add(c);
         }
@@ -65,51 +64,51 @@ public class CategoriaController {
 
     @FXML
     public void onGuardar(ActionEvent event) {
-        lblError.setText("");
+        lblCategoriaError.setText("");
         try {
-            if (txtId.getText() == null || txtId.getText().isBlank()) {
-                categoriaService.crear(txtDescripcion.getText());
+            if (txtCategoriaId.getText() == null || txtCategoriaId.getText().isBlank()) {
+                categoriaService.crear(txtCategoriaDescripcion.getText());
             } else {
-                categoriaService.modificar(txtId.getText(), txtDescripcion.getText());
+                categoriaService.modificar(txtCategoriaId.getText(), txtCategoriaDescripcion.getText());
             }
             limpiarFormulario();
             cargarTodas();
         } catch (ValidacionException e) {
-            lblError.setText(e.getMessage());
+            lblCategoriaError.setText(e.getMessage());
         }
     }
 
     @FXML
     public void onBorrar(ActionEvent event) {
-        lblError.setText("");
-        if (txtId.getText() == null || txtId.getText().isBlank()) {
-            lblError.setText("Seleccione una categoría de la lista para borrar.");
+        lblCategoriaError.setText("");
+        if (txtCategoriaId.getText() == null || txtCategoriaId.getText().isBlank()) {
+            lblCategoriaError.setText("Seleccione una categoría de la lista para borrar.");
             return;
         }
         try {
-            categoriaService.eliminar(txtId.getText());
+            categoriaService.eliminar(txtCategoriaId.getText());
             limpiarFormulario();
             cargarTodas();
         } catch (ValidacionException e) {
-            lblError.setText(e.getMessage());
+            lblCategoriaError.setText(e.getMessage());
         }
     }
 
     @FXML
     public void onLimpiar(ActionEvent event) {
         limpiarFormulario();
-        lblError.setText("");
+        lblCategoriaError.setText("");
     }
 
     @FXML
     public void onImprimir(ActionEvent event) {
-        lblError.setText("");
+        lblCategoriaError.setText("");
 
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Guardar reporte de categorías");
         fileChooser.setInitialFileName("categorias.pdf");
         fileChooser.getExtensionFilters().add(new FileChooser.ExtensionFilter("Archivos PDF", "*.pdf"));
-        Stage stage = (Stage) tablaCategorias.getScene().getWindow();
+        Stage stage = (Stage) tblCategoriaListado.getScene().getWindow();
         File archivo = fileChooser.showSaveDialog(stage);
 
         if (archivo == null) {
@@ -125,7 +124,7 @@ public class CategoriaController {
         try {
             ReportePdfUtil.generarReporteTabla(archivo.getAbsolutePath(), "Listado de Categorías", encabezados, filas);
         } catch (IOException e) {
-            lblError.setText("No se pudo generar el PDF: " + e.getMessage());
+            lblCategoriaError.setText("No se pudo generar el PDF: " + e.getMessage());
         }
     }
 
@@ -138,8 +137,8 @@ public class CategoriaController {
     }
 
     private void limpiarFormulario() {
-        txtId.clear();
-        txtDescripcion.clear();
-        tablaCategorias.getSelectionModel().clearSelection();
+        txtCategoriaId.clear();
+        txtCategoriaDescripcion.clear();
+        tblCategoriaListado.getSelectionModel().clearSelection();
     }
 }

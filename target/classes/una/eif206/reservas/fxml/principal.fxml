@@ -11,12 +11,12 @@
     <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
 
     <HBox alignment="CENTER_RIGHT">
-        <Button text="Cerrar sesión" onAction="#onCerrarSesion"/>
+        <Button fx:id="btnPrincipalCerrarSesion" text="Cerrar sesión" onAction="#onCerrarSesion"/>
     </HBox>
 
-    <Label fx:id="lblBienvenida" style="-fx-font-size: 16px;"/>
-    <Button fx:id="btnCategorias" text="Gestionar Categorías" onAction="#onAbrirCategorias" visible="false" managed="false"/>
-    <Button fx:id="btnFuncionarios" text="Gestionar Funcionarios" onAction="#onAbrirFuncionarios" visible="false" managed="false"/>
-    <Button fx:id="btnReservas" text="Mis Reservas" onAction="#onAbrirReservas" visible="false" managed="false"/>
-    <Button fx:id="btnRecursos" text="Gestionar Recursos" onAction="#onAbrirRecursos" visible="false" managed="false"/>
+    <Label fx:id="lblPrincipalBienvenida" style="-fx-font-size: 16px;"/>
+    <Button fx:id="btnPrincipalCategorias" text="Gestionar Categorías" onAction="#onAbrirCategorias" visible="false" managed="false"/>
+    <Button fx:id="btnPrincipalFuncionarios" text="Gestionar Funcionarios" onAction="#onAbrirFuncionarios" visible="false" managed="false"/>
+    <Button fx:id="btnPrincipalRecursos" text="Gestionar Recursos" onAction="#onAbrirRecursos" visible="false" managed="false"/>
+    <Button fx:id="btnPrincipalReservas" text="Mis Reservas" onAction="#onAbrirReservas" visible="false" managed="false"/>
 </VBox>

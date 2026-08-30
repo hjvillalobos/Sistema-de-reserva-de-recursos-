@@ -17,32 +17,32 @@
     <Label text="Búsqueda" style="-fx-font-weight: bold;"/>
     <HBox spacing="10.0" alignment="CENTER_LEFT">
         <Label text="Descripcion"/>
-        <TextField fx:id="txtBusquedaDescripcion" prefWidth="200.0"/>
-        <Button text="Buscar" onAction="#onBuscar"/>
-        <Button text="Imprimir" onAction="#onImprimir"/>
+        <TextField fx:id="txtCategoriaBusquedaDescripcion" prefWidth="200.0"/>
+        <Button fx:id="btnCategoriaBuscar" text="Buscar" onAction="#onBuscar"/>
+        <Button fx:id="btnCategoriaImprimir" text="Imprimir" onAction="#onImprimir"/>
     </HBox>
 
     <Label text="Categoría" style="-fx-font-weight: bold;"/>
     <GridPane hgap="10.0" vgap="10.0">
         <Label text="ID" GridPane.rowIndex="0" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtId" editable="false" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+        <TextField fx:id="txtCategoriaId" editable="false" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
         <Label text="Descripcion" GridPane.rowIndex="1" GridPane.columnIndex="0"/>
-        <TextField fx:id="txtDescripcion" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+        <TextField fx:id="txtCategoriaDescripcion" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
     </GridPane>
 
     <HBox spacing="10.0">
-        <Button text="Guardar" onAction="#onGuardar"/>
-        <Button text="Borrar" onAction="#onBorrar"/>
-        <Button text="Limpiar" onAction="#onLimpiar"/>
+        <Button fx:id="btnCategoriaGuardar" text="Guardar" onAction="#onGuardar"/>
+        <Button fx:id="btnCategoriaBorrar" text="Borrar" onAction="#onBorrar"/>
+        <Button fx:id="btnCategoriaLimpiar" text="Limpiar" onAction="#onLimpiar"/>
     </HBox>
 
-    <Label fx:id="lblError" style="-fx-text-fill: red;"/>
+    <Label fx:id="lblCategoriaError" style="-fx-text-fill: red;"/>
 
     <Label text="Listado" style="-fx-font-weight: bold;"/>
-    <TableView fx:id="tablaCategorias" prefHeight="200.0">
+    <TableView fx:id="tblCategoriaListado" prefHeight="200.0">
         <columns>
-            <TableColumn fx:id="colId" text="Id" prefWidth="120.0"/>
-            <TableColumn fx:id="colDescripcion" text="Descripcion" prefWidth="280.0"/>
+            <TableColumn fx:id="colCategoriaId" text="Id" prefWidth="120.0"/>
+            <TableColumn fx:id="colCategoriaDescripcion" text="Descripcion" prefWidth="280.0"/>
         </columns>
     </TableView>
 </VBox>
