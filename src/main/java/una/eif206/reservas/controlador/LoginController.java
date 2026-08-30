@@ -15,6 +15,7 @@ import una.eif206.reservas.servicio.CredencialesInvalidasException;
 import una.eif206.reservas.servicio.LoginService;
 
 import java.io.IOException;
+import java.net.URL;
 
 public class LoginController {
 
@@ -55,16 +56,26 @@ public class LoginController {
 
     private void abrirVistaPrincipal(Usuario usuario) {
         try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/una/eif206/reservas/fxml/principal.fxml"));
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/una/eif206/reservas/fxml/principal.fxml"));
             Parent root = loader.load();
-            ((PrincipalController) loader.getController()).inicializar(usuario);
 
-            Stage stage = (Stage) btnLoginIngresar.getScene().getWindow();
-            stage.setScene(new Scene(root));
-            stage.setTitle("Sistema de Reservas - " + usuario.getId() + " (" + usuario.getRol() + ")");
+            PrincipalController controller = loader.getController();
+            controller.inicializar(usuario);
+
+            Stage stage = (Stage) txtLoginId.getScene().getWindow();
+            Scene scene = new Scene(root);
+
+            // Inyectar el archivo CSS aquí
+            URL cssUrl = getClass().getResource("/una/eif206/reservas/estilos.css");
+            if (cssUrl != null) {
+                scene.getStylesheets().add(cssUrl.toExternalForm());
+            }
+
+            stage.setScene(scene);
+            stage.setTitle("Sistema de Reservas - Menú Principal");
+            stage.show();
         } catch (IOException e) {
-            lblLoginError.setText("No se pudo cargar la vista principal.");
+            lblLoginError.setText("Error al cargar la vista principal: " + e.getMessage());
         }
     }
 

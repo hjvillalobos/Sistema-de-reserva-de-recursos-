@@ -120,6 +120,11 @@ public class ReservaController {
     }
 
     @FXML
+    public void onVolverPrincipal(ActionEvent event) {
+        ((Stage) tblReservaListado.getScene().getWindow()).close();
+    }
+
+    @FXML
     public void onExtraerIA(ActionEvent event) {
         lblReservaError.setText("");
 

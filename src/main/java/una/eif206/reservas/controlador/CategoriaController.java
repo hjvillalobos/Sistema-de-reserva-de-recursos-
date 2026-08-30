@@ -99,6 +99,10 @@ public class CategoriaController {
         limpiarFormulario();
         lblCategoriaError.setText("");
     }
+    @FXML
+    public void onVolverPrincipal(ActionEvent event) {
+        ((Stage) tblCategoriaListado.getScene().getWindow()).close();
+    }
 
     @FXML
     public void onImprimir(ActionEvent event) {

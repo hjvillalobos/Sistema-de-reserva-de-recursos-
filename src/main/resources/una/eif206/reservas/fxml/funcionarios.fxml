@@ -5,21 +5,62 @@
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import java.net.URL?>
 
-<VBox spacing="15.0" xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="una.eif206.reservas.controlador.FuncionarioController">
-    <padding><Insets top="15" right="15" bottom="15" left="15"/></padding>
+<VBox spacing="20.0" prefWidth="900.0" prefHeight="700.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.eif206.reservas.controlador.FuncionarioController">
+    <stylesheets>
+        <URL value="@/una/eif206/reservas/css/estilos.css"/>
+    </stylesheets>
+    <padding><Insets top="30" right="40" bottom="40" left="40"/></padding>
 
-    <Label text="Búsqueda" style="-fx-font-weight: bold;"/>
-    <HBox spacing="10.0" alignment="CENTER_LEFT">
-        <Label text="ID"/>
-        <TextField fx:id="txtFuncionarioBusquedaId" prefWidth="100.0"/>
-        <Label text="Nombre"/>
-        <TextField fx:id="txtFuncionarioBusquedaNombre" prefWidth="180.0"/>
-        <Button fx:id="btnFuncionarioBuscar" text="Buscar" onAction="#onBuscar"/>
-        <Button fx:id="btnFuncionarioImprimir" text="Imprimir" onAction="#onImprimir"/>
-    </HBox>
+    <VBox spacing="15.0" styleClass="panel">
+        <Label text="Búsqueda de Funcionarios" styleClass="label-title"/>
+        <HBox spacing="15.0" alignment="CENTER_LEFT">
+            <Label text="ID" styleClass="label-subtitle"/>
+            <TextField fx:id="txtFuncionarioBusquedaId" promptText="ID" prefWidth="120.0"/>
+            <Label text="Nombre" styleClass="label-subtitle"/>
+            <TextField fx:id="txtFuncionarioBusquedaNombre" promptText="Nombre del funcionario" prefWidth="220.0"/>
+            <Button fx:id="btnFuncionarioBuscar" text="Buscar" onAction="#onBuscar" styleClass="btn-primary"/>
+            <Button fx:id="btnFuncionarioImprimir" text="Imprimir" onAction="#onImprimir" styleClass="btn-outline-info"/>
+            <Button fx:id="btnFuncionarioVolver" text="← Volver al Menú Principal" onAction="#onVolverPrincipal" styleClass="btn-outline-info"/>
+        </HBox>
+    </VBox>
+
+    <VBox spacing="15.0" styleClass="panel">
+        <Label text="Datos del Funcionario" styleClass="label-title"/>
+        <GridPane hgap="15.0" vgap="15.0">
+            <columnConstraints>
+                <ColumnConstraints minWidth="80.0" halignment="RIGHT"/>
+                <ColumnConstraints minWidth="250.0"/>
+            </columnConstraints>
+            <Label text="ID" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="label-subtitle"/>
+            <TextField fx:id="txtFuncionarioId" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+            <Label text="Nombre" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="label-subtitle"/>
+            <TextField fx:id="txtFuncionarioNombre" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+            <Label text="Teléfono" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="label-subtitle"/>
+            <TextField fx:id="txtFuncionarioTelefono" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+        </GridPane>
+        <HBox spacing="10.0">
+            <Button fx:id="btnFuncionarioGuardar" text="Guardar" onAction="#onGuardar" styleClass="btn-primary"/>
+            <Button fx:id="btnFuncionarioBorrar" text="Borrar" onAction="#onBorrar" styleClass="btn-outline-danger"/>
+            <Button fx:id="btnFuncionarioLimpiar" text="Limpiar" onAction="#onLimpiar" styleClass="btn-outline-info"/>
+        </HBox>
+        <Label fx:id="lblFuncionarioError" styleClass="label-error"/>
+    </VBox>
+
+    <Label text="Listado de Funcionarios" styleClass="label-title"/>
+    <TableView fx:id="tblFuncionarioListado" VBox.vgrow="ALWAYS">
+        <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY"/>
+        </columnResizePolicy>
+        <columns>
+            <TableColumn fx:id="colFuncionarioId" text="ID" prefWidth="120.0"/>
+            <TableColumn fx:id="colFuncionarioNombre" text="Nombre" prefWidth="300.0"/>
+            <TableColumn fx:id="colFuncionarioTelefono" text="Teléfono" prefWidth="150.0"/>
+        </columns>
+    </TableView>
+</VBox>

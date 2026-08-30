@@ -1,0 +1,197 @@
+
+.root {
+    -fx-background-color: #0B1020;
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+    -fx-text-fill: #EAF6FF; /* Color de texto global claro */
+    -fx-focus-color: #00A8FF;
+    -fx-faint-focus-color: transparent;
+}
+
+/* Forzar que todas las etiquetas por defecto usen texto claro */
+.label {
+    -fx-text-fill: #EAF6FF;
+}
+/* ======================================================== */
+/* 2. CAMPOS DE TEXTO Y COMBOBOX                            */
+/* ======================================================== */
+.text-field, .password-field, .combo-box, .date-picker > .text-field {
+    -fx-background-color: #0F172A;
+    -fx-text-fill: #EAF6FF;
+    -fx-prompt-text-fill: #64748B;
+    -fx-border-color: #334155;
+    -fx-border-width: 1;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+    -fx-font-size: 13px;
+    -fx-padding: 8;
+}
+/* Tarjetas (Contenedores principales con soporte de bordes redondeados) */
+.panel {
+    -fx-background-color: #151D32;
+    -fx-background-radius: 15;
+    -fx-border-color: #263A5C;
+    -fx-border-width: 1;
+    -fx-border-radius: 15;
+    -fx-background-insets: 0;
+    -fx-border-insets: 0;
+    -fx-padding: 20;
+}
+
+/* ======================================================== */
+/* 3. BOTONES (Especifidad combinada para JavaFX)          */
+/* ======================================================== */
+.button {
+    -fx-cursor: hand;
+    -fx-font-size: 12px;
+    -fx-background-radius: 8;
+    -fx-border-radius: 8;
+    -fx-padding: 8 20;
+}
+
+/* Botón Azul Primario */
+.button.btn-primary {
+    -fx-background-color: #00A8FF;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.button.btn-primary:hover {
+    -fx-background-color: #38BDF8;
+}
+
+/* Botón Outline Rojo (Cancelar/Borrar) */
+.button.btn-outline-danger {
+    -fx-background-color: transparent;
+    -fx-text-fill: #FF5C7A;
+    -fx-border-color: #7A2836;
+    -fx-border-width: 1;
+}
+.button.btn-outline-danger:hover {
+    -fx-background-color: #7A2836;
+    -fx-text-fill: white;
+}
+
+/* Botón Outline Celeste (Imprimir/Cambiar Clave) */
+.button.btn-outline-info {
+    -fx-background-color: transparent;
+    -fx-text-fill: #5CC8FF;
+    -fx-border-color: #287AA8;
+    -fx-border-width: 1;
+}
+.button.btn-outline-info:hover {
+    -fx-background-color: #287AA8;
+    -fx-text-fill: white;
+}
+
+/* Arreglar el menú desplegable del ComboBox y DatePicker */
+.combo-box-popup .list-view, .date-picker-popup {
+    -fx-background-color: #151D32;
+    -fx-border-color: #334155;
+}
+
+/* Cambiamos el color de selección por defecto del ComboBox */
+.combo-box-popup .list-view {
+    -fx-control-inner-background: #151D32;
+    -fx-accent: #00A8FF; /* Este es el color cuando seleccionas un ítem */
+}
+
+.combo-box-popup .list-cell {
+    -fx-text-fill: #EAF6FF;
+}
+
+/* ======================================================== */
+/* 4. TABLAS (TableView)                                    */
+/* ======================================================== */
+.table-view {
+    -fx-background-color: #0F172A;
+    -fx-border-color: #334155;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    /* Variables para el color de fila seleccionada */
+    -fx-control-inner-background: #0F172A;
+    -fx-accent: #263A5C; /* Fondo de la fila seleccionada */
+    -fx-selection-bar-text: white; /* Texto de la fila seleccionada */
+}
+
+/* ======================================================== */
+/* 5. CORRECCIONES DE ZONAS BLANCAS Y BOTÓN IA              */
+/* ======================================================== */
+
+/* Botón IA Morado */
+.button.btn-ai {
+    -fx-background-color: #7C3AED;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+.button.btn-ai:hover {
+    -fx-background-color: #8B5CF6;
+}
+
+/* Forzar fondo oscuro en el ListView de categorías (en Reservas) */
+.list-view {
+    -fx-background-color: #0F172A;
+    -fx-control-inner-background: #0F172A;
+    -fx-border-color: #334155;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+.list-view .list-cell {
+    -fx-background-color: #0F172A;
+    -fx-text-fill: #EAF6FF;
+}
+
+/* Quitar el fondo blanco de las celdas vacías en TODAS las tablas */
+.table-view .virtual-flow .clipped-container .sheet .table-row-cell:empty {
+    -fx-background-color: #0F172A;
+    -fx-border-color: transparent transparent #1E293B transparent;
+}
+.table-view .filler {
+    -fx-background-color: #0F172A;
+}
+.table-view .column-header-background .filler {
+    -fx-background-color: #151D32;
+}
+
+
+
+/* Cabeceras de columnas */
+.table-view .column-header-background {
+    -fx-background-color: #151D32;
+    -fx-background-radius: 8 8 0 0;
+}
+.table-view .column-header {
+    -fx-background-color: transparent;
+    -fx-border-color: #263A5C;
+    -fx-border-width: 0 0 1 0;
+}
+.table-view .column-header .label {
+    -fx-text-fill: #A9B7D0;
+    -fx-font-weight: bold;
+}
+
+
+.table-view .table-row-cell {
+    -fx-cell-size: 35px;
+    -fx-border-color: transparent transparent #1E293B transparent;
+}
+.table-view .table-row-cell .text {
+    -fx-fill: #EAF6FF;
+}
+
+.date-picker .arrow-button {
+    -fx-background-color: #151D32;
+    -fx-background-radius: 0 8 8 0;
+    -fx-border-color: #334155;
+    -fx-border-width: 0 0 0 1;
+}
+
+.date-picker .arrow-button .arrow {
+    -fx-background-color: #A9B7D0;
+}
+
+
+.date-picker .arrow-button:hover {
+    -fx-background-color: #263A5C;
+}
+.date-picker .arrow-button:hover .arrow {
+    -fx-background-color: #EAF6FF;
+}

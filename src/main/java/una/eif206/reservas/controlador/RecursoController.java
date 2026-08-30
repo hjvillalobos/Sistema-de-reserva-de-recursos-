@@ -138,6 +138,11 @@ public class RecursoController {
     }
 
     @FXML
+    public void onVolverPrincipal(ActionEvent event) {
+        ((Stage) tblRecursoListado.getScene().getWindow()).close();
+    }
+
+    @FXML
     public void onImprimir(ActionEvent event) {
         lblRecursoError.setText("");
 

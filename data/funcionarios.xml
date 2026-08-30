@@ -10,4 +10,9 @@
         <nombre>KIM</nombre>
         <telefono>1234</telefono>
     </funcionario>
+    <funcionario id="12" rol="FUNCIONARIO">
+        <clave>12</clave>
+        <nombre>pepe</nombre>
+        <telefono>85838392</telefono>
+    </funcionario>
 </funcionarios>

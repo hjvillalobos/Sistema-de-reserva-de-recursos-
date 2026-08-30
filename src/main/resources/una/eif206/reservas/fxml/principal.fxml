@@ -1,22 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="10.0" xmlns="http://javafx.com/javafx/21"
-      xmlns:fx="http://javafx.com/fxml/1"
-      fx:controller="una.eif206.reservas.controlador.PrincipalController">
-    <padding><Insets top="20" right="20" bottom="20" left="20"/></padding>
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.eif206.reservas.controlador.PrincipalController">
 
-    <HBox alignment="CENTER_RIGHT">
-        <Button fx:id="btnPrincipalCerrarSesion" text="Cerrar sesión" onAction="#onCerrarSesion"/>
-    </HBox>
+    <stylesheets>
+        <URL value="@/una/eif206/reservas/css/estilos.css" />
+    </stylesheets>
 
-    <Label fx:id="lblPrincipalBienvenida" style="-fx-font-size: 16px;"/>
-    <Button fx:id="btnPrincipalCategorias" text="Gestionar Categorías" onAction="#onAbrirCategorias" visible="false" managed="false"/>
-    <Button fx:id="btnPrincipalFuncionarios" text="Gestionar Funcionarios" onAction="#onAbrirFuncionarios" visible="false" managed="false"/>
-    <Button fx:id="btnPrincipalRecursos" text="Gestionar Recursos" onAction="#onAbrirRecursos" visible="false" managed="false"/>
-    <Button fx:id="btnPrincipalReservas" text="Mis Reservas" onAction="#onAbrirReservas" visible="false" managed="false"/>
+    <VBox alignment="CENTER" spacing="30.0" VBox.vgrow="ALWAYS">
+        <padding><Insets bottom="40" left="40" right="40" top="40" /></padding>
+
+        <!-- TARJETA CENTRAL -->
+        <VBox alignment="CENTER" maxWidth="420.0" spacing="25.0" styleClass="panel">
+            <VBox alignment="CENTER" spacing="5.0">
+                <Label fx:id="lblPrincipalBienvenida" alignment="CENTER" styleClass="label-title" text="Bienvenido" />
+                <Label alignment="CENTER" styleClass="label-subtitle" text="MENÚ PRINCIPAL" />
+            </VBox>
+
+            <VBox alignment="CENTER" prefWidth="300.0" spacing="15.0">
+                <Button fx:id="btnPrincipalCategorias" managed="false" onAction="#onAbrirCategorias" prefWidth="260.0" styleClass="btn-outline-info" text="Gestionar Categorías" visible="false" />
+                <Button fx:id="btnPrincipalFuncionarios" managed="false" onAction="#onAbrirFuncionarios" prefWidth="260.0" styleClass="btn-outline-info" text="Gestionar Funcionarios" visible="false" />
+                <Button fx:id="btnPrincipalRecursos" managed="false" onAction="#onAbrirRecursos" prefWidth="260.0" styleClass="btn-outline-info" text="Gestionar Recursos" visible="false" />
+                <Button fx:id="btnPrincipalReservas" managed="false" onAction="#onAbrirReservas" prefWidth="260.0" styleClass="btn-primary" text="Mis Reservas" visible="false" />
+
+                <!-- BOTÓN DE CERRAR SESIÓN CENTRADO Y ALINEADO -->
+                <Button fx:id="btnPrincipalCerrarSesion" onAction="#onCerrarSesion" prefWidth="260.0" styleClass="btn-outline-danger" text="Cerrar Sesión" />
+            </VBox>
+        </VBox>
+    </VBox>
 </VBox>

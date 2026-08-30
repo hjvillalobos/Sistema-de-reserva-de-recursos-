@@ -25,6 +25,9 @@ public class PrincipalController {
 
     private Usuario usuarioActual;
 
+    // Ruta de mi CSS
+    private final String RUTA_CSS = "/una/eif206/reservas/css/estilos.css";
+
     public void inicializar(Usuario usuario) {
         this.usuarioActual = usuario;
         lblPrincipalBienvenida.setText("Bienvenido, " + usuario.getId() + " (" + usuario.getRol() + ")");
@@ -77,7 +80,10 @@ public class PrincipalController {
             controller.inicializar(usuarioActual);
 
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            aplicarEstilos(scene);
+
+            stage.setScene(scene);
             stage.setTitle("Mis Reservas");
             stage.show();
         } catch (IOException e) {
@@ -93,7 +99,10 @@ public class PrincipalController {
             Parent root = loader.load();
 
             Stage stage = (Stage) lblPrincipalBienvenida.getScene().getWindow();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            aplicarEstilos(scene); // <-- Se aplica el CSS al volver al Login
+
+            stage.setScene(scene);
             stage.setTitle("Sistema de Reservas");
         } catch (IOException e) {
             mostrarError("No se pudo volver al login", e.getMessage());
@@ -113,11 +122,24 @@ public class PrincipalController {
             Parent root = loader.load();
 
             Stage stage = new Stage();
-            stage.setScene(new Scene(root));
+            Scene scene = new Scene(root);
+            aplicarEstilos(scene); // <-- Se aplica el CSS a las ventanas secundarias
+
+            stage.setScene(scene);
             stage.setTitle(titulo);
             stage.show();
         } catch (IOException e) {
             mostrarError("No se pudo cargar la vista", e.getMessage());
+        }
+    }
+
+    // Método para aplicar el CSS
+    private void aplicarEstilos(Scene scene) {
+        URL cssUrl = getClass().getResource(RUTA_CSS);
+        if (cssUrl != null) {
+            scene.getStylesheets().add(cssUrl.toExternalForm());
+        } else {
+            System.err.println("Advertencia: No se encontró el archivo CSS en la ruta: " + RUTA_CSS);
         }
     }
 

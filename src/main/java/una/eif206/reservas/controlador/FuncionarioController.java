@@ -109,6 +109,11 @@ public class FuncionarioController {
     }
 
     @FXML
+    public void onVolverPrincipal(ActionEvent event) {
+        ((Stage) tblFuncionarioListado.getScene().getWindow()).close();
+    }
+
+    @FXML
     public void onImprimir(ActionEvent event) {
         lblFuncionarioError.setText("");
 
