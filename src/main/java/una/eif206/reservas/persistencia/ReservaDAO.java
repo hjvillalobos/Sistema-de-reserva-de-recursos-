@@ -9,6 +9,7 @@ import java.util.Optional;
 public interface ReservaDAO {
     List<Reserva> obtenerReservas();
     List<Reserva> obtenerPorFechaYCategoria(LocalDate fecha,String idCat);
+    List<Reserva> obtenerPorRangoFechas(LocalDate desde, LocalDate hasta);
     Optional<Reserva> busquedaPorId(String id);
     void guardar(Reserva recurso);
     void eliminar(String id);

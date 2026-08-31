@@ -38,6 +38,16 @@ public class ReservaDaoXml implements ReservaDAO{
     }
 
     @Override
+    public List<Reserva> obtenerPorRangoFechas(LocalDate desde, LocalDate hasta) {
+        return obtenerReservas().stream()
+                .filter(r -> r.getEstado() == EstadoReserva.ACTIVA)
+                .filter(r -> r.getFecha() != null
+                        && !r.getFecha().isBefore(desde)
+                        && !r.getFecha().isAfter(hasta))
+                .collect(Collectors.toList());
+    }
+
+    @Override
     public void guardar(Reserva reserva) {
         ListaReservas lista = cargar();
         lista.getReservas().removeIf(f -> f.getId().equalsIgnoreCase(reserva.getId()));
