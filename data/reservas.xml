@@ -56,4 +56,60 @@
             <recursoId>01</recursoId>
         </recursosAsignados>
     </reserva>
+    <reserva id="RES-000005">
+        <actividad>Fuchibol</actividad>
+        <fecha>2026-08-31</fecha>
+        <horaInicio>18:00</horaInicio>
+        <horaFin>19:00</horaFin>
+        <funcionarioId>18</funcionarioId>
+        <estado>CANCELADA</estado>
+        <categoriasSolicitadas>
+            <categoriaId>CAT-000001</categoriaId>
+        </categoriasSolicitadas>
+        <recursosAsignados>
+            <recursoId>238715</recursoId>
+        </recursosAsignados>
+    </reserva>
+    <reserva id="RES-000006">
+        <actividad>jugar play</actividad>
+        <fecha>2026-09-02</fecha>
+        <horaInicio>12:00</horaInicio>
+        <horaFin>14:00</horaFin>
+        <funcionarioId>01</funcionarioId>
+        <estado>ACTIVA</estado>
+        <categoriasSolicitadas>
+            <categoriaId>CAT-000002</categoriaId>
+        </categoriasSolicitadas>
+        <recursosAsignados>
+            <recursoId>01</recursoId>
+        </recursosAsignados>
+    </reserva>
+    <reserva id="RES-000007">
+        <actividad>Charla recreativa</actividad>
+        <fecha>2026-10-05</fecha>
+        <horaInicio>08:00</horaInicio>
+        <horaFin>12:00</horaFin>
+        <funcionarioId>01</funcionarioId>
+        <estado>ACTIVA</estado>
+        <categoriasSolicitadas>
+            <categoriaId>CAT-000002</categoriaId>
+        </categoriasSolicitadas>
+        <recursosAsignados>
+            <recursoId>01</recursoId>
+        </recursosAsignados>
+    </reserva>
+    <reserva id="RES-000008">
+        <actividad>Junta directiva</actividad>
+        <fecha>2026-08-31</fecha>
+        <horaInicio>09:00</horaInicio>
+        <horaFin>10:00</horaFin>
+        <funcionarioId>01</funcionarioId>
+        <estado>CANCELADA</estado>
+        <categoriasSolicitadas>
+            <categoriaId>CAT-000001</categoriaId>
+        </categoriasSolicitadas>
+        <recursosAsignados>
+            <recursoId>238715</recursoId>
+        </recursosAsignados>
+    </reserva>
 </reservas>

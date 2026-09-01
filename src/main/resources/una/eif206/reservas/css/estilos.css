@@ -170,3 +170,44 @@
 .date-picker .arrow-button:hover .arrow {
     -fx-background-color: #EAF6FF;
 }
+
+
+.combo-box {
+    -fx-background-color: #0B1020;
+    -fx-border-color: #334155;
+    -fx-border-radius: 6;
+    -fx-background-radius: 6;
+}
+
+
+.combo-box .list-cell {
+    -fx-text-fill: #EAF6FF;
+    -fx-background-color: transparent;
+}
+
+.combo-box-popup .list-view {
+    -fx-background-color: #0F172A;
+    -fx-border-color: #334155;
+}
+
+.combo-box-popup .list-view .list-cell {
+    -fx-text-fill: #EAF6FF;
+    -fx-background-color: #0F172A;
+}
+
+.combo-box-popup .list-view .list-cell:hover {
+    -fx-background-color: #00A8FF;
+    -fx-text-fill: white;
+}
+
+
+.list-view .list-cell:selected {
+    -fx-background-color: #00A8FF;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.list-view .list-cell:selected:hover {
+    -fx-background-color: #0096E6;
+    -fx-text-fill: white;
+}

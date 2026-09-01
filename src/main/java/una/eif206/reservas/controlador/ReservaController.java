@@ -56,7 +56,7 @@ public class ReservaController {
     @FXML
     public void initialize() {
         lstReservaCategorias.setItems(FXCollections.observableArrayList(categoriaService.listarTodos()));
-        lstReservaCategorias.getSelectionModel().setSelectionMode(javafx.scene.control.SelectionMode.MULTIPLE);
+        lstReservaCategorias.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         colReservaId.setCellValueFactory(new PropertyValueFactory<Reserva, String>("id"));
         colReservaActividad.setCellValueFactory(new PropertyValueFactory<Reserva, String>("actividad"));

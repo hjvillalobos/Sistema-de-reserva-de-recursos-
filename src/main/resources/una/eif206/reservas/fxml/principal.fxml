@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
@@ -11,24 +12,27 @@
         <URL value="@/una/eif206/reservas/css/estilos.css" />
     </stylesheets>
 
-    <VBox alignment="CENTER" spacing="30.0" VBox.vgrow="ALWAYS">
+    <VBox alignment="CENTER" spacing="35.0" VBox.vgrow="ALWAYS">
         <padding><Insets bottom="40" left="40" right="40" top="40" /></padding>
 
-        <!-- TARJETA CENTRAL -->
-        <VBox alignment="CENTER" maxWidth="420.0" spacing="25.0" styleClass="panel">
-            <VBox alignment="CENTER" spacing="5.0">
-                <Label fx:id="lblPrincipalBienvenida" alignment="CENTER" styleClass="label-title" text="Bienvenido" />
-                <Label alignment="CENTER" styleClass="label-subtitle" text="MENÚ PRINCIPAL" />
+        <VBox alignment="CENTER" maxWidth="750.0" prefHeight="480.0" spacing="30.0" style="-fx-border-color: #00A8FF; -fx-border-width: 1.5; -fx-border-radius: 12;" styleClass="panel">
+            <padding><Insets bottom="40" left="60" right="60" top="40" /></padding>
+
+            <VBox alignment="CENTER" spacing="10.0">
+                <Label fx:id="lblPrincipalBienvenida" alignment="CENTER" style="-fx-font-size: 24px; -fx-font-weight: bold; -fx-text-fill: #EAF6FF;" styleClass="label-title" text="INITIALIZING SYSTEM..." />
+                <Label alignment="CENTER" style="-fx-font-size: 12px; -fx-letter-spacing: 3px; -fx-text-fill: #38BDF8;" styleClass="label-subtitle" />
             </VBox>
 
-            <VBox alignment="CENTER" prefWidth="300.0" spacing="15.0">
-                <Button fx:id="btnPrincipalCategorias" managed="false" onAction="#onAbrirCategorias" prefWidth="260.0" styleClass="btn-outline-info" text="Gestionar Categorías" visible="false" />
-                <Button fx:id="btnPrincipalFuncionarios" managed="false" onAction="#onAbrirFuncionarios" prefWidth="260.0" styleClass="btn-outline-info" text="Gestionar Funcionarios" visible="false" />
-                <Button fx:id="btnPrincipalRecursos" managed="false" onAction="#onAbrirRecursos" prefWidth="260.0" styleClass="btn-outline-info" text="Gestionar Recursos" visible="false" />
-                <Button fx:id="btnPrincipalReservas" managed="false" onAction="#onAbrirReservas" prefWidth="260.0" styleClass="btn-primary" text="Mis Reservas" visible="false" />
+            <VBox alignment="CENTER" prefWidth="350.0" spacing="18.0">
+                <Button fx:id="btnPrincipalCategorias" managed="false" onAction="#onAbrirCategorias" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-outline-info" text="GESTIONAR CATEGORÍAS" visible="false" />
+                <Button fx:id="btnPrincipalFuncionarios" managed="false" onAction="#onAbrirFuncionarios" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-outline-info" text="GESTIONAR FUNCIONARIOS" visible="false" />
+                <Button fx:id="btnPrincipalRecursos" managed="false" onAction="#onAbrirRecursos" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-outline-info" text="GESTIONAR RECURSOS" visible="false" />
+                <Button fx:id="btnPrincipalReservas" managed="false" onAction="#onAbrirReservas" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-primary" text="ACCEDER A MIS RESERVAS" visible="false" />
 
-                <Button fx:id="btnPrincipalCerrarSesion" onAction="#onCerrarSesion" prefWidth="260.0" styleClass="btn-outline-danger" text="Cerrar Sesión" />
+                <Button fx:id="btnPrincipalCerrarSesion" onAction="#onCerrarSesion" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-outline-danger" text="CERRAR SESIÓN" />
             </VBox>
+
+            <Label style="-fx-text-fill: #38BDF8; -fx-font-size: 15px; -fx-font-weight: bold; -fx-opacity: 0.8;" text="●  CONFIANOS TUS RESERVAS " />
         </VBox>
     </VBox>
 </VBox>

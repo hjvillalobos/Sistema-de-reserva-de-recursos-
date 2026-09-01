@@ -29,7 +29,7 @@ public class PrincipalController {
 
     public void inicializar(Usuario usuario) {
         this.usuarioActual = usuario;
-        lblPrincipalBienvenida.setText("Bienvenido, " + usuario.getId() + " (" + usuario.getRol() + ")");
+        lblPrincipalBienvenida.setText("OPERADOR: " + usuario.getId().toUpperCase() + " [" + usuario.getRol().toUpperCase() + "]");
 
         if (usuario.getRol() == Rol.ADMINISTRADOR) {
             btnPrincipalCategorias.setVisible(true);

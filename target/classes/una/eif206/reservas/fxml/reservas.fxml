@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
+<?import java.net.URL?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.DatePicker?>
@@ -11,57 +12,59 @@
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
-<?import java.net.URL?>
 
-<VBox spacing="20.0" prefWidth="1000.0" prefHeight="800.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.eif206.reservas.controlador.ReservaController">
+<VBox spacing="20.0" prefWidth="1000.0" prefHeight="820.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.eif206.reservas.controlador.ReservaController">
     <stylesheets>
         <URL value="@/una/eif206/reservas/css/estilos.css"/>
     </stylesheets>
     <padding><Insets top="30" right="40" bottom="40" left="40"/></padding>
 
-    <VBox spacing="15.0" styleClass="panel">
-        <Label text="Generación Asistida por IA" styleClass="label-title"/>
+    <HBox alignment="CENTER_RIGHT">
+        <Button fx:id="btnReservaVolver" text="← VOLVER AL MENÚ PRINCIPAL" onAction="#onVolverPrincipal" styleClass="btn-outline-info" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <VBox spacing="15.0" styleClass="panel" style="-fx-border-color: #00A8FF; -fx-border-width: 1.2; -fx-border-radius: 10;">
+        <Label text="◇  ASISTENTE INTELIGENTE IA" styleClass="label-title" style="-fx-font-size: 16px;"/>
         <HBox spacing="15.0" alignment="CENTER_LEFT">
-            <Label text="Frase" styleClass="label-subtitle"/>
-            <TextField fx:id="txtReservaFrase" promptText="Describa lo que desea reservar..." prefWidth="500.0"/>
-            <Button fx:id="btnReservaExtraerIA" text="Extraer (IA) ✦" onAction="#onExtraerIA" styleClass="btn-ai"/>
-            <Button fx:id="btnReservaVolver" text="← Volver al Menú Principal" onAction="#onVolverPrincipal" styleClass="btn-outline-info"/>
+            <Label text="FRASE" styleClass="label-subtitle" style="-fx-font-weight: bold;"/>
+            <TextField fx:id="txtReservaFrase" promptText="Describa el propósito..." prefHeight="38.0" prefWidth="520.0"/>
+            <Button fx:id="btnReservaExtraerIA" text="EXTRAER (IA) ✦" prefHeight="38.0" prefWidth="140.0" onAction="#onExtraerIA" styleClass="btn-ai" style="-fx-font-weight: bold;"/>
         </HBox>
     </VBox>
 
-    <VBox spacing="15.0" styleClass="panel">
-        <Label text="Nueva Reserva" styleClass="label-title"/>
+    <VBox spacing="15.0" styleClass="panel" style="-fx-border-color: #00A8FF; -fx-border-width: 1.2; -fx-border-radius: 10;">
+        <Label text="◇  NUEVA RESERVA" styleClass="label-title" style="-fx-font-size: 16px;"/>
         <HBox spacing="30.0">
-            <GridPane hgap="15.0" vgap="15.0" HBox.hgrow="ALWAYS">
+            <GridPane hgap="15.0" vgap="12.0" HBox.hgrow="ALWAYS">
                 <columnConstraints>
-                    <ColumnConstraints minWidth="120.0" halignment="RIGHT"/>
+                    <ColumnConstraints minWidth="130.0" halignment="RIGHT"/>
                     <ColumnConstraints minWidth="220.0"/>
                 </columnConstraints>
-                <Label text="Actividad" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="label-subtitle"/>
-                <TextField fx:id="txtReservaActividad" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
-                <Label text="Fecha" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="label-subtitle"/>
-                <DatePicker fx:id="dpReservaFecha" prefWidth="220.0" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
-                <Label text="Hora inicio (HH:mm)" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="label-subtitle"/>
-                <TextField fx:id="txtReservaHoraInicio" promptText="00:00" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
-                <Label text="Hora fin (HH:mm)" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="label-subtitle"/>
-                <TextField fx:id="txtReservaHoraFin" promptText="00:00" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
+                <Label text="ACTIVIDAD" GridPane.rowIndex="0" GridPane.columnIndex="0" styleClass="label-subtitle" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtReservaActividad" prefHeight="38.0" GridPane.rowIndex="0" GridPane.columnIndex="1"/>
+                <Label text="FECHA" GridPane.rowIndex="1" GridPane.columnIndex="0" styleClass="label-subtitle" style="-fx-font-weight: bold;"/>
+                <DatePicker fx:id="dpReservaFecha" prefHeight="38.0" prefWidth="220.0" GridPane.rowIndex="1" GridPane.columnIndex="1"/>
+                <Label text="INICIO (HH:mm)" GridPane.rowIndex="2" GridPane.columnIndex="0" styleClass="label-subtitle" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtReservaHoraInicio" promptText="00:00" prefHeight="38.0" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
+                <Label text="FIN (HH:mm)" GridPane.rowIndex="3" GridPane.columnIndex="0" styleClass="label-subtitle" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtReservaHoraFin" promptText="00:00" prefHeight="38.0" GridPane.rowIndex="3" GridPane.columnIndex="1"/>
             </GridPane>
-            <VBox spacing="10.0" HBox.hgrow="ALWAYS">
-                <Label text="Categorías requeridas (selección múltiple)" styleClass="label-subtitle"/>
-                <ListView fx:id="lstReservaCategorias" prefHeight="135.0" style="-fx-background-color: #0F172A; -fx-border-color: #334155; -fx-border-width: 1; -fx-border-radius: 8; -fx-background-radius: 8;"/>
+            <VBox spacing="8.0" HBox.hgrow="ALWAYS">
+                <Label text="CATEGORÍAS REQUERIDAS" styleClass="label-subtitle" style="-fx-font-weight: bold;"/>
+                <ListView fx:id="lstReservaCategorias" prefHeight="150.0" styleClass="list-view"/>
             </VBox>
         </HBox>
-        <HBox spacing="10.0" alignment="CENTER_LEFT">
-            <Button fx:id="btnReservaReservar" text="Reservar" onAction="#onReservar" styleClass="btn-primary"/>
-            <Button fx:id="btnReservaCancelarSeleccionada" text="Cancelar reserva seleccionada" onAction="#onCancelarSeleccionada" styleClass="btn-outline-danger"/>
-            <Button fx:id="btnReservaLimpiar" text="Limpiar" onAction="#onLimpiar" styleClass="btn-outline-info"/>
+        <HBox spacing="12.0" alignment="CENTER_LEFT">
+            <Button fx:id="btnReservaReservar" text="REGISTRAR" prefHeight="40.0" prefWidth="130.0" onAction="#onReservar" styleClass="btn-primary" style="-fx-font-weight: bold;"/>
+            <Button fx:id="btnReservaCancelarSeleccionada" text="CANCELAR SELECCIONADA" prefHeight="40.0" prefWidth="210.0" onAction="#onCancelarSeleccionada" styleClass="btn-outline-danger"/>
+            <Button fx:id="btnReservaLimpiar" text="LIMPIAR" prefHeight="40.0" prefWidth="110.0" onAction="#onLimpiar" styleClass="btn-outline-info"/>
         </HBox>
         <Label fx:id="lblReservaError" styleClass="label-error"/>
     </VBox>
 
     <HBox alignment="BOTTOM_LEFT" spacing="15.0">
-        <Label text="Mis Reservas" styleClass="label-title"/>
-        <Button fx:id="btnReservaImprimir" text="Imprimir" onAction="#onImprimir" styleClass="btn-outline-info" style="-fx-font-size: 11px; -fx-padding: 5 15;"/>
+        <Label text="REGISTROS DE RESERVAS" styleClass="label-title" style="-fx-font-size: 14px;"/>
+        <Button fx:id="btnReservaImprimir" text="IMPRIMIR" onAction="#onImprimir" styleClass="btn-outline-info" style="-fx-font-size: 11px; -fx-padding: 5 15;"/>
     </HBox>
 
     <TableView fx:id="tblReservaListado" VBox.vgrow="ALWAYS">
@@ -70,10 +73,10 @@
         </columnResizePolicy>
         <columns>
             <TableColumn fx:id="colReservaId" text="ID" prefWidth="100.0"/>
-            <TableColumn fx:id="colReservaActividad" text="Actividad" prefWidth="300.0"/>
-            <TableColumn fx:id="colReservaFecha" text="Fecha" prefWidth="120.0"/>
-            <TableColumn fx:id="colReservaHorario" text="Horario" prefWidth="150.0"/>
-            <TableColumn fx:id="colReservaEstado" text="Estado" prefWidth="120.0"/>
+            <TableColumn fx:id="colReservaActividad" text="ACTIVIDAD" prefWidth="320.0"/>
+            <TableColumn fx:id="colReservaFecha" text="FECHA" prefWidth="120.0"/>
+            <TableColumn fx:id="colReservaHorario" text="HORARIO" prefWidth="160.0"/>
+            <TableColumn fx:id="colReservaEstado" text="ESTADO" prefWidth="120.0"/>
         </columns>
     </TableView>
 </VBox>
