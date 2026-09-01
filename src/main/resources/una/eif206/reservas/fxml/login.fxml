@@ -46,7 +46,7 @@
         <Label fx:id="lblLoginError" maxWidth="450.0" style="-fx-alignment: CENTER; -fx-font-size: 13px;" styleClass="label-error" text="" wrapText="true" />
 
         <HBox alignment="CENTER" spacing="18.0">
-            <Button fx:id="btnLoginIngresar" onAction="#onIngresar" prefHeight="48.0" prefWidth="140.0" style="-fx-font-size: 13px; -fx-font-weight: bold;" styleClass="btn-primary" text="INGRESAR" />
+            <Button fx:id="btnLoginIngresar" onAction="#onIngresar" prefHeight="48.0" prefWidth="140.0" style="-fx-font-size: 13px; -fx-font-weight: bold;" styleClass="btn-primary" text="INGRESAR" defaultButton="true"/>
             <Button fx:id="btnLoginCambiarClave" onAction="#onCambiarClave" prefHeight="48.0" prefWidth="160.0" style="-fx-font-size: 13px;" styleClass="btn-outline-info" text="CAMBIAR CLAVE" />
             <Button fx:id="btnLoginCancelar" onAction="#onCancelar" prefHeight="48.0" prefWidth="130.0" style="-fx-font-size: 13px;" styleClass="btn-outline-danger" text="SALIR" />
         </HBox>

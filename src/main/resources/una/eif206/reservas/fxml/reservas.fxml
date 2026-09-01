@@ -55,7 +55,7 @@
             </VBox>
         </HBox>
         <HBox spacing="12.0" alignment="CENTER_LEFT">
-            <Button fx:id="btnReservaReservar" text="REGISTRAR" prefHeight="40.0" prefWidth="130.0" onAction="#onReservar" styleClass="btn-primary" style="-fx-font-weight: bold;"/>
+            <Button fx:id="btnReservaReservar" text="REGISTRAR" prefHeight="40.0" prefWidth="130.0" onAction="#onReservar" styleClass="btn-primary" style="-fx-font-weight: bold;" defaultButton="true"/>
             <Button fx:id="btnReservaCancelarSeleccionada" text="CANCELAR SELECCIONADA" prefHeight="40.0" prefWidth="210.0" onAction="#onCancelarSeleccionada" styleClass="btn-outline-danger"/>
             <Button fx:id="btnReservaLimpiar" text="LIMPIAR" prefHeight="40.0" prefWidth="110.0" onAction="#onLimpiar" styleClass="btn-outline-info"/>
         </HBox>
