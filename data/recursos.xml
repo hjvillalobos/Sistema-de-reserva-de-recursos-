@@ -8,8 +8,4 @@
         <categoriaId>CAT-000001</categoriaId>
         <descripcion>Promete darle play</descripcion>
     </recurso>
-    <recurso id="01">
-        <categoriaId>CAT-000002</categoriaId>
-        <descripcion>hacerlo bien rico</descripcion>
-    </recurso>
 </recursos>

@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="20.0" prefWidth="1000.0" prefHeight="750.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.eif206.reservas.controladores.ProgramacionController">
+    <stylesheets>
+        <URL value="@/una/eif206/reservas/fxml/css/estilos.css" />
+    </stylesheets>
+    <padding><Insets top="30" right="40" bottom="40" left="40"/></padding>
+
+    <!-- NAVEGACIÓN SUPERIOR -->
+    <HBox alignment="CENTER_RIGHT">
+        <Button text="← VOLVER AL MENÚ PRINCIPAL" onAction="#onVolverPrincipal" styleClass="btn-outline-info" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <!-- PANEL DE CONTROL DE SEMANA -->
+    <VBox spacing="15.0" styleClass="panel" style="-fx-border-color: #00A8FF; -fx-border-width: 1.2; -fx-border-radius: 10;">
+        <Label text="◇  PROGRAMACIÓN SEMANAL DE ACTIVIDADES" styleClass="label-title" style="-fx-font-size: 16px;"/>
+        <HBox spacing="12.0" alignment="CENTER_LEFT">
+            <Button text="◀ SEMANA ANTERIOR" prefHeight="38.0" onAction="#onSemanaAnterior" styleClass="btn-outline-info" style="-fx-font-weight: bold;"/>
+            <Label fx:id="lblSemana" text="[ SEMANA EN CURSO ]" HBox.hgrow="ALWAYS" maxWidth="Infinity" alignment="CENTER" styleClass="label-subtitle" style="-fx-font-weight: bold; -fx-font-size: 13px; -fx-text-fill: #38BDF8;"/>
+            <Button text="SEMANA SIGUIENTE ▶" prefHeight="38.0" onAction="#onSemanaSiguiente" styleClass="btn-outline-info" style="-fx-font-weight: bold;"/>
+            <Button text="HOY" prefHeight="38.0" prefWidth="80.0" onAction="#onSemanaActual" styleClass="btn-primary" style="-fx-font-weight: bold;"/>
+            <Button text="GENERAR PDF" prefHeight="38.0" prefWidth="120.0" onAction="#onImprimir" styleClass="btn-outline-info"/>
+        </HBox>
+        <Label fx:id="lblError" styleClass="label-error"/>
+    </VBox>
+
+    <!-- MATRIZ DE ACTIVIDADES -->
+    <Label text="PROGRAMACIÓN DE ACTIVIDADES" styleClass="label-title" style="-fx-font-size: 14px;"/>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="scroll-pane-matriz">
+        <content>
+            <GridPane fx:id="gridMatriz" styleClass="grid-matriz"/>
+        </content>
+    </ScrollPane>
+</VBox>

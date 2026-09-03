@@ -13,9 +13,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="20.0" prefWidth="1000.0" prefHeight="820.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.eif206.reservas.controlador.ReservaController">
+<VBox spacing="20.0" prefWidth="1000.0" prefHeight="820.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.eif206.reservas.controladores.ReservaController">
     <stylesheets>
-        <URL value="@/una/eif206/reservas/css/estilos.css"/>
+        <URL value="@/una/eif206/reservas/fxml/css/estilos.css"/>
     </stylesheets>
     <padding><Insets top="30" right="40" bottom="40" left="40"/></padding>
 
@@ -55,7 +55,7 @@
             </VBox>
         </HBox>
         <HBox spacing="12.0" alignment="CENTER_LEFT">
-            <Button fx:id="btnReservaReservar" text="REGISTRAR" prefHeight="40.0" prefWidth="130.0" onAction="#onReservar" styleClass="btn-primary" style="-fx-font-weight: bold;" defaultButton="true"/>
+            <Button fx:id="btnReservaReservar" text="REGISTRAR" prefHeight="40.0" prefWidth="130.0" onAction="#onReservar" styleClass="btn-primary" style="-fx-font-weight: bold;"/>
             <Button fx:id="btnReservaCancelarSeleccionada" text="CANCELAR SELECCIONADA" prefHeight="40.0" prefWidth="210.0" onAction="#onCancelarSeleccionada" styleClass="btn-outline-danger"/>
             <Button fx:id="btnReservaLimpiar" text="LIMPIAR" prefHeight="40.0" prefWidth="110.0" onAction="#onLimpiar" styleClass="btn-outline-info"/>
         </HBox>

@@ -6,10 +6,10 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.eif206.reservas.controlador.PrincipalController">
+<VBox alignment="CENTER" prefHeight="600.0" prefWidth="900.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.eif206.reservas.controladores.PrincipalController">
 
     <stylesheets>
-        <URL value="@/una/eif206/reservas/css/estilos.css" />
+        <URL value="@/una/eif206/reservas/fxml/css/estilos.css" />
     </stylesheets>
 
     <VBox alignment="CENTER" spacing="35.0" VBox.vgrow="ALWAYS">
@@ -27,7 +27,10 @@
                 <Button fx:id="btnPrincipalCategorias" managed="false" onAction="#onAbrirCategorias" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-outline-info" text="GESTIONAR CATEGORÍAS" visible="false" />
                 <Button fx:id="btnPrincipalFuncionarios" managed="false" onAction="#onAbrirFuncionarios" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-outline-info" text="GESTIONAR FUNCIONARIOS" visible="false" />
                 <Button fx:id="btnPrincipalRecursos" managed="false" onAction="#onAbrirRecursos" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-outline-info" text="GESTIONAR RECURSOS" visible="false" />
-                <Button fx:id="btnPrincipalReservas" managed="false" onAction="#onAbrirReservas" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-primary" text="ACCEDER A MIS RESERVAS" visible="false" />
+                <Button fx:id="btnPrincipalReservas" managed="false" onAction="#onAbrirReservas" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-outline-info" text="ACCEDER A MIS RESERVAS" visible="false" />
+                <Button fx:id="btnCalendarizacion" managed="false" onAction="#onAbrirCalendarizacion" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-outline-info" text="CALENDARIZACIÓN DE RECURSOS" visible="false" />
+                <Button fx:id="btnProgramacion" managed="false" onAction="#onAbrirProgramacion" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-outline-info" text="GESTIONAR PROGRAMACION" visible="false" />
+                <Button fx:id="btnEstadisticas" managed="false" onAction="#onAbrirEstadisticas" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-outline-info" text="ESTADISTICAS DE RECURSOS" visible="false" />
 
                 <Button fx:id="btnPrincipalCerrarSesion" onAction="#onCerrarSesion" prefHeight="48.0" prefWidth="320.0" style="-fx-font-size: 14px; -fx-font-weight: bold;" styleClass="btn-outline-danger" text="CERRAR SESIÓN" />
             </VBox>

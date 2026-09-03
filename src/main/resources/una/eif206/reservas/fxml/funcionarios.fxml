@@ -11,9 +11,9 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox spacing="20.0" prefWidth="950.0" prefHeight="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.eif206.reservas.controlador.FuncionarioController">
+<VBox spacing="20.0" prefWidth="950.0" prefHeight="750.0" xmlns="http://javafx.com/javafx/21" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.eif206.reservas.controladores.FuncionarioController">
     <stylesheets>
-        <URL value="@/una/eif206/reservas/css/estilos.css"/>
+        <URL value="@/una/eif206/reservas/fxml/css/estilos.css"/>
     </stylesheets>
     <padding><Insets top="30" right="40" bottom="40" left="40"/></padding>
 
@@ -48,7 +48,7 @@
             <TextField fx:id="txtFuncionarioTelefono" prefHeight="38.0" GridPane.rowIndex="2" GridPane.columnIndex="1"/>
         </GridPane>
         <HBox spacing="12.0">
-            <Button fx:id="btnFuncionarioGuardar" text="GUARDAR" prefHeight="40.0" prefWidth="110.0" onAction="#onGuardar" styleClass="btn-primary" style="-fx-font-weight: bold;" defaultButton="true"/>
+            <Button fx:id="btnFuncionarioGuardar" text="GUARDAR" prefHeight="40.0" prefWidth="110.0" onAction="#onGuardar" styleClass="btn-primary" style="-fx-font-weight: bold;"/>
             <Button fx:id="btnFuncionarioBorrar" text="ELIMINAR" prefHeight="40.0" prefWidth="110.0" onAction="#onBorrar" styleClass="btn-outline-danger"/>
             <Button fx:id="btnFuncionarioLimpiar" text="LIMPIAR" prefHeight="40.0" prefWidth="110.0" onAction="#onLimpiar" styleClass="btn-outline-info"/>
         </HBox>

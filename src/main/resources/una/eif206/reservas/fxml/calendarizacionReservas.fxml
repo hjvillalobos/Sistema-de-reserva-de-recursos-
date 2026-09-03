@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox spacing="20.0" prefWidth="1000.0" prefHeight="750.0" xmlns="http://javafx.com/javafx/26" xmlns:fx="http://javafx.com/fxml/1" fx:controller="una.eif206.reservas.controladores.CalendarizacionController">
+    <stylesheets>
+        <URL value="@/una/eif206/reservas/fxml/css/estilos.css"/>
+    </stylesheets>
+    <padding><Insets top="30" right="40" bottom="40" left="40"/></padding>
+
+    <HBox alignment="CENTER_RIGHT">
+        <Button text="← VOLVER AL MENÚ PRINCIPAL" onAction="#onVolverPrincipal" styleClass="btn-outline-info" style="-fx-font-size: 11px; -fx-font-weight: bold;"/>
+    </HBox>
+
+    <VBox spacing="15.0" styleClass="panel" style="-fx-border-color: #00A8FF; -fx-border-width: 1.2; -fx-border-radius: 10;">
+        <Label text="◇  CALENDARIZACIÓN DE RECURSOS" styleClass="label-title" style="-fx-font-size: 16px;"/>
+        <HBox spacing="15.0" alignment="CENTER_LEFT">
+            <Label text="FECHA" styleClass="label-subtitle" style="-fx-font-weight: bold;"/>
+            <DatePicker fx:id="dpFecha" prefHeight="38.0" prefWidth="160.0"/>
+            <Label text="CATEGORÍA" styleClass="label-subtitle" style="-fx-font-weight: bold;"/>
+            <ComboBox fx:id="comboCategoria" prefHeight="38.0" prefWidth="200.0"/>
+            <Button fx:id="btnConsultar" text="CONSULTAR" prefHeight="38.0" prefWidth="120.0" onAction="#onConsultar" styleClass="btn-primary" style="-fx-font-weight: bold;"/>
+            <Button fx:id="btnGenerarPDF" text="GENERAR PDF" prefHeight="38.0" prefWidth="130.0" onAction="#onImprimir" styleClass="btn-outline-info"/>
+        </HBox>
+        <Label fx:id="lblError" styleClass="label-error"/>
+    </VBox>
+
+    <Label text="DISPONIBILIDAD" styleClass="label-title" style="-fx-font-size: 14px;"/>
+
+    <ScrollPane fitToWidth="true" VBox.vgrow="ALWAYS" styleClass="scroll-pane-matriz">
+        <content>
+            <GridPane fx:id="gridMatriz" styleClass="grid-matriz">
+                <columnConstraints>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                    <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0"/>
+                </columnConstraints>
+                <rowConstraints>
+                    <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES"/>
+                </rowConstraints>
+            </GridPane>
+        </content>
+    </ScrollPane>
+</VBox>
