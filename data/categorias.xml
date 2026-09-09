@@ -1,14 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <categorias>
-    <categoria id="CAT-000001">
-        <descripcion>Jugar futbol</descripcion>
-    </categoria>
-    <categoria id="CAT-000002">
-        <descripcion>jugar</descripcion>
-    </categoria>
-    <categoria id="CAT-000003">
-        <descripcion>tomar guaro</descripcion>
-    </categoria>
     <categoria id="CAT-000004">
         <descripcion>Laptop windows</descripcion>
     </categoria>

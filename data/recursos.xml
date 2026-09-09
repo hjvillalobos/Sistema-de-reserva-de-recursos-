@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <recursos>
-    <recurso id="238715">
-        <categoriaId>CAT-000001</categoriaId>
-        <descripcion>Laptop #238715</descripcion>
-    </recurso>
-    <recurso id="001">
-        <categoriaId>CAT-000001</categoriaId>
-        <descripcion>Promete darle play</descripcion>
-    </recurso>
     <recurso id="239715">
         <categoriaId>CAT-000004</categoriaId>
         <descripcion>Laptop Dell #1</descripcion>
