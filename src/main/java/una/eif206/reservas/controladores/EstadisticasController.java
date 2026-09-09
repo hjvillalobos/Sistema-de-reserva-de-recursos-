@@ -28,6 +28,7 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
+import javafx.geometry.Side;
 
 public class EstadisticasController {
 
@@ -85,6 +86,11 @@ public class EstadisticasController {
                 serie.getData().add(new XYChart.Data<>(dato.getDescripcionCategoria(), dato.getCantidad()));
             }
             chartRecursos.getData().setAll(serie);
+
+            javafx.scene.chart.CategoryAxis xAxisRecursos = (javafx.scene.chart.CategoryAxis) chartRecursos.getXAxis();
+            xAxisRecursos.setTickLabelRotation(90);
+            xAxisRecursos.setSide(Side.BOTTOM);
+
         } catch (ValidacionException e) {
             lblErrorRecursos.setText(e.getMessage());
         }
@@ -106,6 +112,11 @@ public class EstadisticasController {
                 serie.getData().add(new XYChart.Data<>(dato.getEtiqueta(), dato.getCantidad()));
             }
             chartActividades.getData().setAll(serie);
+
+            javafx.scene.chart.CategoryAxis xAxisActividades = (javafx.scene.chart.CategoryAxis) chartActividades.getXAxis();
+            xAxisActividades.setTickLabelRotation(90);
+            xAxisActividades.setSide(Side.BOTTOM);
+
         } catch (ValidacionException e) {
             lblErrorActividades.setText(e.getMessage());
         }

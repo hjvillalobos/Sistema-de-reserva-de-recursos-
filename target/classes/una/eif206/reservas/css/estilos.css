@@ -90,10 +90,9 @@
     -fx-border-color: #334155;
     -fx-border-radius: 8;
     -fx-border-width: 1;
-    /* Variables para el color de fila seleccionada */
     -fx-control-inner-background: #0F172A;
-    -fx-accent: #263A5C; /* Fondo de la fila seleccionada */
-    -fx-selection-bar-text: white; /* Texto de la fila seleccionada */
+    -fx-accent: #263A5C;
+    -fx-selection-bar-text: white;
 }
 
 .button.btn-ai {
@@ -210,4 +209,54 @@
 .list-view .list-cell:selected:hover {
     -fx-background-color: #0096E6;
     -fx-text-fill: white;
+}
+
+.date-picker-popup {
+    -fx-background-color: #151D32;
+    -fx-border-color: #334155;
+    -fx-border-radius: 8;
+    -fx-background-radius: 8;
+}
+
+.date-picker-popup .month-year-pane {
+    -fx-background-color: #151D32;
+}
+
+.date-picker-popup .month-year-pane .label {
+    -fx-text-fill: #EAF6FF !important;
+    -fx-font-weight: bold;
+}
+
+.date-picker-popup .spinner .button {
+    -fx-background-color: #1F2937;
+}
+
+.date-picker-popup .spinner .button .arrow {
+    -fx-background-color: #EAF6FF;
+}
+
+.date-picker-popup .calendar-grid {
+    -fx-background-color: #0F172A;
+}
+
+.date-picker-popup .day-name-cell,
+.date-picker-popup .day-cell {
+    -fx-background-color: #0F172A;
+    -fx-text-fill: #EAF6FF;
+}
+
+.date-picker-popup .day-cell:hover {
+    -fx-background-color: #00A8FF;
+    -fx-text-fill: white;
+}
+
+.date-picker-popup .day-cell:selected {
+    -fx-background-color: #00A8FF;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+}
+
+.date-picker-popup .today {
+    -fx-border-color: #00A8FF;
+    -fx-border-width: 1;
 }

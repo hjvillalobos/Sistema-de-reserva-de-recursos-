@@ -1,2 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<funcionarios/>
+<funcionarios>
+    <funcionario id="888">
+        <clave>888</clave>
+        <nombre>Ana Gómez</nombre>
+        <telefono>8765-4321</telefono>
+    </funcionario>
+</funcionarios>
