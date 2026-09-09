@@ -6,13 +6,10 @@
         <horaInicio>00:00</horaInicio>
         <horaFin>23:59</horaFin>
         <funcionarioId>01</funcionarioId>
-        <estado>ACTIVA</estado>
-        <categoriasSolicitadas>
-            <categoriaId>CAT-000001</categoriaId>
-        </categoriasSolicitadas>
         <recursosAsignados>
             <recursoId>238715</recursoId>
         </recursosAsignados>
+        <estado>ACTIVA</estado>
     </reserva>
     <reserva id="RES-000002">
         <actividad>Darle play</actividad>
@@ -20,12 +17,32 @@
         <horaInicio>00:00</horaInicio>
         <horaFin>12:00</horaFin>
         <funcionarioId>01</funcionarioId>
-        <estado>ACTIVA</estado>
-        <categoriasSolicitadas>
-            <categoriaId>CAT-000001</categoriaId>
-        </categoriasSolicitadas>
         <recursosAsignados>
             <recursoId>001</recursoId>
         </recursosAsignados>
+        <estado>ACTIVA</estado>
+    </reserva>
+    <reserva id="RES-000003">
+        <actividad>ir a la cali</actividad>
+        <fecha>2026-09-05</fecha>
+        <horaInicio>12:00</horaInicio>
+        <horaFin>5:00</horaFin>
+        <funcionarioId>belen</funcionarioId>
+        <recursosAsignados>
+            <recursoId>238715</recursoId>
+        </recursosAsignados>
+        <estado>ACTIVA</estado>
+    </reserva>
+    <reserva id="RES-000004">
+        <actividad>reunión de trabajo</actividad>
+        <fecha>2026-08-14</fecha>
+        <horaInicio>08:00</horaInicio>
+        <horaFin>10:00</horaFin>
+        <funcionarioId>01</funcionarioId>
+        <recursosAsignados>
+            <recursoId>239715</recursoId>
+            <recursoId>34343</recursoId>
+        </recursosAsignados>
+        <estado>ACTIVA</estado>
     </reserva>
 </reservas>

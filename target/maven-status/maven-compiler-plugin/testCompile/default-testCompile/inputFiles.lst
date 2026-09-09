@@ -1,40 +1,53 @@
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\datos\AdministradorDatosIT.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\datos\CategoriaDatosIT.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\datos\FuncionarioDatosIT.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\datos\RecursoDatosIT.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\datos\ReservaDatosIT.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\DTO\CategoriaDTOTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\DTO\CeldaCalendarizacionDTOTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\DTO\CeldaProgramacionDTOTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\DTO\EstadisticaCategoriaDTOTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\DTO\EstadisticaSemanaDTOTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\DTO\FuncionarioDTOTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\DTO\MatrizCalendarizacionDTOTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\DTO\MatrizProgramacionDTOTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\DTO\RecursoDTOTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\DTO\ReservaDTOTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\DTO\UsuarioDTOTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\CalendarizacionLogicaIT.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\CalendarizacionLogicaTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\CategoriaLogicaIT.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\CategoriaLogicaTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\EstadisticaLogicaTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\EstadisticasLogicaIT.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\FuncionarioLogicaIT.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\FuncionarioLogicaTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\LoginLogicaIT.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\LoginLogicaTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\ProgramacionLogicaIT.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\ProgramacionLogicaTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\RecursoLogicaIT.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\RecursoLogicaTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\ReservaLogicaIT.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\logica\ReservaLogicaTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\servicios\CalendarizacionServiceTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\servicios\CategoriaServiceTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\servicios\EstadisticasServicioTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\servicios\FuncionarioServicioTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\servicios\LoginServiceTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\servicios\ProgramacionServiceTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\servicios\RecursoServiceTest.java
-C:\Users\diego\IdeaProjects\Proyecto1\src\test\java\una\eif206\reservas\servicios\ReservaServicioTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\datos\AdministradorDatosIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\datos\CategoriaDatosIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\datos\FuncionarioDatosIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\datos\RecursoDatosIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\datos\ReservaDatosIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\DTO\CategoriaDTOTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\DTO\CeldaCalendarizacionDTOTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\DTO\CeldaProgramacionDTOTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\DTO\EstadisticaCategoriaDTOTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\DTO\EstadisticaSemanaDTOTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\DTO\FuncionarioDTOTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\DTO\MatrizCalendarizacionDTOTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\DTO\MatrizProgramacionDTOTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\DTO\RecursoDTOTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\DTO\ReservaDTOTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\DTO\UsuarioDTOTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\CalendarizacionLogicaIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\CalendarizacionLogicaTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\CategoriaLogicaIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\CategoriaLogicaTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\EstadisticaLogicaTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\EstadisticasLogicaIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\FuncionarioLogicaIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\FuncionarioLogicaTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\LoginLogicaIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\LoginLogicaTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\ProgramacionLogicaIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\ProgramacionLogicaTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\RecursoLogicaIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\RecursoLogicaTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\ReservaLogicaIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\logica\ReservaLogicaTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\modelo\RecursoServiceTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\modelo\RecursoTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\modelo\ReservaTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicio\CategoriaServiceIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicio\CategoriaServiceTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicio\FuncionarioServiceIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicio\FuncionarioServiceTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicio\LoginServiceIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicio\LoginServiceTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicio\RecursoServiceIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicio\RecursoServiceTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicio\ReservaServiceIT.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicio\ReservaServiceTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicios\CalendarizacionServiceTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicios\CategoriaServiceTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicios\EstadisticasServicioTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicios\FuncionarioServicioTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicios\LoginServiceTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicios\ProgramacionServiceTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicios\RecursoServiceTest.java
+C:\Users\HP PAVILION\Documents\Universidad ll Ciclo\Programacion lll\Proyecto l\Sistema-de-reserva-de-recursos-\src\test\java\una\eif206\reservas\servicios\ReservaServicioTest.java

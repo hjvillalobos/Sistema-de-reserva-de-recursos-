@@ -1,8 +1,13 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <funcionarios>
-    <funcionario id="01" rol="FUNCIONARIO">
+    <funcionario id="01">
         <clave>1234</clave>
         <nombre>Joel</nombre>
         <telefono>64585341</telefono>
+    </funcionario>
+    <funcionario id="belen">
+        <clave>belen</clave>
+        <nombre>maria</nombre>
+        <telefono>01</telefono>
     </funcionario>
 </funcionarios>

@@ -6,4 +6,13 @@
     <categoria id="CAT-000002">
         <descripcion>jugar</descripcion>
     </categoria>
+    <categoria id="CAT-000003">
+        <descripcion>tomar guaro</descripcion>
+    </categoria>
+    <categoria id="CAT-000004">
+        <descripcion>Laptop windows</descripcion>
+    </categoria>
+    <categoria id="CAT-000005">
+        <descripcion>Sala de Juntas</descripcion>
+    </categoria>
 </categorias>

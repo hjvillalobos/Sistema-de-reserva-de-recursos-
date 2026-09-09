@@ -8,4 +8,12 @@
         <categoriaId>CAT-000001</categoriaId>
         <descripcion>Promete darle play</descripcion>
     </recurso>
+    <recurso id="239715">
+        <categoriaId>CAT-000004</categoriaId>
+        <descripcion>Laptop Dell #1</descripcion>
+    </recurso>
+    <recurso id="34343">
+        <categoriaId>CAT-000005</categoriaId>
+        <descripcion>Sala 1 primer piso</descripcion>
+    </recurso>
 </recursos>
