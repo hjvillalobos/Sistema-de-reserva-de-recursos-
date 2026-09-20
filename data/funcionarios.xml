@@ -5,9 +5,4 @@
         <nombre>Ana Gómez</nombre>
         <telefono>8765-4321</telefono>
     </funcionario>
-    <funcionario id="118030207">
-        <clave>118030207</clave>
-        <nombre>Eliseo Zuñiga Obanfo</nombre>
-        <telefono>60313796</telefono>
-    </funcionario>
 </funcionarios>
