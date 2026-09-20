@@ -12,4 +12,15 @@
         </recursosAsignados>
         <estado>ACTIVA</estado>
     </reserva>
+    <reserva id="RES-000002">
+        <actividad>cunumi</actividad>
+        <fecha>2026-09-10</fecha>
+        <horaInicio>00:00</horaInicio>
+        <horaFin>06:00</horaFin>
+        <funcionarioId>118030207</funcionarioId>
+        <recursosAsignados>
+            <recursoId>34343</recursoId>
+        </recursosAsignados>
+        <estado>ACTIVA</estado>
+    </reserva>
 </reservas>
