@@ -8,10 +8,13 @@
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>frontend</artifactId>
-    <properties>
-        <reservas.modoLocal>false</reservas.modoLocal>
-    </properties>
     <dependencies>
+        <!-- Solo las pruebas levantan un backend real; no se incluye en la aplicación. -->
+        <dependency>
+            <groupId>una.eif206</groupId>
+            <artifactId>backend</artifactId>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>una.eif206</groupId>
             <artifactId>compartido</artifactId>
@@ -56,28 +59,25 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <version>3.2.0</version>
+                <executions>
+                    <execution>
+                        <id>dependencias-ejecucion</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                    </execution>
+                </executions>
                 <configuration>
-                    <systemPropertyVariables>
-                        <reservas.modoLocal>${reservas.modoLocal}</reservas.modoLocal>
-                    </systemPropertyVariables>
+                    <includeScope>runtime</includeScope>
+                    <outputDirectory>${project.build.directory}/dependency</outputDirectory>
                 </configuration>
             </plugin>
         </plugins>
     </build>
-    <profiles>
-        <profile>
-            <id>local</id>
-            <!-- Solo para seguir ejecutando XML durante la migración; no es el modo distribuido. -->
-            <properties>
-                <reservas.modoLocal>true</reservas.modoLocal>
-            </properties>
-            <dependencies>
-                <dependency>
-                    <groupId>una.eif206</groupId>
-                    <artifactId>backend</artifactId>
-                    <scope>runtime</scope>
-                </dependency>
-            </dependencies>
-        </profile>
-    </profiles>
 </project>

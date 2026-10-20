@@ -1,6 +1,7 @@
 package una.eif206.reservas.DTO;
 
-public class EstadisticaCategoriaDTO {
+public class EstadisticaCategoriaDTO implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     private final String categoriaId;
     private final String descripcionCategoria;

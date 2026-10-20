@@ -1,6 +1,7 @@
 package una.eif206.reservas.DTO;
 
-public class EstadisticaSemanaDTO {
+public class EstadisticaSemanaDTO implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     private final String inicioSemana;
     private final String finSemana;

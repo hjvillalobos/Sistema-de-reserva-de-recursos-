@@ -1,6 +1,7 @@
 package una.eif206.reservas.DTO;
 
-public class CeldaCalendarizacionDTO {
+public class CeldaCalendarizacionDTO implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     private boolean ocupada;
     private String actividad;

@@ -39,7 +39,7 @@ public class ReservaDatos {
         List<ReservaDTO> resultado=new ArrayList<>();
         List<ReservaDTO> reservas=obtenerTodos();
         for(ReservaDTO reserva: reservas){
-            if(reserva.getFuncionarioId().toLowerCase().contains(funcionarioId)){
+            if(funcionarioId != null && reserva.getFuncionarioId().equalsIgnoreCase(funcionarioId)){
                 resultado.add(reserva);
             }
         }

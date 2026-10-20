@@ -8,6 +8,8 @@ import una.eif206.reservas.DTO.ReservaDTO;
 import una.eif206.reservas.datos.ReservaDatos;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -49,10 +51,25 @@ public class ReservaLogica {
         if (categoriasIds == null || categoriasIds.isEmpty()){
             throw new ValidacionException("Debe seleccionar al menos una categoría.");
         }
+        try {
+            LocalDate.parse(fecha);
+            LocalTime inicio = LocalTime.parse(horaInicio);
+            LocalTime fin = LocalTime.parse(horaFin);
+            if (!horaInicio.matches("\\d{2}:\\d{2}") || !horaFin.matches("\\d{2}:\\d{2}") || !inicio.isBefore(fin))
+                throw new ValidacionException("Indique un horario válido en formato HH:mm.");
+        } catch (DateTimeParseException e) {
+            throw new ValidacionException("La fecha o el horario no son válidos.");
+        }
+        var categoriasUnicas = new java.util.HashSet<String>();
+        for (String categoria : categoriasIds) {
+            if (categoria == null || categoria.isBlank() || !categoriasUnicas.add(categoria.toLowerCase(java.util.Locale.ROOT)))
+                throw new ValidacionException("Las categorías deben ser válidas y no repetirse.");
+        }
     }
 
     public ReservaDTO intentarRegistrar(String actividad, String fecha, String horaInicio, String horaFin, String funcionarioId, List<String> categoriasIds) throws ValidacionException {
         validarDatos(actividad, fecha, horaInicio, horaFin, categoriasIds);
+        if (funcionarioId == null || funcionarioId.isBlank()) throw new ValidacionException("Debe indicar el funcionario.");
 
         List<String> recursosAsignados = new ArrayList<>();
         List<String> categoriasNoDisponibles = new ArrayList<>();

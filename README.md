@@ -1,122 +1,70 @@
 # EIF206 - Sistema de Reserva de Recursos
 
-Universidad Nacional · Escuela de Informática · Programación 3 · 2026-II
+Universidad Nacional · Programación 3 · 2026-II
 
-## Integrantes
+## Estado actual
 
-- Heifryl Joel Villalobos Ureña
-- Pablo Hernandez Esquivel
-- Diego Jimenez Villalobos
+Cliente JavaFX y servidor se ejecutan en procesos separados y se comunican por sockets. Login, cambio de contraseña, recursos y reservas utilizan servicios remotos. **La persistencia todavía es XML; MySQL es el siguiente paso.**
 
-## Estado: primer paso de la migración al Proyecto II
+- `compartido`: DTO, interfaces y mensajes de red.
+- `backend`: servidor, sesiones, permisos, lógica y almacenamiento XML.
+- `frontend`: JavaFX, proxies y conexión al servidor.
+- `database`: lugar para el esquema MySQL.
+- `data`: XML existentes, usados solamente por el servidor.
+- `legacy`: código anterior fuera de la compilación.
 
-El repositorio ahora es un proyecto Maven con tres módulos. Se conserva la lógica
-del Proyecto I y su persistencia XML. **Todavía no hay servidor de sockets, proxies
-remotos, conexión MySQL ni alertas.** Esta etapa separa el código y sus dependencias.
+El frontend depende de compartido. Su dependencia de backend tiene alcance de pruebas: permite probar contra un servidor real y no se distribuye con la aplicación. El antiguo proveedor local permanece como compatibilidad interna, pero el frontend ya no lo carga ni utiliza el perfil `local`.
 
-```text
-pom.xml                 Padre: versiones, Java 21, pruebas y módulos
-compartido/
-  src/main/java/        DTO, interfaces de servicios y excepción compartida
-  src/test/java/        Pruebas de DTO
-backend/
-  src/main/java/        Servicios, lógica y persistencia XML existente
-  src/main/resources/   Registro del proveedor local transitorio
-  src/test/java/        Pruebas de lógica, servicios, modelo y persistencia
-frontend/
-  src/main/java/        JavaFX, controladores activos y utilidades de presentación
-  src/main/resources/   FXML y CSS con sus rutas originales
-  src/test/java/        Verificación de vistas y controladores
-database/               Lugar para el futuro script MySQL
-data/                   XML del Proyecto I, usados por el modo local
-legacy/                 Controladores antiguos sin uso en los FXML actuales
-```
+## Compilar y ejecutar
 
-## Por qué se hizo así
-
-1. **El POM raíz coordina la compilación.** Tiene `packaging=pom`; no genera el
-   ejecutable de la aplicación. Centraliza versiones y plugins. Cada módulo
-   declara las bibliotecas que necesita. Se usa `release=21` para compilar con
-   las APIs de Java 21 incluso cuando el JDK instalado es posterior.
-2. **Compartido no conoce la interfaz ni la persistencia.** Contiene los DTO
-   existentes, ocho contratos `*Api` y `ValidacionException`. No depende de JavaFX,
-   JAXB ni MySQL. Las firmas actuales se conservan: todavía no son el contrato
-   definitivo de red y los DTO de usuario aún requieren separar las credenciales.
-3. **Backend concentra la implementación.** Sus servicios implementan los
-   contratos compartidos y conservan las reglas y los accesos XML. JAXB solo se
-   declara aquí. No depende de JavaFX ni del frontend.
-4. **Frontend depende de los contratos.** Los controladores dejaron de construir
-   servicios concretos. `ServiciosCliente` encuentra un `ProveedorServicios`
-   mediante `ServiceLoader`, mecanismo estándar de Java para cargar una
-   implementación sin importar sus clases. No es todavía el patrón Proxy remoto.
-5. **Las interfaces fueron necesarias para separar los módulos.** Mover solamente
-   los archivos dejaba a todos los controladores dependiendo del backend. Se
-   extrajeron las firmas actuales, sin rediseñar todavía login o reservas.
-6. **Se conserva la ejecución anterior de forma explícita.** El perfil opcional
-   `local` añade el backend únicamente al ejecutar la aplicación y conserva XML.
-   Es un puente temporal: frontend y backend corren juntos en ese modo, por lo
-   que **no cumple todavía la arquitectura distribuida final**. Sin ese perfil,
-   frontend solo depende de compartido y avisa que falta el proveedor remoto.
-
-Dependencias normales:
-
-```text
-frontend ---> compartido <--- backend
-```
-
-La única excepción transitoria es el perfil `local`, que incorpora `backend` con
-alcance Maven `runtime`. El compilador del frontend sigue sin poder importar
-las implementaciones del backend.
-
-## Compilar y verificar
-
-Requisitos: JDK 21 o posterior y Maven. Configure `JAVA_HOME` con el JDK correcto;
-un JRE de Java 8 no permite compilar este proyecto.
-
-Desde la raíz del repositorio:
+Requiere JDK 21 o posterior y Maven. Configure `JAVA_HOME` con el JDK elegido. Desde la raíz:
 
 ```powershell
 mvn verify
 ```
 
-Compila los tres módulos, ejecuta pruebas unitarias con Surefire y pruebas de
-integración con Failsafe. Las pruebas de integración existentes siguen siendo
-sobre XML y archivos temporales, no sobre MySQL.
+La compilación prepara las bibliotecas de cada aplicación en `target/dependency`. Las pruebas usan carpetas temporales y conexiones locales; no modifican los XML de `data/`. Java debe poder abrir sockets de loopback.
 
-Para compilar únicamente frontend y sus dependencias:
+En una terminal:
 
 ```powershell
-mvn -pl frontend -am verify
+.\iniciar-servidor.ps1
 ```
 
-Esta segunda orden no necesita compilar backend y permite comprobar el aislamiento.
-
-## Ejecutar temporalmente la aplicación anterior
-
-Desde la raíz, instalar los módulos y lanzar el frontend con el perfil local:
+En otra terminal:
 
 ```powershell
-mvn -Plocal install
-mvn -pl frontend -Plocal javafx:run
+.\iniciar-cliente.ps1
 ```
 
-El plugin JavaFX usa la raíz como directorio de trabajo para conservar las rutas
-`data/*.xml`. Este modo lee y puede modificar los mismos datos XML del Proyecto I.
-No requiere MySQL y no demuestra comunicación por red.
+Se pueden abrir varios clientes. Por defecto se usa `127.0.0.1:5050` y el servidor lee `data/` del repositorio. Las acciones realizadas en la aplicación sí guardan cambios en esos XML. Ejecute un solo servidor por carpeta de datos.
 
-En IntelliJ, abrir o recargar el `pom.xml` raíz como proyecto Maven. Seleccionar
-el JDK correcto y utilizar las órdenes anteriores desde la ventana Maven o una
-terminal con Maven configurado. Una ejecución directa del Launcher sin el perfil
-local no incluye el proveedor y mostrará el aviso de migración pendiente.
+Para una prueba entre equipos en una red de confianza:
 
-## Continuación
+```powershell
+.\iniciar-servidor.ps1 -Direccion 0.0.0.0 -Puerto 5050
+.\iniciar-cliente.ps1 -Direccion IP_DEL_SERVIDOR -Puerto 5050
+```
 
-- Rediseñar el contrato de login: DTO de sesión sin contraseña y cambio de clave
-  asociado a la sesión del servidor.
-- Acordar mensajes de red y sustituir el proveedor local por proxies en frontend.
-- Implementar el servidor de sockets en backend.
-- Incorporar JDBC y el esquema MySQL coordinado con el compañero A.
-- Migrar Recursos y Reservas; conectar el registro con las alertas del compañero B.
+Permita ese puerto en el firewall del servidor. El transporte actual no usa TLS. El servidor también acepta `-Datos RUTA_DE_DATOS` para una carpeta XML alternativa ya preparada. No crea automáticamente usuarios ni una base de datos.
 
-La extracción de contratos de las otras funciones es exclusivamente estructural;
-su migración funcional sigue correspondiendo a sus responsables.
+## Comportamiento implementado
+
+- Cada conexión tiene su sesión. El login devuelve identificación y rol sin contraseña; el cambio de clave usa la identidad almacenada en el servidor.
+- Los permisos se revisan en el servidor. Un funcionario no puede administrar recursos ni consultar, crear o cancelar reservas a nombre de otro usuario.
+- Las operaciones XML están coordinadas para que dos clientes no reserven simultáneamente un recurso ocupado. Se validan horarios y categorías repetidas.
+- Los recursos requieren una categoría existente; no se elimina un recurso referenciado por reservas.
+- Las respuestas se relacionan con su solicitud. Hay límites para los mensajes, filtros de deserialización y tiempo de espera ante desconexiones.
+- Login, cambio de clave, recursos y reservas realizan las consultas fuera del hilo de JavaFX para mantener disponible la interfaz mientras esperan.
+
+Las interfaces existentes de categorías, funcionarios, calendarización, programación y estadísticas también cuentan con transporte remoto. Su evolución funcional sigue correspondiendo a los responsables de esas partes.
+
+## Integración de alertas
+
+Al guardar una reserva, el servidor envía `EventoReserva` a las conexiones autenticadas de otros usuarios. Los eventos están disponibles en `ProveedorServiciosRemoto.conexion().eventos()` para el consumidor del compañero encargado de alertas. La cola es limitada y no es un historial persistente. La presentación de alertas en pantalla todavía no está implementada.
+
+## Siguiente etapa: MySQL
+
+`ServiciosServidor` concentra la construcción de los accesos a datos. El próximo paso es acordar el esquema e instalar/configurar MySQL Server mediante Workbench, incorporar JDBC únicamente al backend y sustituir los accesos XML por consultas y transacciones. La coordinación en memoria deberá complementarse con transacciones y restricciones de la base de datos.
+
+Todavía no hay esquema SQL, conector MySQL ni credenciales de conexión. No se han migrado los datos. Las pruebas automáticas cubren servicios y transporte; falta la comprobación manual completa de las ventanas y entre equipos distintos.

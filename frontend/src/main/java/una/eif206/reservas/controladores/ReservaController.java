@@ -1,6 +1,7 @@
 package una.eif206.reservas.controladores;
 
 import una.eif206.reservas.cliente.ServiciosCliente;
+import una.eif206.reservas.cliente.TareasUI;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,7 +13,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import una.eif206.reservas.DTO.CategoriaDTO;
 import una.eif206.reservas.DTO.ReservaDTO;
-import una.eif206.reservas.DTO.UsuarioDTO;
+import una.eif206.reservas.DTO.UsuarioSesionDTO;
 import una.eif206.reservas.api.CategoriaApi;
 import una.eif206.reservas.api.ReservaApi;
 import una.eif206.reservas.excepciones.ValidacionException;
@@ -48,16 +49,18 @@ public class ReservaController {
     private final ExtractorReservaIA extractorIA = new ExtractorReservaIA();
     private final ObservableList<ReservaDTO> datos = FXCollections.observableArrayList();
 
-    private UsuarioDTO usuarioActual;
+    private UsuarioSesionDTO usuarioActual;
 
-    public void inicializar(UsuarioDTO usuario) {
+    public void inicializar(UsuarioSesionDTO usuario) {
         this.usuarioActual = usuario;
-        cargarReservas();
+        TareasUI.ejecutar(lblReservaError, categoriaService::listarTodos, categorias -> {
+            lstReservaCategorias.setItems(FXCollections.observableArrayList(categorias));
+            cargarReservas();
+        });
     }
 
     @FXML
     public void initialize() {
-        lstReservaCategorias.setItems(FXCollections.observableArrayList(categoriaService.listarTodos()));
         lstReservaCategorias.getSelectionModel().setSelectionMode(SelectionMode.MULTIPLE);
 
         colReservaId.setCellValueFactory(new PropertyValueFactory<ReservaDTO, String>("id"));
@@ -74,45 +77,31 @@ public class ReservaController {
 
     @FXML
     public void onReservar(ActionEvent event) {
-        lblReservaError.setText("");
-
         if (dpReservaFecha.getValue() == null) {
-            lblReservaError.setText("Debe seleccionar una fecha.");
+            lblReservaError.setText("Debe indicar la fecha.");
             return;
         }
-
-        try {
-            List<String> categoriasIds = new ArrayList<>();
-            for (CategoriaDTO c : lstReservaCategorias.getSelectionModel().getSelectedItems()) {
-                categoriasIds.add(c.getId());
-            }
-
-            reservaService.intentarRegistrar(
-                    txtReservaActividad.getText(), dpReservaFecha.getValue().toString(),
-                    txtReservaHoraInicio.getText(), txtReservaHoraFin.getText(),
-                    usuarioActual.getId(), categoriasIds);
-
-            limpiarFormulario();
-            cargarReservas();
-        } catch (ValidacionException e) {
-            lblReservaError.setText(e.getMessage());
-        }
+        String actividad = txtReservaActividad.getText();
+        String fecha = dpReservaFecha.getValue().toString();
+        String inicio = txtReservaHoraInicio.getText();
+        String fin = txtReservaHoraFin.getText();
+        String id = usuarioActual.getId();
+        List<String> categorias = lstReservaCategorias.getSelectionModel().getSelectedItems().stream().map(CategoriaDTO::getId).toList();
+        TareasUI.ejecutar(lblReservaError,
+                () -> reservaService.intentarRegistrar(actividad, fecha, inicio, fin, id, categorias),
+                resultado -> { limpiarFormulario(); cargarReservas(); });
     }
 
     @FXML
     public void onCancelarSeleccionada(ActionEvent event) {
-        lblReservaError.setText("");
         ReservaDTO seleccionada = tblReservaListado.getSelectionModel().getSelectedItem();
         if (seleccionada == null) {
             lblReservaError.setText("Seleccione una reserva de la lista para cancelar.");
             return;
         }
-        try {
-            reservaService.cancelar(seleccionada.getId(), usuarioActual.getId());
-            cargarReservas();
-        } catch (ValidacionException e) {
-            lblReservaError.setText(e.getMessage());
-        }
+        String id = usuarioActual.getId();
+        TareasUI.ejecutar(lblReservaError, () -> { reservaService.cancelar(seleccionada.getId(), id); return null; },
+                resultado -> cargarReservas());
     }
 
     @FXML
@@ -128,40 +117,22 @@ public class ReservaController {
 
     @FXML
     public void onExtraerIA(ActionEvent event) {
-        lblReservaError.setText("");
-
-        List<String> descripcionesDisponibles = new ArrayList<>();
-        for (CategoriaDTO c : categoriaService.listarTodos()) {
-            descripcionesDisponibles.add(c.getDescripcion());
-        }
-
-        try {
-            ReservaExtraida extraido = extractorIA.extraer(txtReservaFrase.getText(), descripcionesDisponibles);
-
+        String frase = txtReservaFrase.getText();
+        List<String> categorias = lstReservaCategorias.getItems().stream().map(CategoriaDTO::getDescripcion).toList();
+        TareasUI.ejecutar(lblReservaError, () -> extractorIA.extraer(frase, categorias), extraido -> {
             txtReservaActividad.setText(extraido.getActividad());
             txtReservaHoraInicio.setText(extraido.getHoraInicio());
             txtReservaHoraFin.setText(extraido.getHoraFin());
-
             if (!extraido.getFecha().isBlank()) {
-                try {
-                    dpReservaFecha.setValue(LocalDate.parse(extraido.getFecha()));
-                } catch (Exception e) {
-                    // Si la IA devolvió una fecha en formato raro, el usuario la corrige a mano
-                }
+                try { dpReservaFecha.setValue(LocalDate.parse(extraido.getFecha())); }
+                catch (java.time.format.DateTimeParseException e) { lblReservaError.setText("Revise la fecha extraída."); }
             }
-
             lstReservaCategorias.getSelectionModel().clearSelection();
-            for (CategoriaDTO categoria : lstReservaCategorias.getItems()) {
-                for (String descripcionExtraida : extraido.getCategoriasDescripcion()) {
-                    if (categoria.getDescripcion().equalsIgnoreCase(descripcionExtraida.trim())) {
+            for (CategoriaDTO categoria : lstReservaCategorias.getItems())
+                for (String descripcion : extraido.getCategoriasDescripcion())
+                    if (categoria.getDescripcion().equalsIgnoreCase(descripcion.trim()))
                         lstReservaCategorias.getSelectionModel().select(categoria);
-                    }
-                }
-            }
-
-        } catch (ExtraccionIAException e) {
-            lblReservaError.setText(e.getMessage());
-        }
+        });
     }
 
     @FXML
@@ -196,9 +167,9 @@ public class ReservaController {
     }
 
     private void cargarReservas() {
-        datos.clear();
         if (usuarioActual == null) return;
-        datos.addAll(reservaService.listarPorFuncionario(usuarioActual.getId()));
+        String id = usuarioActual.getId();
+        TareasUI.ejecutar(lblReservaError, () -> reservaService.listarPorFuncionario(id), reservas -> datos.setAll(reservas));
     }
 
     private void limpiarFormulario() {

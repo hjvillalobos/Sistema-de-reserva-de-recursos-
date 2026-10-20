@@ -1,6 +1,7 @@
 package una.eif206.reservas.DTO;
 
 public class FuncionarioDTO extends UsuarioDTO {
+    private static final long serialVersionUID = 1L;
 
     private String nombre;
     private String telefono;

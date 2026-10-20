@@ -3,7 +3,8 @@ package una.eif206.reservas.DTO;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CeldaProgramacionDTO {
+public class CeldaProgramacionDTO implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     private final List<String> actividades;
 

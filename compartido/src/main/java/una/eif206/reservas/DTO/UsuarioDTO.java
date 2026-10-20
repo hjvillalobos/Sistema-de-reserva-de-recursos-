@@ -1,5 +1,6 @@
 package una.eif206.reservas.DTO;
-public class UsuarioDTO {
+public class UsuarioDTO implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     protected String id;
     protected String clave;

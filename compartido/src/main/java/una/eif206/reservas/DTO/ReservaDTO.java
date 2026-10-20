@@ -2,7 +2,8 @@ package una.eif206.reservas.DTO;
 
 import java.util.List;
 
-public class ReservaDTO {
+public class ReservaDTO implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     private String id;
     private String actividad;

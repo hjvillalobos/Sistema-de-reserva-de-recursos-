@@ -46,6 +46,7 @@ public class RecursoLogica {
     }
 
     private void validarDatos(RecursoDTO recurso) throws ValidacionException {
+        if (recurso == null) throw new ValidacionException("Debe indicar un recurso.");
         if (recurso.getId() == null || recurso.getId().isBlank()) {
             throw new ValidacionException("El id (número de activo) es obligatorio.");
         }

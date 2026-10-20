@@ -1,4 +1,6 @@
 package una.eif206.reservas.controladores;
+import una.eif206.reservas.cliente.ServiciosCliente;
+import una.eif206.reservas.cliente.TareasUI;
 
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -11,7 +13,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import una.eif206.reservas.DTO.RolDTO;
-import una.eif206.reservas.DTO.UsuarioDTO;
+import una.eif206.reservas.DTO.UsuarioSesionDTO;
 
 import java.io.IOException;
 import java.net.URL;
@@ -27,11 +29,11 @@ public class PrincipalController {
     @FXML private Button btnEstadisticas;
     @FXML private Button btnCalendarizacion;
 
-    private UsuarioDTO usuarioActual;
+    private UsuarioSesionDTO usuarioActual;
 
     private final String RUTA_CSS = "/una/eif206/reservas/fxml/css/estilos.css";
 
-    public void inicializar(UsuarioDTO usuario) {
+    public void inicializar(UsuarioSesionDTO usuario) {
         this.usuarioActual = usuario;
         lblPrincipalBienvenida.setText("OPERADOR: " + usuario.getId().toUpperCase() + " [" + usuario.getRol().toString().toUpperCase() + "]");
 
@@ -108,6 +110,7 @@ public class PrincipalController {
             aplicarEstilos(scene);
 
             stage.setScene(scene);
+            stage.initOwner(lblPrincipalBienvenida.getScene().getWindow());
             stage.setTitle("Mis Reservas");
             stage.show();
         } catch (IOException e) {
@@ -161,19 +164,20 @@ public class PrincipalController {
 
     @FXML
     public void onCerrarSesion(ActionEvent event) {
-        try {
-            FXMLLoader loader = new FXMLLoader(
-                    getClass().getResource("/una/eif206/reservas/fxml/login.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) lblPrincipalBienvenida.getScene().getWindow();
-            Scene scene = new Scene(root);
-            aplicarEstilos(scene);
-
-            stage.setScene(scene);
-            stage.setTitle("Sistema de Reservas");
-        } catch (IOException e) {
-            mostrarError("No se pudo volver al login", e.getMessage());
+        // Cerrar el socket elimina la sesión del servidor incluso si se perdió la red.
+        ServiciosCliente.cerrar();
+        Stage principal = (Stage) lblPrincipalBienvenida.getScene().getWindow();
+        for (javafx.stage.Window ventana : java.util.List.copyOf(javafx.stage.Window.getWindows())) {
+            if (ventana instanceof Stage hija && hija.getOwner() == principal) hija.close();
         }
+        TareasUI.ejecutar(lblPrincipalBienvenida, ServiciosCliente::obtener, proveedor -> {
+            try {
+                Parent root = new FXMLLoader(getClass().getResource("/una/eif206/reservas/fxml/login.fxml")).load();
+                principal.setScene(new Scene(root));
+                principal.setTitle("Sistema de Reservas");
+            } catch (IOException e) {
+                mostrarError("No se pudo abrir el login", e.getMessage());
+            }
+        });
     }
 }

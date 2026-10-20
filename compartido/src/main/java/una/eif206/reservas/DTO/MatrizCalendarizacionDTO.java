@@ -2,7 +2,8 @@ package una.eif206.reservas.DTO;
 
 import java.util.List;
 
-public class MatrizCalendarizacionDTO {
+public class MatrizCalendarizacionDTO implements java.io.Serializable {
+    private static final long serialVersionUID = 1L;
 
     private final List<String> horas;
     private final List<RecursoDTO> recursos;

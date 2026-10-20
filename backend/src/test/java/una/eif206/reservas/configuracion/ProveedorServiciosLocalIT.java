@@ -24,6 +24,6 @@ class ProveedorServiciosLocalIT {
                 () -> assertNotNull(servicios.estadisticas())
         );
         // Atraviesa el contrato hasta la validación real, sin leer archivos XML.
-        assertThrows(ValidacionException.class, () -> servicios.login().autenticar("", ""));
+        assertThrows(ValidacionException.class, () -> servicios.login().autenticarSesion("", ""));
     }
 }

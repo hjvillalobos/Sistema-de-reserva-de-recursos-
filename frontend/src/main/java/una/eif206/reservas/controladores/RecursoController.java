@@ -1,6 +1,7 @@
 package una.eif206.reservas.controladores;
 
 import una.eif206.reservas.cliente.ServiciosCliente;
+import una.eif206.reservas.cliente.TareasUI;
 
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
@@ -47,15 +48,6 @@ public class RecursoController {
 
     @FXML
     public void initialize() {
-        categoriasDisponibles = categoriaService.listarTodos();
-
-        ObservableList<CategoriaDTO> categoriasParaFiltro = FXCollections.observableArrayList();
-        categoriasParaFiltro.add(null);
-        categoriasParaFiltro.addAll(categoriasDisponibles);
-        cmbRecursoFiltroCategoria.setItems(categoriasParaFiltro);
-
-        cmbRecursoCategoria.setItems(FXCollections.observableArrayList(categoriasDisponibles));
-
         colRecursoId.setCellValueFactory(new PropertyValueFactory<RecursoDTO, String>("id"));
         colRecursoDescripcion.setCellValueFactory(new PropertyValueFactory<RecursoDTO, String>("descripcion"));
         colRecursoCategoria.setCellValueFactory(new Callback<TableColumn.CellDataFeatures<RecursoDTO, String>, ObservableValue<String>>() {
@@ -81,56 +73,47 @@ public class RecursoController {
             }
         });
 
-        cargarTodos();
+        TareasUI.ejecutar(lblRecursoError, categoriaService::listarTodos, categorias -> {
+            categoriasDisponibles = categorias;
+            var filtros = FXCollections.<CategoriaDTO>observableArrayList();
+            filtros.add(null);
+            filtros.addAll(categorias);
+            cmbRecursoFiltroCategoria.setItems(filtros);
+            cmbRecursoCategoria.setItems(FXCollections.observableArrayList(categorias));
+            cargarTodos();
+        });
     }
 
     @FXML
     public void onBuscar(ActionEvent event) {
-        datos.clear();
-        String categoriaId = (cmbRecursoFiltroCategoria.getValue() == null) ? "" : cmbRecursoFiltroCategoria.getValue().getId();
-        String descripcionB = txtRecursoFiltroDescripcion.getText() == null ? "" : txtRecursoFiltroDescripcion.getText().toLowerCase();
-
-        for (RecursoDTO r : recursoService.obtenerTodos()) {
-            boolean coincideCat = categoriaId.isEmpty() || r.getCategoriaId().equalsIgnoreCase(categoriaId);
-            boolean coincideDesc = descripcionB.isEmpty() || r.getDescripcion().toLowerCase().contains(descripcionB);
-            if (coincideCat && coincideDesc) datos.add(r);
-        }
+        String categoriaId = cmbRecursoFiltroCategoria.getValue() == null ? "" : cmbRecursoFiltroCategoria.getValue().getId();
+        String descripcion = txtRecursoFiltroDescripcion.getText() == null ? "" : txtRecursoFiltroDescripcion.getText().toLowerCase();
+        TareasUI.ejecutar(lblRecursoError, recursoService::obtenerTodos, recursos -> datos.setAll(
+            recursos.stream().filter(r -> (categoriaId.isEmpty() || r.getCategoriaId().equalsIgnoreCase(categoriaId))
+                    && (descripcion.isEmpty() || r.getDescripcion().toLowerCase().contains(descripcion))).toList()));
     }
 
     @FXML
     public void onGuardar(ActionEvent event) {
-        lblRecursoError.setText("");
-
         if (cmbRecursoCategoria.getValue() == null) {
             lblRecursoError.setText("Debe seleccionar una categoría.");
             return;
         }
-        String categoriaId = cmbRecursoCategoria.getValue().getId();
-
-        try {
-            RecursoDTO dto = new RecursoDTO(txtRecursoId.getText(), categoriaId, txtRecursoDescripcion.getText());
-            if (editandoExistente) {
-                recursoService.modificar(dto);
-            } else {
-                recursoService.crear(dto);
-            }
-            limpiarFormulario();
-            cargarTodos();
-        } catch (ValidacionException e) {
-            lblRecursoError.setText(e.getMessage());
-        }
+        RecursoDTO dto = new RecursoDTO(txtRecursoId.getText(), cmbRecursoCategoria.getValue().getId(), txtRecursoDescripcion.getText());
+        boolean modificar = editandoExistente;
+        TareasUI.ejecutar(lblRecursoError, () -> modificar ? recursoService.modificar(dto) : recursoService.crear(dto),
+                resultado -> { limpiarFormulario(); cargarTodos(); });
     }
 
     @FXML
     public void onBorrar(ActionEvent event) {
-        lblRecursoError.setText("");
-        if (txtRecursoId.getText() == null || txtRecursoId.getText().isBlank()) {
+        String id = txtRecursoId.getText();
+        if (id == null || id.isBlank()) {
             lblRecursoError.setText("Seleccione un recurso de la lista para borrar.");
             return;
         }
-        recursoService.eliminar(txtRecursoId.getText());
-        limpiarFormulario();
-        cargarTodos();
+        TareasUI.ejecutar(lblRecursoError, () -> { recursoService.eliminar(id); return null; },
+                resultado -> { limpiarFormulario(); cargarTodos(); });
     }
 
     @FXML
@@ -171,8 +154,7 @@ public class RecursoController {
     }
 
     private void cargarTodos() {
-        datos.clear();
-        datos.addAll(recursoService.obtenerTodos());
+        TareasUI.ejecutar(lblRecursoError, recursoService::obtenerTodos, recursos -> datos.setAll(recursos));
     }
 
     private void limpiarFormulario() {
