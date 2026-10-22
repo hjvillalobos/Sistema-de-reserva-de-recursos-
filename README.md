@@ -4,10 +4,10 @@ Universidad Nacional · Programación 3 · 2026-II
 
 ## Estado actual
 
-Cliente JavaFX y servidor se ejecutan en procesos separados y se comunican por sockets. Login, cambio de contraseña, recursos y reservas utilizan servicios remotos. **La persistencia todavía es XML; MySQL es el siguiente paso.**
+Cliente JavaFX y servidor se ejecutan en procesos separados y se comunican por sockets. Login, cambio de contraseña, recursos y reservas utilizan servicios remotos. **Login y cambio de contraseña usan MySQL; los demás servicios siguen en XML.**
 
 - `compartido`: DTO, interfaces y mensajes de red.
-- `backend`: servidor, sesiones, permisos, lógica y almacenamiento XML.
+- `backend`: servidor, sesiones, permisos, acceso a usuarios MySQL y otros datos XML.
 - `frontend`: JavaFX, proxies y conexión al servidor.
 - `database`: lugar para el esquema MySQL.
 - `data`: XML existentes, usados solamente por el servidor.
@@ -26,6 +26,9 @@ mvn verify
 La compilación prepara las bibliotecas de cada aplicación en `target/dependency`. Las pruebas usan carpetas temporales y conexiones locales; no modifican los XML de `data/`. Java debe poder abrir sockets de loopback.
 
 En una terminal:
+
+Configure primero RESERVAS_DB_CLAVE con la contraseña de reservas_app en el entorno
+del servidor. Para crear la cuenta de la aplicación, siga database/README.md.
 
 ```powershell
 .\iniciar-servidor.ps1
@@ -67,4 +70,12 @@ Al guardar una reserva, el servidor envía `EventoReserva` a las conexiones aute
 
 `ServiciosServidor` concentra la construcción de los accesos a datos. El próximo paso es acordar el esquema e instalar/configurar MySQL Server mediante Workbench, incorporar JDBC únicamente al backend y sustituir los accesos XML por consultas y transacciones. La coordinación en memoria deberá complementarse con transacciones y restricciones de la base de datos.
 
-Todavía no hay esquema SQL, conector MySQL ni credenciales de conexión. No se han migrado los datos. Las pruebas automáticas cubren servicios y transporte; falta la comprobación manual completa de las ventanas y entre equipos distintos.
+El backend incluye Connector/J, ConexionBD y una prueba manual PruebaConexionBD.
+La contraseña se configura con RESERVAS_DB_CLAVE; los pasos están en database/README.md.
+ServidorMain utiliza MySQL para el login y el cambio de contraseña; requiere
+RESERVAS_DB_CLAVE también en su propia configuración de ejecución. CrearAdministradorBD
+permite crear una cuenta de prueba con contraseña protegida. Los demás servicios
+todavía utilizan XML y no se han migrado los datos. El esquema creado
+en Workbench aún no está guardado en el repositorio. Las pruebas automáticas cubren
+servicios y transporte; falta la comprobación manual completa de las ventanas y
+entre equipos distintos.
