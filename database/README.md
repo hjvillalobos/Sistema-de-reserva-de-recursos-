@@ -1,70 +1,97 @@
-# Base de datos del Proyecto II
+# MySQL: configuración y pruebas
 
-El backend cuenta con Connector/J y ConexionBD. ServidorMain utiliza MySQL para login y cambio de clave. Los demás servicios todavía utilizan XML. Esta carpeta aún no contiene el esquema SQL creado en Workbench.
+## Esquema y conexión
 
-Workbench 8.0 CE se usará para administrar MySQL Server y ejecutar el script. Workbench no reemplaza a MySQL Server. Solo backend deberá incorporar el conector JDBC y la configuración de conexión; las credenciales reales no se deben incluir en el repositorio.
+ServidorMain usa MySQL para acceso, recursos y reservas. Las clases XML quedan
+para compatibilidad y pruebas anteriores, sin fallback automático.
 
-El servidor de sockets sigue utilizando los XML de data/. El cliente ya no accede directamente a esos archivos. ServiciosServidor concentra la construcción de los accesos a datos.
+Las seis tablas esperadas se describen en esquema.sql. Si ya fueron creadas en
+Workbench no hay que recrearlas. Para una base vacía, seleccionar primero la base
+con USE y ejecutar ese archivo. Todas deben usar InnoDB y conservar las claves
+foráneas. El script no borra datos ni actualiza definiciones existentes.
 
-Antes de sustituir XML, se debe acordar el esquema, las claves y las relaciones; después incorporar el conector y las transacciones para evitar reservas simultáneas del mismo recurso.
+Variables locales de cada configuración Java:
 
-## Probar la conexión desde IntelliJ
+- RESERVAS_DB_CLAVE: contraseña de la cuenta MySQL reservas_app; obligatoria.
+- RESERVAS_DB_URL: opcional; jdbc:mysql://localhost:3306/sistema_reservas por defecto.
+- RESERVAS_DB_USUARIO: opcional; reservas_app por defecto.
 
-1. Recargar el proyecto Maven con JDK 21 o posterior.
-2. Abrir la clase `una.eif206.reservas.configuracion.PruebaConexionBD` del backend.
-3. Crear una configuración de ejecución de tipo Application para su método main,
-   usando el módulo backend. En Run > Edit Configurations, agregar el campo
-   Environment variables (puede estar dentro de Modify options).
-4. Agregar `RESERVAS_DB_CLAVE` con la contraseña de reservas_app. No compartir
-   esta configuración como archivo del proyecto ni incluir la contraseña en Git.
-5. Ejecutar PruebaConexionBD. Debe terminar con:
-   `Conexión correcta. Las seis tablas están disponibles.`
+reservas_app necesita SELECT, INSERT, UPDATE y DELETE sobre sistema_reservas.
+No guardar contraseñas ni configuraciones con secretos en Git. Workbench administra
+MySQL Server; no lo reemplaza. PruebaConexionBD comprueba conexión y nombres de
+tablas; no modifica datos ni valida por sí sola todas sus relaciones.
 
-La URL predeterminada es `jdbc:mysql://localhost:3306/sistema_reservas` y el
-usuario es `reservas_app`. Se pueden cambiar mediante `RESERVAS_DB_URL` y
-`RESERVAS_DB_USUARIO`. La contraseña no tiene valor predeterminado.
+## Administrador
 
-La prueba consulta la base seleccionada, la versión y los nombres de las tablas;
-no inserta, modifica ni elimina datos y no comprueba aún las columnas o relaciones.
-Las conexiones y los resultados se cierran automáticamente, incluso si ocurre
-un error. Los límites de espera evitan esperar indefinidamente por el servidor.
+CrearAdministradorBD necesita RESERVAS_DB_CLAVE, RESERVAS_ADMIN_ID y
+RESERVAS_ADMIN_CLAVE. Crea un administrador nuevo sin sobrescribir usuarios.
+La contraseña se almacena con PBKDF2-HMAC-SHA256, 600000 iteraciones y sal aleatoria.
+No volver a ejecutar esta herramienta para cambiar una contraseña: usar la aplicación.
 
-Si falla, revisar el mensaje: contraseña ausente requiere configurar la variable;
-Access denied requiere revisar cuenta y contraseña; Communications link failure
-requiere comprobar que MySQL Server esté iniciado y que host y puerto coincidan.
+## Preparar una prueba manual de recursos y reservas
 
-## Crear la cuenta de prueba y ejecutar el login MySQL
+1. Compilar los cambios y detener el ServidorMain anterior.
+2. Crear una configuración Application para
+   una.eif206.reservas.configuracion.PrepararPruebaReservasBD, módulo backend.
+3. Configurar RESERVAS_DB_CLAVE y RESERVAS_PRUEBA_CLAVE. La segunda es una contraseña
+   que se elige para las dos cuentas de funcionario, distinta de la cuenta MySQL.
+4. Ejecutar una vez. La herramienta crea en una transacción dos funcionarios con
+   sus usuarios, una categoría y un recurso. Todos llevan un prefijo PRUEBA- único.
+   Imprime sus identificadores, pero no la contraseña. No modifica datos previos.
+5. Iniciar ServidorMain con sus propias variables de conexión y dos Launcher.
+6. Ingresar con un funcionario distinto en cada cliente y la contraseña elegida.
+7. Seleccionar la categoría impresa, la misma fecha y horario en ambos clientes.
+   Registrar las dos reservas: una debe funcionar y la otra informar falta de disponibilidad.
+8. Cancelar desde el cliente que obtuvo la reserva. El otro debe poder reservar
+   el mismo recurso y horario. La reserva cancelada permanece en el historial.
+9. Con el administrador, crear y editar otro recurso usando esa categoría; borrar
+   un recurso sin reservas debe funcionar, borrar uno con reservas debe rechazarse.
+10. Reiniciar el servidor y confirmar que las reservas y recursos siguen presentes.
 
-1. En IntelliJ crear una configuración Application para
-   `una.eif206.reservas.configuracion.CrearAdministradorBD`, módulo backend.
-2. Agregar a sus variables de entorno:
-   - `RESERVAS_DB_CLAVE`: contraseña de la cuenta MySQL reservas_app.
-   - `RESERVAS_ADMIN_ID`: identificación elegida para entrar a la aplicación.
-   - `RESERVAS_ADMIN_CLAVE`: contraseña elegida para ese administrador.
-3. Ejecutar una vez. Debe indicar que el administrador fue creado. Si ya existe,
-   no lo sobrescribe ni cambia su contraseña. No hay contraseñas predeterminadas.
-4. Ejecutar `una.eif206.reservas.servidor.ServidorMain` con módulo backend, la raíz
-   del repositorio como directorio de trabajo y RESERVAS_DB_CLAVE configurada.
-   Las variables de PruebaConexionBD no pasan automáticamente a esta configuración.
-5. Ejecutar el Launcher del frontend. Ingresar con RESERVAS_ADMIN_ID y la clave
-   de la aplicación, no con la contraseña de reservas_app.
-6. Probar el cambio de clave con la clave actual, cerrar sesión y verificar que
-   la nueva funciona y la anterior es rechazada.
+Puede comprobar el resultado en Workbench con SELECT sobre recursos, reservas y
+reserva_recursos. El frontend no necesita la contraseña de la conexión MySQL.
+Los datos PRUEBA- permanecen para la comprobación manual; no se borran automáticamente.
 
-Si se utilizan los scripts PowerShell, compilar primero con `mvn verify` y
-configurar RESERVAS_DB_CLAVE en el entorno de la terminal del servidor. También
-se admiten RESERVAS_DB_URL y RESERVAS_DB_USUARIO en cada configuración Java.
-No compartir configuraciones que contengan secretos ni guardarlas en Git.
+## Límites de la división del trabajo
 
-La clave se guarda como PBKDF2-HMAC-SHA256 con 600000 iteraciones y sal aleatoria;
-no se acepta texto plano en clave_hash. Las consultas usan parámetros. El cambio
-de clave comprueba la clave actual y actualiza solo si el hash no cambió entre
-la lectura y la escritura. El cliente recibe identificación y rol, nunca el hash.
+La gestión de categorías y funcionarios sigue a cargo del compañero responsable.
+Se agregaron adaptadores de lectura para que recursos, reservas e informes utilicen
+sus tablas MySQL. Mientras se integra su gestión, crear/modificar/eliminar desde
+esas dos pantallas informa que esa función está pendiente; no escribe en XML.
+La herramienta de prueba crea únicamente datos de demostración. No se importaron
+los XML históricos ni se cambiaron las reglas de los módulos de los compañeros.
 
-Esta etapa no importa usuarios XML ni modifica la gestión de funcionarios:
-crear o eliminar funcionarios desde esa pantalla aún afecta solamente XML y no
-crea/elimina cuentas MySQL. Para probar este bloque usar el administrador creado
-con la herramienta. Antes de probar reservas con funcionarios habrá que migrar
-su gestión y mantener sus identificaciones coherentes con los datos existentes.
-Los constructores XML se conservan para pruebas anteriores; ServidorMain no
-recurre a XML cuando falla MySQL.
+## Transacciones y concurrencia
+
+ReservaMySqlLogica valida la entrada. ReservaMySqlDatos abre una transacción
+READ COMMITTED, verifica al funcionario y las categorías, bloquea candidatos
+con SELECT FOR UPDATE, comprueba cruces de horario e inserta cabecera y detalles.
+Si algo falla, hace rollback. Los bloqueos son de MySQL, no un candado global Java:
+funcionan con conexiones independientes e instancias distintas del backend.
+La cancelación comprueba propietario y cambia el estado en una transacción.
+Los IDs nuevos RES-UUID no dependen de contar reservas existentes.
+
+Los SQL usan parámetros. RecursoMySqlDatos diferencia INSERT y UPDATE para que
+una creación concurrente no sobrescriba un recurso. Las claves foráneas protegen
+las relaciones frente a eliminaciones simultáneas. El bloqueo dura hasta commit
+según https://dev.mysql.com/doc/refman/8.0/en/innodb-locking-reads.html.
+
+## Pruebas automáticas con MySQL real
+
+Las clases ReservasMySqlIT y FlujoMySqlIT se habilitan únicamente con
+RESERVAS_PRUEBAS_MYSQL=true. Configurar RESERVAS_DB_URL a una base vacía EXCLUSIVA de
+pruebas cuyo nombre termine en _pruebas, creada con esquema.sql, y sus credenciales.
+Nunca utilizar sistema_reservas. Ejecutar mvn verify desde la raíz.
+
+La cuenta de pruebas necesita DDL y TRIGGER sobre esa base, además de DML. La prueba
+de rollback instala y elimina un trigger temporal que provoca un fallo en el
+segundo detalle. Usar una instancia aislada sin binlog o con
+log_bin_trust_function_creators habilitado solo en esa instancia de pruebas.
+No habilitar estos permisos ni cambiar opciones globales en la instancia habitual.
+
+Se verifica CRUD de recursos, claves foráneas, reservas por propietario, horarios
+contiguos, cancelación, categorías repetidas, ausencia de disponibilidad, dos
+solicitudes con uno o dos recursos, rollback de cabecera y detalles, permisos por
+sockets, eventos y persistencia tras reiniciar el backend. Cada prueba elimina
+solo sus registros identificados por prefijos aleatorios. No ejecutar estas
+pruebas en paralelo sobre la misma base por el trigger temporal.

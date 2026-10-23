@@ -32,7 +32,7 @@ public class ReservaLogica {
         return reservaDatos.buscarPorFuncionario(funcionarioId);
     }
 
-    private void validarDatos(String actividad, String fecha, String horaInicio, String horaFin, List<String> categoriasIds) throws ValidacionException {
+    protected void validarDatos(String actividad, String fecha, String horaInicio, String horaFin, List<String> categoriasIds) throws ValidacionException {
         if (actividad == null || actividad.isBlank()) {
             throw new ValidacionException("Debe indicar la actividad.");
         }

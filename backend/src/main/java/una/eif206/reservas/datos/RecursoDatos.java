@@ -52,6 +52,9 @@ public class RecursoDatos {
         serializar(internos);
     }
 
+    public void crear(RecursoDTO recurso) { guardar(recurso); }
+    public void modificar(RecursoDTO recurso) { guardar(recurso); }
+
     public void eliminar(String id){
         List<RecursoXML> internos=deserializar();
         internos.removeIf(a->a.id.equalsIgnoreCase(id));

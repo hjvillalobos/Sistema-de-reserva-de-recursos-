@@ -27,7 +27,7 @@ public class RecursoLogica {
         if(recursoDatos.buscarPorId(recursoDTO.getId())!=null){
             throw new ValidacionException("Ya existe un recurso con ese id.");
         }
-        recursoDatos.guardar(recursoDTO);
+        recursoDatos.crear(recursoDTO);
         return recursoDTO;
     }
 
@@ -37,7 +37,7 @@ public class RecursoLogica {
         if (recursoDatos.buscarPorId(recurso.getId()) == null) {
             throw new ValidacionException("No existe un recurso con id " + recurso.getId());
         }
-        recursoDatos.guardar(recurso);
+        recursoDatos.modificar(recurso);
         return recurso;
     }
 
@@ -55,6 +55,9 @@ public class RecursoLogica {
         }
         if (recurso.getDescripcion() == null || recurso.getDescripcion().isBlank()) {
             throw new ValidacionException("La descripción es obligatoria.");
+        }
+        if (recurso.getId().length() > 100 || recurso.getCategoriaId().length() > 100 || recurso.getDescripcion().length() > 255) {
+            throw new ValidacionException("Los identificadores admiten hasta 100 caracteres y la descripción hasta 255.");
         }
     }
 
